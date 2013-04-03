@@ -8,6 +8,7 @@
 // Main document.ready path
 $(document).ready(function () {
     /** Initialize UI  */
+    CreateCanvas();
 
     /** Load config data */
 

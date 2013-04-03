@@ -4,9 +4,10 @@
     <list id="dffa65c6-1358-439d-b91d-5ef99f148acb" name="Default" comment="" />
     <list id="bc166a81-2bc8-4f38-bd62-74850f0eaf91" name="BugOut" comment="On Hold" />
     <list default="true" id="1ea9c6ec-aa69-4242-92d2-c9368ee30397" name="POvGrid Master" comment="Initial file list">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/povgrid_main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/povgrid_UI_lib.js" afterPath="$PROJECT_DIR$/povgrid_UI_lib.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/povgrid_canvas.html" afterPath="$PROJECT_DIR$/povgrid_canvas.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/povgrid_main.js" afterPath="$PROJECT_DIR$/povgrid_main.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/povgrid_object_def.js" afterPath="$PROJECT_DIR$/povgrid_object_def.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="PovGrid.iws" />
@@ -14,10 +15,12 @@
     <file path="/a.js" changelist="dffa65c6-1358-439d-b91d-5ef99f148acb" time="1365015228191" ignored="false" />
     <file path="/a.html" changelist="dffa65c6-1358-439d-b91d-5ef99f148acb" time="1365015263775" ignored="false" />
     <file path="/povgrid_kjs_lib.js" changelist="dffa65c6-1358-439d-b91d-5ef99f148acb" time="1365015661458" ignored="false" />
-    <file path="/povgrid_canvas.html" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1365025284816" ignored="false" />
+    <file path="/povgrid_canvas.html" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1365026792991" ignored="false" />
     <file path="/Dummy.regexp" changelist="dffa65c6-1358-439d-b91d-5ef99f148acb" time="1365018760315" ignored="false" />
     <file path="/Dummy.xpath" changelist="dffa65c6-1358-439d-b91d-5ef99f148acb" time="1365018760315" ignored="false" />
-    <file path="/Dummy.txt" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1365025022416" ignored="false" />
+    <file path="/Dummy.txt" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1365025829196" ignored="false" />
+    <file path="/povgrid_UI_lib.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1365026740786" ignored="false" />
+    <file path="/povgrid_main.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1365026364333" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,37 +39,7 @@
     <favorites_list name="PovGrid" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="povgrid_canvas.html" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/povgrid_canvas.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="18" column="35" selection-start="579" selection-end="579" vertical-scroll-proportion="-11.769231">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="povgrid_UI_lib.js" pinned="false" current="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/povgrid_UI_lib.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="0" column="0" selection-start="0" selection-end="187" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="povgrid_main.js" pinned="false" current="true" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/povgrid_main.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state line="13" column="15" selection-start="326" selection-end="326" vertical-scroll-proportion="0.39605734">
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-    </leaf>
+    <leaf />
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -93,9 +66,10 @@
     <option name="changedFiles">
       <list>
         <option value="$PROJECT_DIR$/povgrid_kjs_lib.js" />
-        <option value="$PROJECT_DIR$/povgrid_canvas.html" />
-        <option value="$PROJECT_DIR$/povgrid_UI_lib.js" />
+        <option value="$PROJECT_DIR$/povgrid_object_def.js" />
         <option value="$PROJECT_DIR$/povgrid_main.js" />
+        <option value="$PROJECT_DIR$/povgrid_UI_lib.js" />
+        <option value="$PROJECT_DIR$/povgrid_canvas.html" />
       </list>
     </option>
   </component>
@@ -163,6 +137,20 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="povgrid" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PovGrid" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="povgrid" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Examples_Helpers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -269,7 +257,11 @@
       <created>1365024077754</created>
       <updated>1365024077754</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Initial file list">
+      <created>1365025839038</created>
+      <updated>1365025839038</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -294,13 +286,14 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1696" height="1026" extended-state="6" />
-    <editor active="true" />
+    <editor active="false" />
     <layout>
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295063" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295063" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3295063" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295063" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.24984913" sideWeight="0.67049366" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15872058" sideWeight="0.67049366" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39839265" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.15872058" sideWeight="0.6016073" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.39839265" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32951117" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15958668" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -309,7 +302,6 @@
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3295063" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -374,7 +366,16 @@
     <MESSAGE value="Initial file list" />
   </component>
   <component name="XDebuggerManager">
-    <breakpoint-manager />
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/povgrid_main.js</url>
+          <line>10</line>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+      </breakpoints>
+      <option name="time" value="4" />
+    </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/povgrid_canvas.html">
@@ -422,9 +423,9 @@
         <state line="20" column="7" selection-start="477" selection-end="477" vertical-scroll-proportion="0.63909775" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/povgrid_kjs_lib.js">
+    <entry file="file://$PROJECT_DIR$/jquery_lightdark.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="206" vertical-scroll-proportion="0.0">
+        <state line="11" column="24" selection-start="296" selection-end="296" vertical-scroll-proportion="-0.35051546">
           <folding />
         </state>
       </provider>
@@ -438,25 +439,44 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/povgrid_canvas.html">
+    <entry file="file://$PROJECT_DIR$/Examples_Helpers/kineticJS_Demo.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="35" selection-start="579" selection-end="579" vertical-scroll-proportion="-11.769231">
+        <state line="282" column="140" selection-start="9915" selection-end="9915" vertical-scroll-proportion="156.26923">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/povgrid_main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="10" column="0" selection-start="281" selection-end="281" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/povgrid_kjs_lib.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="403" column="0" selection-start="11630" selection-end="11630" vertical-scroll-proportion="0.33195877">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/kinetic-v4.4.0.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="3252" column="17" selection-start="108140" selection-end="108140" vertical-scroll-proportion="0.33195877">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/povgrid_UI_lib.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="187" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+        <state line="175" column="0" selection-start="4663" selection-end="4663" vertical-scroll-proportion="0.33195877">
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/povgrid_main.js">
+    <entry file="file://$PROJECT_DIR$/povgrid_canvas.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="13" column="15" selection-start="326" selection-end="326" vertical-scroll-proportion="0.39605734">
+        <state line="10" column="32" selection-start="507" selection-end="507" vertical-scroll-proportion="0.3601695">
           <folding />
         </state>
       </provider>

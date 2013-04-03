@@ -1,18 +1,23 @@
-/* This JS file defines all global objects and properties for all forms. */
+/**
+ *************************************************************
+ * POVGRID global object/property definition file
+ * Created 04/03/2013
+ *************************************************************
+ */
 
-var segmentParams = Object.create(null)
-var vp1 = Object.create(null)
-var vp2 = Object.create(null)
-var vp3 = Object.create(null)
-var workspaceSettings = Object.create(null)
-var vpAttrs = Object.create(null)
-var vpStage = Object.create(null)
-var vpShape = Object.create(null)
+/* Declaration */
+var segmentParams = Object.create(null);
+var vp1 = Object.create(null);
+var vp2 = Object.create(null);
+var vp3 = Object.create(null);
+var workspaceSettings = Object.create(null);
+var vpAttrs = Object.create(null);
+var vpStage = Object.create(null);
+var vpShape = Object.create(null);
 var lineWidth = .5;
 
 /* Object properties */
-
-/*
+/**
 *  Parameters for grid segments. This is used for gridlines
 *  anchored to verticle foreground lines only and passed to function
 *  to calculate grid points.
@@ -56,7 +61,7 @@ Object.defineProperties(segmentParams, {
     }            
 })
 
-/*
+/**
 *	workspaceSettings property
 *	orientation: 0 = landscape, 1 = portrait;
 *	persType: 1 = 1 point, 2 = 2 point, 3 = 3 point;
@@ -246,10 +251,11 @@ Object.defineProperties(vpAttrs,
 })     
 
 
-/* This is the shape container element that will hold
-*  details about each shape. This container will be
-*  added to a collection of shape containers and maintained
-*  at all times.  
+/**
+* This is the shape container element that will hold
+* details about each shape. This container will be
+* added to a collection of shape containers and maintained
+* at all times.
 */  
 Object.defineProperties(vpShape,
 {
@@ -294,4 +300,4 @@ Object.defineProperties(vpShape,
     }
 })   
 
-/* END PROPERTY DEFINITIONS */ 
+/** END PROPERTY DEFINITIONS */
