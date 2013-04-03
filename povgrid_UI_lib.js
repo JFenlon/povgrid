@@ -5,9 +5,3 @@
 *************************************************************
 */
 
-// Main document read path
-$(document).ready(function () {
-
-	alert("hello");
-
-});
