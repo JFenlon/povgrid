@@ -1,12 +1,13 @@
 /**
-*************************************************************
-* POVGRID Custom UI function library
-* Created 04/03/2013
-*************************************************************
-*/
+ *************************************************************
+ * POVGRID Custom UI function library
+ * Created 04/03/2013
+ *************************************************************
+ * @param {*} vpAttrs2
+ */
 
-function CreateCanvas()
-{
+function CreateCanvas(vpAttrs2) {
+    vpAttrs2 = vpAttrs2 || vpAttrs;
     var stageDiag = getDistanceBetweenPoints(0,800,600,0);
 
     vpStage = new Kinetic.Stage({
@@ -16,7 +17,8 @@ function CreateCanvas()
         height: 600
     });
 
-    vpLayer = new Kinetic.Layer();
+    //noinspection JSCheckFunctionSignatures
+    var vpLayer = new Kinetic.Layer();
 
     // This is the 'paper' shape
     var rect = new Kinetic.Rect({
@@ -125,7 +127,7 @@ function CreateCanvas()
     vp2.posX = (vpStage.attrs.width - vp1.posX);
     vp2.posY = hlineY;
 
-    vp3.posX = 400 - vpAttrs.radius;
+    vp3.posX = 400 - vpAttrs2.radius;
     vp3.posY = hlineY;
 
     // Set params and pass object to getSegmentCoords
@@ -208,7 +210,8 @@ function CreateCanvas()
     // animation ** Allows drag and move of multiple shapes
     var anim = new Kinetic.Animation({
 
-        func: function(frame){
+
+        func: function (frame) {
 
             // For some reason, the getPosition coords must add/subtract the original start position as an offset.
             vertLine.setPosition((vHandle.getPosition().x -  vertLine.getPoints()[0].x) + workspaceSettings.touchPadding, (vHandle.getPosition().y -  vertLine.getPoints()[0].y) + workspaceSettings.touchPadding);
@@ -248,7 +251,7 @@ function CreateCanvas()
 
     anim.start();
 
-    $("#sldrRotation").bind( "change", function(event, ui) {
+    $("#sldrRotation").bind("change", function () {
         var rotDegree = Math.abs(this.value);
         var vPoint3 = vpLayer.get('#vp3')[0];
 

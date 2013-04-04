@@ -240,8 +240,9 @@
             // animation ** Allows drag and move of multiple shapes
             var anim = new Kinetic.Animation({
 
-                func: function(frame){
-                    
+
+                func: function (frame) {
+
                     // For some reason, the getPosition coords must add/subtract the original start position as an offset.
                     vertLine.setPosition((vHandle.getPosition().x -  vertLine.getPoints()[0].x) + workspaceSettings.touchPadding, (vHandle.getPosition().y -  vertLine.getPoints()[0].y) + workspaceSettings.touchPadding);
 
