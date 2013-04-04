@@ -11,13 +11,12 @@ function CreateCanvas(vpAttrs2) {
     var stageDiag = getDistanceBetweenPoints(0,800,600,0);
 
     vpStage = new Kinetic.Stage({
-        container: "container",
+        container: "canvasContainer",
         id: 'mainStage',
         width: 800,
         height: 600
     });
 
-    //noinspection JSCheckFunctionSignatures
     var vpLayer = new Kinetic.Layer();
 
     // This is the 'paper' shape
