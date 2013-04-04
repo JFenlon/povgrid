@@ -11,55 +11,32 @@ var vp1 = Object.create(null);
 var vp2 = Object.create(null);
 var vp3 = Object.create(null);
 var workspaceSettings = Object.create(null);
-var vpAttrs = Object.create(null);
+var vpAttributes = Object.create(null);
 var vpStage = Object.create(null);
 var vpShape = Object.create(null);
 var lineWidth = .5;
 
 /* Object properties */
 /**
-*  Parameters for grid segments. This is used for gridlines
-*  anchored to verticle foreground lines only and passed to function
-*  to calculate grid points.
-*  Point1 is top anchor point on verticle line.
-*  Point2 is bottom anchor point on verticle line.
-*/
-Object.defineProperties(segmentParams, { 
-    staticPos:   { 
-        value:        0
-      , writable:     true
-      , configurable: true
-      , enumerable:   true 
+ *  Parameters for grid segments. This is used for gridlines
+ *  anchored to verticle foreground lines only and passed to function
+ *  to calculate grid points.
+ *  Point1 is top anchor point on verticle line.
+ *  Point2 is bottom anchor point on verticle line.
+ */
+Object.defineProperties(segmentParams, {
+    staticPos: {
+        value: 0, writable: true, configurable: true, enumerable: true
+    }, xIsStatic: {
+        value: true, writable: true, configurable: true, enumerable: true
+    }, point1: {
+        value: 0, writable: true, configurable: true, enumerable: true
+    }, point2: {
+        value: 0, writable: true, configurable: true, enumerable: true
+    }, segmentCount: {
+        value: 0, writable: true, configurable: true, enumerable: true
     }
-
-    , xIsStatic: {
-        value:        true
-      , writable:     true
-      , configurable: true
-      , enumerable:   true 
-    }
-
-    , point1:    { 
-        value:        0
-      , writable:     true
-      , configurable: true
-      , enumerable:   true 
-    }
-
-    , point2: { 
-        value:        0
-      , writable:     true
-      , configurable: true
-      , enumerable:   true 
-    }
-
-    , segmentCount: { 
-        value:        0
-      , writable:     true
-      , configurable: true
-      , enumerable:   true 
-    }            
-})
+});
 
 /**
 *	workspaceSettings property

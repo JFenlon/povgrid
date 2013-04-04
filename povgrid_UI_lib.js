@@ -1,12 +1,13 @@
 /**
-*************************************************************
-* POVGRID Custom UI function library
-* Created 04/03/2013
-*************************************************************
-*/
+ *************************************************************
+ * POVGRID Custom UI function library
+ * Created 04/03/2013
+ *************************************************************
+ * @param {*} vpAttrs2
+ */
 
-function CreateCanvas()
-{
+function CreateCanvas(vpAttrs2) {
+    vpAttrs2 = vpAttrs2 || vpAttrs;
     var stageDiag = getDistanceBetweenPoints(0,800,600,0);
 
     vpStage = new Kinetic.Stage({
@@ -16,7 +17,8 @@ function CreateCanvas()
         height: 600
     });
 
-    vpLayer = new Kinetic.Layer();
+    //noinspection JSCheckFunctionSignatures
+    var vpLayer = new Kinetic.Layer();
 
     // This is the 'paper' shape
     var rect = new Kinetic.Rect({
@@ -36,7 +38,7 @@ function CreateCanvas()
     });
 
     var hlineY = (vpStage.getHeight() - 2) /2;
-    var hlineX1 = 0
+    var hlineX1 = 0;
     var hlineX2 = vpStage.getWidth();
     workspaceSettings.hLineMidPoint = (hlineX2 - hlineX1) / 2;
 
@@ -55,7 +57,7 @@ function CreateCanvas()
     var vY2 = 410;
 
     // Required for consistency while dragging.
-    fgrLineHeight = vY2 - vY1;
+    var fgrLineHeight = vY2 - vY1;
 
     var vertLine = new Kinetic.Line({
         points: [vX1,vY1,vX2,vY2],
@@ -125,7 +127,7 @@ function CreateCanvas()
     vp2.posX = (vpStage.attrs.width - vp1.posX);
     vp2.posY = hlineY;
 
-    vp3.posX = 400 - vpAttrs.radius;
+    vp3.posX = 400 - vpAttrs2.radius;
     vp3.posY = hlineY;
 
     // Set params and pass object to getSegmentCoords
@@ -169,7 +171,7 @@ function CreateCanvas()
      draggable: false
      });
      */
-    var rotLine = new Array();
+    var rotLine = [];
     var ang=0;
     for(var n=0; n<12; n++)
     {
@@ -208,7 +210,8 @@ function CreateCanvas()
     // animation ** Allows drag and move of multiple shapes
     var anim = new Kinetic.Animation({
 
-        func: function(frame){
+
+        func: function (frame) {
 
             // For some reason, the getPosition coords must add/subtract the original start position as an offset.
             vertLine.setPosition((vHandle.getPosition().x -  vertLine.getPoints()[0].x) + workspaceSettings.touchPadding, (vHandle.getPosition().y -  vertLine.getPoints()[0].y) + workspaceSettings.touchPadding);
@@ -248,7 +251,7 @@ function CreateCanvas()
 
     anim.start();
 
-    $("#sldrRotation").bind( "change", function(event, ui) {
+    $("#sldrRotation").bind("change", function () {
         var rotDegree = Math.abs(this.value);
         var vPoint3 = vpLayer.get('#vp3')[0];
 
@@ -261,4 +264,4 @@ function CreateCanvas()
         }
         //console.log(rotDegree);
     });
-};
+}
