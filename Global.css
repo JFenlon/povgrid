@@ -3,23 +3,26 @@
      border: 1px solid #9C9898;
  }
 
-#popupPanel-popup {
+#popupPanel-popup
+{
     right: 0 !important;
     left: auto !important;
     top: 20% !important;
 }
-#popupPanel {
+#popupPanel
+{
     width: 200px;
     border: 1px solid #000;
     border-right: none;
     background: rgba(0,0,0,.5);
     margin: -1px 0;
 }
-#popupPanel .ui-btn {
+#popupPanel .ui-btn
+{
     margin: 2em 15px;
 }
 
-#container 
+#canvasContainer
 {
     border: 1px solid #9C9898;
     max-width: 800px;
@@ -30,13 +33,12 @@
 }
 .control_top 
 {
-    padding: 20 10 20 10;
+    padding: 20px 10px 20px 10px;
     max-width: 50%;
 }
-
 body 
 {
-    margin: 0px;
-    padding: 0px;
+    margin: 0;
+    padding: 0;
     background-color: rgb(148,148,148);
 }

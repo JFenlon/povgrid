@@ -36,7 +36,7 @@ function CreateCanvas()
     });
 
     var hlineY = (vpStage.getHeight() - 2) /2;
-    var hlineX1 = 0
+    var hlineX1 = 0;
     var hlineX2 = vpStage.getWidth();
     workspaceSettings.hLineMidPoint = (hlineX2 - hlineX1) / 2;
 
@@ -55,7 +55,7 @@ function CreateCanvas()
     var vY2 = 410;
 
     // Required for consistency while dragging.
-    fgrLineHeight = vY2 - vY1;
+    var fgrLineHeight = vY2 - vY1;
 
     var vertLine = new Kinetic.Line({
         points: [vX1,vY1,vX2,vY2],
@@ -169,7 +169,7 @@ function CreateCanvas()
      draggable: false
      });
      */
-    var rotLine = new Array();
+    var rotLine = [];
     var ang=0;
     for(var n=0; n<12; n++)
     {
@@ -261,4 +261,4 @@ function CreateCanvas()
         }
         //console.log(rotDegree);
     });
-};
+}

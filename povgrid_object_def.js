@@ -16,7 +16,7 @@ var vpStage = Object.create(null);
 var vpShape = Object.create(null);
 var lineWidth = .5;
 
-/* Object properties */
+// Object properties
 /**
 *  Parameters for grid segments. This is used for gridlines
 *  anchored to verticle foreground lines only and passed to function
@@ -59,7 +59,7 @@ Object.defineProperties(segmentParams, {
       , configurable: true
       , enumerable:   true 
     }            
-})
+});
 
 /**
 *	workspaceSettings property
@@ -124,7 +124,7 @@ Object.defineProperties(workspaceSettings, {
       , configurable: false
       , enumerable:   true 
     }            
-})
+});
 
 Object.defineProperties(vp1,
 {
@@ -151,7 +151,7 @@ Object.defineProperties(vp1,
         , configurable: false
         , enumerable:   true 
     }              
-})
+});
 
 Object.defineProperties(vp2,
 {
@@ -178,7 +178,7 @@ Object.defineProperties(vp2,
         , configurable: false
         , enumerable:   true 
     }      
-})  
+});
 
 Object.defineProperties(vp3,
 {
@@ -205,7 +205,7 @@ Object.defineProperties(vp3,
         , configurable: false
         , enumerable:   true 
     }      
-})  
+});
 
 Object.defineProperties(vpAttrs,
 {
@@ -248,7 +248,7 @@ Object.defineProperties(vpAttrs,
         , configurable: true
         , enumerable:   true
     }
-})     
+});
 
 
 /**
@@ -298,6 +298,6 @@ Object.defineProperties(vpShape,
         , configurable: true
         , enumerable:   true
     }
-})   
+});
 
 /** END PROPERTY DEFINITIONS */
