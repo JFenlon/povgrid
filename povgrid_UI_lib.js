@@ -3,28 +3,33 @@
  * POVGRID Custom UI function library
  * Created 04/03/2013
  *************************************************************
- * @param {*} vpAttrs2
+ * @param {*} vpAttrs_init
  */
 
-function CreateCanvas(vpAttrs2) {
-    vpAttrs2 = vpAttrs2 || vpAttrs;
-    var stageDiag = getDistanceBetweenPoints(0,800,600,0);
+function CreateCanvas(vpAttrs_init) {
+    vpAttrs_init = vpAttrs_init || vpAttrs;
+    var stageDiagonal = getDistanceBetweenPoints(0,800,600,0);
+    var stageParent = $("#canvasContainer").parent();
+    var stageWidth = stageParent.innerWidth();
+    var stageHeight = stageParent.innerHeight();
 
     vpStage = new Kinetic.Stage({
         container: "canvasContainer",
         id: 'mainStage',
-        width: 800,
-        height: 600
+        width: stageWidth,
+        height: stageHeight
     });
 
     var vpLayer = new Kinetic.Layer();
 
     // This is the 'paper' shape
-    var rect = new Kinetic.Rect({
-        x: (800-600)/2,
-        y: (600-400)/2,
-        width: 600,
-        height: 400,
+    var paperWidth = stageWidth * 0.8;
+    var paperHeight = stageHeight * 0.8;
+    var gridPaper = new Kinetic.Rect({
+        x: (stageWidth-paperWidth)/2,
+        y: (stageHeight-paperHeight)/2,
+        width: paperWidth,
+        height: paperHeight,
         fill: workspaceSettings.paperColor,
         stroke: 'black',
         strokeWidth: .5,
@@ -190,7 +195,7 @@ function CreateCanvas(vpAttrs2) {
     }
 
     // add the shape to the layer
-    vpLayer.add(rect);
+    vpLayer.add(gridPaper);
     vpLayer.add(grid1);
     vpLayer.add(grid2);
     vpLayer.add(horzLine);
