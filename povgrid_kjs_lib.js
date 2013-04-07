@@ -7,12 +7,12 @@
 
 //   Returns the distance/length of a line between two coordinates
 //  [Returns: decimal]
-function getDistanceBetweenPoints(touch1, touch2)
+function getDistanceBetweenPoints(coordinate1, coordinate2)
 {
-    var x1 = touch1.clientX;
-    var x2 = touch2.clientX;
-    var y1 = touch1.clientY;
-    var y2 = touch2.clientY;
+    var x1 = coordinate1.x;
+    var x2 = coordinate2.x;
+    var y1 = coordinate1.y;
+    var y2 = coordinate2.y;
 
     return Math.sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)));
 }
@@ -56,20 +56,20 @@ function drawVP(vanishingPoint, baseLayer)
 //   [Returns: decimal object of (x1,y1,x2,y2)]
 function getBounds(domObject)
 {
-    var objBoundries = [{
+    var objBoundaries = [{
         "x1" : 0,
         "x2" : 0,
         "y1" : 0,
         "y2" : 0
     }];
 
-    objBoundries.x1 = domObject.getWidth() / 2 * -1;
-    objBoundries.x2 = objBoundries.x1 * -1;
+    objBoundaries.x1 = domObject.getWidth() / 2 * -1;
+    objBoundaries.x2 = objBoundaries.x1 * -1;
 
-    objBoundries.y1 = domObject.getHeight() / 2 * -1;
-    objBoundries.y2 = objBoundries.y1 * -1;
+    objBoundaries.y1 = domObject.getHeight() / 2 * -1;
+    objBoundaries.y2 = objBoundaries.y1 * -1;
 
-    return objBoundries;
+    return objBoundaries;
 }
 
 //   Returns the points to which all grid lines should run
