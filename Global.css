@@ -24,18 +24,50 @@
 
 #canvasContainer
 {
-    border: 1px solid #9C9898;
-    max-width: 800px;
+    border: 0;
+    border-right: 1px;
+    border-style: solid;
+    border-color: #9C9898;
 }
+
 #home 
 {
     height: 768px;
 }
+
 .control_top 
 {
     padding: 20px 10px 20px 10px;
     max-width: 50%;
 }
+
+.inline_display
+{
+    display: inline-block;
+}
+
+ul#display-inline-block,
+ul#display-inline-block li
+{
+    /* Setting a common base */
+    margin: 0;
+    padding: 0;
+    display: inline-block !important;
+    min-height: 700px;
+    background: #ccc;
+    vertical-align: top;
+}
+
+#display-inline-block li#canvas_parent
+{
+    width: 1325px;
+}
+
+.side_toolbar
+{
+    width: 200px;
+}
+
 body 
 {
     margin: 0;

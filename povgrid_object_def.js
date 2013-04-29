@@ -11,7 +11,7 @@ var vp1 = Object.create(null);
 var vp2 = Object.create(null);
 var vp3 = Object.create(null);
 var workspaceSettings = Object.create(null);
-var vpAttrs = Object.create(null);
+var vpDefaultAttrs = Object.create(null);
 var vpStage = Object.create(null);
 var vpShape = Object.create(null);
 var lineWidth = .5;
@@ -24,7 +24,7 @@ var lineWidth = .5;
 *  Point1 is top anchor point on verticle line.
 *  Point2 is bottom anchor point on verticle line.
 */
-Object.defineProperties(segmentParams, { 
+Object.defineProperties(segmentParams, {
     staticPos:   { 
         value:        0
       , writable:     true
@@ -90,7 +90,7 @@ Object.defineProperties(workspaceSettings, {
       , enumerable:   true 
     }
 
-    , persType: { 
+    , persistenceType: {
         value:        1
       , writable:     true
       , configurable: false
@@ -207,7 +207,7 @@ Object.defineProperties(vp3,
     }      
 });
 
-Object.defineProperties(vpAttrs,
+Object.defineProperties(vpDefaultAttrs,
 {
     fillColor:
     {
@@ -301,3 +301,13 @@ Object.defineProperties(vpShape,
 });
 
 /** END PROPERTY DEFINITIONS */
+
+/** OBJECT DEFINITION */
+
+// Coordinate object
+function Coordinate(xPos, yPos)
+{
+    var _coordinate = {x: xPos || 0, y: yPos || 0};
+
+    return _coordinate;
+}
