@@ -83,7 +83,7 @@ Object.defineProperties(workspaceSettings, {
       , enumerable:   true 
     }
 
-    , paperColor: { 
+    , documentColor: {
         value:        'white'
       , writable:     true
       , configurable: false
@@ -307,7 +307,5 @@ Object.defineProperties(vpShape,
 // Coordinate object
 function Coordinate(xPos, yPos)
 {
-    var _coordinate = {x: xPos || 0, y: yPos || 0};
-
-    return _coordinate;
+    return  {x: xPos || 0, y: yPos || 0};
 }

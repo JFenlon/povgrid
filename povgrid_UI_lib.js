@@ -31,7 +31,7 @@ function CreateCanvas(vpAttrs_init) {
         y: (stageHeight-paperHeight)/2,
         width: paperWidth,
         height: paperHeight,
-        fill: workspaceSettings.paperColor,
+        fill: workspaceSettings.documentColor,
         stroke: 'black',
         strokeWidth: .5,
         shadow: {
