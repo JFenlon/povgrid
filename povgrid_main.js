@@ -7,10 +7,13 @@
 
 // Main document.ready path
 $(document).ready(function () {
+    /** Load config data */
+
+
+
     /** Initialize UI  */
     CreateCanvas();
 
-    /** Load config data */
 
     /** Cleanup  */
 

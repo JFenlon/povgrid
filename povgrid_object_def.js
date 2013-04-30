@@ -7,16 +7,45 @@
 
 /* Declaration */
 var segmentParams = Object.create(null);
+var vpDefaultAttrs = Object.create(null);
+var vpStage = Object.create(null);
+var vpShape = Object.create(null);
 var vp1 = Object.create(null);
 var vp2 = Object.create(null);
 var vp3 = Object.create(null);
 var workspaceSettings = Object.create(null);
-var vpDefaultAttrs = Object.create(null);
-var vpStage = Object.create(null);
-var vpShape = Object.create(null);
+var gridDocument = Object.create(null);
 var lineWidth = .5;
 
 // Object properties
+/**
+ *  Parameters grid document.
+ *  This is the document that will get exported as an image after
+ *  the grid and vanishing points are in place.
+ */
+Object.defineProperties(gridDocument, {
+    width:   {
+        value:        1024
+        , writable:     true
+        , configurable: true
+        , enumerable:   true
+    }
+
+    , height: {
+        value:        768
+        , writable:     true
+        , configurable: true
+        , enumerable:   true
+    }
+
+    , backgroundColor: {
+        value:        '#FFFFFF'
+        , writable:     true
+        , configurable: true
+        , enumerable:   true
+    }
+});
+
 /**
 *  Parameters for grid segments. This is used for gridlines
 *  anchored to verticle foreground lines only and passed to function
@@ -83,8 +112,8 @@ Object.defineProperties(workspaceSettings, {
       , enumerable:   true 
     }
 
-    , documentColor: {
-        value:        'white'
+    , workspaceBackground: {
+        value:        '#C3C3C3'
       , writable:     true
       , configurable: false
       , enumerable:   true 

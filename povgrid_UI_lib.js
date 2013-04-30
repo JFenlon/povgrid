@@ -23,15 +23,15 @@ function CreateCanvas(vpAttrs_init) {
 
     var vpLayer = new Kinetic.Layer();
 
-    // This is the 'paper' shape
-    var paperWidth = stageWidth * 0.8;
-    var paperHeight = stageHeight * 0.8;
-    var gridPaper = new Kinetic.Rect({
-        x: (stageWidth-paperWidth)/2,
-        y: (stageHeight-paperHeight)/2,
-        width: paperWidth,
-        height: paperHeight,
-        fill: workspaceSettings.documentColor,
+    // This is the 'document' shape
+    gridDocument.width = stageWidth * 0.8;
+    gridDocument.height = stageHeight * 0.8;
+    var kjsDocument = new Kinetic.Rect({
+        x: (stageWidth - gridDocument.width)/2,
+        y: (stageHeight - gridDocument.height)/2,
+        width: gridDocument.width,
+        height: gridDocument.height,
+        fill: gridDocument.backgroundColor,
         stroke: 'black',
         strokeWidth: .5,
         shadow: {
@@ -42,12 +42,13 @@ function CreateCanvas(vpAttrs_init) {
         }
     });
 
+    // Draw the horizon line
     var hlineY = (vpStage.getHeight() - 2) /2;
     var hlineX1 = 0;
     var hlineX2 = vpStage.getWidth();
     workspaceSettings.hLineMidPoint = (hlineX2 - hlineX1) / 2;
 
-    var horzLine = new Kinetic.Line({
+    var kjsHorizon = new Kinetic.Line({
         points: [hlineX1, hlineY, hlineX2, hlineY],
         stroke: 'green',
         strokeWidth: lineWidth,
@@ -67,7 +68,7 @@ function CreateCanvas(vpAttrs_init) {
      draggable: false
      });
      */
-    vp3.posX = paperHeight - vpAttrs_init.radius;
+    vp3.posX = gridDocument.height - vpAttrs_init.radius;
     vp3.posY = hlineY;
     var rotLine = [];
     var ang=0;
@@ -89,22 +90,24 @@ function CreateCanvas(vpAttrs_init) {
     }
 
     // add the shape to the layer
-    vpLayer.add(gridPaper);
-    vpLayer.add(horzLine);
+    vpLayer.add(kjsDocument);
+    vpLayer.add(kjsHorizon);
+
+    /*
     for(n=0; n<12; n++)
     {
         vpLayer.add(rotLine[n]);
     }
+    */
 
     console.log(drawVP(vp1, vpLayer));
     console.log(drawVP(vp2, vpLayer));
     console.log(drawVP(vp3, vpLayer));
     vpStage.add(vpLayer);
 
+/*
     // animation ** Allows drag and move of multiple shapes
     var anim = new Kinetic.Animation({
-
-
         func: function (frame) {
 
             // For some reason, the getPosition coords must add/subtract the original start position as an offset.
@@ -144,6 +147,7 @@ function CreateCanvas(vpAttrs_init) {
     });
 
     anim.start();
+*/
 
     $("#sldrRotation").bind("change", function () {
         var rotDegree = Math.abs(this.value);
