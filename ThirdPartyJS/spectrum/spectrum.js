@@ -111,7 +111,7 @@
             html.push('<span title="' + tiny.toHexString() + '" data-color="' + tiny.toRgbString() + '" class="' + c + '"><span class="sp-thumb-inner" style="' + swatchStyle + ';" /></span>');
         }
         return "<div class='sp-cf " + className + "'>" + html.join('') + "</div>";
-    };
+    }
 
     function hideAll() {
         for (var i = 0; i < spectrums.length; i++) {
