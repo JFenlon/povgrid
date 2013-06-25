@@ -338,3 +338,11 @@ function Coordinate(xPos, yPos)
 {
     return  {x: xPos || 0, y: yPos || 0};
 }
+
+function DocumentObject(dWidth, dHeight, rgbColor)
+{
+    rgbColor = rgbColor || "rgb(200, 200, 200)";
+    dWidth = dWidth || 512;
+    dHeight = dHeight || 384;
+    return {width: dWidth, height: dHeight, backgroundColor: rgbColor}
+}

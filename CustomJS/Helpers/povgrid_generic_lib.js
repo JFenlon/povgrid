@@ -5,33 +5,29 @@
  *************************************************************
  */
 
-// Exception to throw and alert user when something goes wrong
-/** EXAMPLE
-try {
-    // some function/code that can throw
-    if (isNaN(value))
-        throw new NotNumberException();
-    else
-    if (value < 0)
-        throw new NotPositiveNumberException();
-}
-catch (e) {
-    if (e instanceof NotNumberException) {
-        alert("not a number");
-    }
-    else
-    if (e instanceof NotPositiveNumberException) {
-        alert("not a positive number");
-    }
-}
-*/
-function ExceptionAlert()
-{ //Log error
-    this.message = "CUSTOM MESSAGE";
-}
-ExceptionAlert.prototype = Error.prototype;
-
 // Simple, returns the DOM element that matches the passed ID
 function getDomElement( id ) {
-    return $( '#' + id );
+    return document.getElementById( id );
+}
+
+function LogError(message)
+{
+    var logFile = Lawnchair({name:'logFile'},function(e){
+        console.log('storage open');
+    });
+    var nowDate = new Date(new Date().getTime());
+    var logMsg = {message:message,timeStamp:nowDate.toString()};
+
+    logFile.nuke();
+    logFile.save({value:logMsg});
+
+    console.log('write done');
+
+    //Retrieve log data
+     logFile.all(function(arrRecords){
+		for(var i = 0; i<arrRecords.length;i++)
+		{
+			console.log('[' + arrRecords[i].value.timeStamp + '] | ' + arrRecords[i].value.message);
+		}
+	});
 }

@@ -12,21 +12,23 @@ $(document).ready(function () {
         /** Load config data */
 
         /** Bind UI events */
+        EventBinding();
 
         /** Initialize UI  */
         if(CreateStage() < 0)
-            var e =  new ExceptionAlert();
-            throw e;
+            throw new EvalError("create-stage-failed");
+
+
     }
     catch(ex)
     {
-        if (ex instanceof ExceptionAlert) {
-            alert(ex.message);
+        if (ex instanceof EvalError) {
+            LogError(ex.message);
         }
         else
         {
-            // Generic alert message
-            alert("Generic Message");
+            // Generic error
+            LogError(ex.message);
         }
     }
     finally
