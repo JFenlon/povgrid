@@ -339,10 +339,10 @@ function Coordinate(xPos, yPos)
     return  {x: xPos || 0, y: yPos || 0};
 }
 
-function DocumentObject(dWidth, dHeight, rgbColor)
+function DocumentObject(dWidth, dHeight, hexColor)
 {
-    rgbColor = rgbColor || "rgb(200, 200, 200)";
+    hexColor = hexColor || "#ffffff";
     dWidth = dWidth || 512;
     dHeight = dHeight || 384;
-    return {width: dWidth, height: dHeight, backgroundColor: rgbColor}
+    return {width: dWidth, height: dHeight, backgroundColor: hexColor}
 }

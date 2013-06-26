@@ -3,7 +3,7 @@
  * POVGRID Custom UI function library
  * Created 04/03/2013
  *************************************************************
- * @param {*} vpAttrs_init
+ *
  */
 
 function EventBinding()
@@ -12,6 +12,9 @@ function EventBinding()
 
 }
 
+/**
+ * @return {number}
+ */
 function CreateStage()
 {
     var results = 0;
@@ -21,7 +24,7 @@ function CreateStage()
         var stageParent = getDomElement('canvasContainer').parentElement;
         var stageWidth = stageParent.clientWidth;
         var stageHeight = stageParent.clientHeight;
-        var stageDiagonal = getDistanceBetweenPoints(new Coordinate(0, 0),new Coordinate(stageWidth, stageHeight));
+        //var stageDiagonal = getDistanceBetweenPoints(new Coordinate(0, 0),new Coordinate(stageWidth, stageHeight));
 
         vpStage = new Kinetic.Stage({
             container: "canvasContainer",
@@ -45,6 +48,9 @@ function CreateStage()
     }
 }
 
+/**
+ * @return {number}
+ */
 function CreateMainLayer(vpAttrs_init)
 {
     var results = 0;
@@ -69,15 +75,14 @@ function CreateMainLayer(vpAttrs_init)
             y: (vpStage.attrs.height - documentObj.height) / 2,
             width: documentObj.width,
             height: documentObj.height,
-            fillRgb: documentObj.backgroundColor,
+            fill: documentObj.backgroundColor,
             stroke: 'black',
             strokeWidth: .5,
-            shadow: {
-                color: "black",
-                blur: 10,
-                offset: [10, 10],
-                opacity: .5
-            }
+            shadowColor: 'black',
+            shadowBlur: 10,
+            shadowOffset: [10, 10],
+            shadowOpacity: .5,
+            shadowEnabled: true
         });
 
         // Draw the horizon line
