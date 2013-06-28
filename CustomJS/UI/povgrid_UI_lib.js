@@ -12,6 +12,16 @@ function EventBinding()
 
 }
 
+function SetCanvasElementHeight()
+{
+    var divHeader = getDomElement('divHeader');
+    var divGrid = getDomElement('divTopGrid');
+    var divContent = getDomElement('divContent');
+
+    divContent.style.height = (getDocumentHeight() - divHeader.clientHeight - divGrid.clientHeight) - 35;
+    divContent.style.maxHeight = divContent.style.height;
+}
+
 /**
  * @return {number}
  */
@@ -21,7 +31,7 @@ function CreateStage()
 
     try
     {
-        var stageParent = getDomElement('canvasContainer').parentElement;
+        var stageParent = getDomElement('divContent');
         var stageWidth = stageParent.clientWidth;
         var stageHeight = stageParent.clientHeight;
         //var stageDiagonal = getDistanceBetweenPoints(new Coordinate(0, 0),new Coordinate(stageWidth, stageHeight));
@@ -30,7 +40,7 @@ function CreateStage()
             container: "canvasContainer",
             id: 'mainStage',
             width: stageWidth,
-            height: stageHeight
+            height: stageHeight - 30
         });
 
         results = 1;
@@ -69,6 +79,11 @@ function CreateMainLayer(vpAttrs_init)
 
         vpAttrs_init = vpAttrs_init || vpDefaultAttrs;
 
+        var mainGroup = new Kinetic.Group({
+            id: 'mainGroup',
+            draggable: false
+        });
+
         // This is the 'document' shape
         var kjsDocument = new Kinetic.Rect({
             x: (vpStage.attrs.width - documentObj.width) / 2,
@@ -97,12 +112,14 @@ function CreateMainLayer(vpAttrs_init)
             strokeWidth: lineWidth,
             id: 'horzLine',
             name: 'Horizon',
-            draggable: true
+            draggable: false
         });
 
         // add the shape to the layer
-        vpLayer.add(kjsDocument);
-        vpLayer.add(kjsHorizon);
+        mainGroup.add(kjsDocument);
+        mainGroup.add(kjsHorizon);
+
+        vpLayer.add(mainGroup);
 
         // add the layer to the stage
         vpStage.add(vpLayer);

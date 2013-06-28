@@ -10,6 +10,16 @@ function getDomElement( id ) {
     return document.getElementById( id );
 }
 
+function getDocumentHeight()
+{
+    return Math.max(
+        $(document).height(),
+        $(window).height(),
+        /* For opera: */
+        document.documentElement.clientHeight
+    );
+}
+
 function LogError(message)
 {
     var logFile = Lawnchair({name:'logFile'},function(e){

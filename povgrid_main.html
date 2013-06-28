@@ -17,18 +17,24 @@
 </head>
 
 <body>
-<div data-role="header">
+<div data-role="header" id="divHeader">
     <a href="#" data-icon="home">Home</a>
     <h1>PovGrid</h1>
     <a href="#" data-icon="bars">Menu</a>
 </div>
-<div class="ui-grid-b">
-    <div class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:125px">
-        <input type='text' id='tbWidth' size="4" maxlength="4" data-mini="true"/>
-        <input type='text' id='tbHeight' size="4" maxlength="4" data-mini="true"/>
-        <input type='button' id='btnCreateDocument' value="Create Document" />
-    </div></div>
+<div class="ui-grid-a" id="divTopGrid">
+    <div class="ui-block-a">
+        <div class="ui-bar ui-bar-e" style="height:125px">
+            <input type='text' id='tbWidth' size="4" maxlength="4" data-mini="true"/>
+            <input type='text' id='tbHeight' size="4" maxlength="4" data-mini="true"/>
+            <input type='button' id='btnCreateDocument' value="Create Document" />
+        </div>
+    </div>
+    <div class="ui-block-b">
+        <div class="ui-bar ui-bar-e" style="height:125px">Block B</div>
+    </div>
 </div>
-<div id="canvasContainer"></div>
-
+<div data-role="content" id="divContent">
+    <div id="canvasContainer"></div>
+</div><!-- /content -->
 </body>
