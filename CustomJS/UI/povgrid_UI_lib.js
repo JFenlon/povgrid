@@ -104,12 +104,12 @@ function CreateMainLayer(vpAttrs_init)
         var hlineY = (vpStage.getHeight() - 2) /2;
         var hlineX1 = 0;
         var hlineX2 = vpStage.getWidth();
-        workspaceSettings.hLineMidPoint = (hlineX2 - hlineX1) / 2;
+        PovGridDesigner.workspaceSettings.hLineMidPoint = (hlineX2 - hlineX1) / 2;
 
         var kjsHorizon = new Kinetic.Line({
             points: [hlineX1, hlineY, hlineX2, hlineY],
             stroke: 'green',
-            strokeWidth: lineWidth,
+            strokeWidth: PovGridDesigner.defaultLineWidth,
             id: 'horzLine',
             name: 'Horizon',
             draggable: false

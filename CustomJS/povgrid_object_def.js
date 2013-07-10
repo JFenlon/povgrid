@@ -6,6 +6,16 @@
  */
 
 /* Declaration */
+// Object literal declaration {namespace}
+var PovGridDesigner = {
+
+    // public property
+    version: 1.0,
+
+    // public method
+    getVersion: function(){ return 'Version ' + this.version; }
+};
+
 var segmentParams = Object.create(null);
 var vpDefaultAttrs = Object.create(null);
 var vpStage = Object.create(null);
@@ -13,9 +23,22 @@ var vpShape = Object.create(null);
 var vp1 = Object.create(null);
 var vp2 = Object.create(null);
 var vp3 = Object.create(null);
-var workspaceSettings = Object.create(null);
-var gridDocument = Object.create(null);
-var lineWidth = .5;
+PovGridDesigner.workspaceSettings = Object.create(null);
+PovGridDesigner.gridDocument = Object.create(null);
+
+PovGridDesigner.defaultLineWidth = .5;
+PovGridDesigner.groupId = new Array("gpMain", "gpHorizon", "gpTraceLines", "gpVanishPoint1", "gpVanishPoint2", "gpVanishPoint3", "gpPerspLines1", "gpPerspLines2", "gpPerspLines3");
+PovGridDesigner.groupIdEnum = {
+        groupMain         : 0,
+        groupHorizon      : 1,
+        groupTraceLines   : 2,
+        groupVanishPoint1 : 3,
+        groupVanishPoint2 : 4,
+        groupVanishPoint3 : 5,
+        groupPerspLines1  : 6,
+        groupPerspLines2  : 7,
+        groupPerspLines3  : 8
+    };
 
 // Object properties
 /**
@@ -23,7 +46,7 @@ var lineWidth = .5;
  *  This is the document that will get exported as an image after
  *  the grid and vanishing points are in place.
  */
-Object.defineProperties(gridDocument, {
+Object.defineProperties(PovGridDesigner.gridDocument, {
     width:   {
         value:        1024
         , writable:     true
@@ -97,7 +120,7 @@ Object.defineProperties(segmentParams, {
 *	isAutomatic: place and draw guides with assistance/assumptions based on perspective principles.
 *	hLineMidPoint: half-way point on horizon line.
 */
-Object.defineProperties(workspaceSettings, { 
+Object.defineProperties(PovGridDesigner.workspaceSettings, {
     isLandscape:   { 
         value:        1
       , writable:     true
