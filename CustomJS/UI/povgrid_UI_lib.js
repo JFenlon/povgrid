@@ -36,7 +36,7 @@ function CreateStage()
         var stageHeight = stageParent.clientHeight;
         //var stageDiagonal = getDistanceBetweenPoints(new Coordinate(0, 0),new Coordinate(stageWidth, stageHeight));
 
-        vpStage = new Kinetic.Stage({
+        PovGridDesigner.MainStage = new Kinetic.Stage({
             container: "canvasContainer",
             id: 'mainStage',
             width: stageWidth,
@@ -45,10 +45,10 @@ function CreateStage()
 
         results = 1;
     }
-    catch(e)
+    catch(ex)
     {
         //LOG ERROR
-
+        LogError(ex.message);
         //Set results to negative
         results = -1;
     }
@@ -61,38 +61,46 @@ function CreateStage()
 /**
  * @return {number}
  */
-function CreateMainLayer(vpAttrs_init)
+function CreateMainLayer(docAttrs_init)
 {
     var results = 0;
 
     try
     {
-        var documentObj = new DocumentObject();
-        var vpLayer = new Kinetic.Layer();
+        var documentObj = new PovGridDesigner.DocumentObject();
+        var kjsLayer = new Kinetic.Layer({
+            id: PovGridDesigner.MainLayer
+        });
+
+        // Grab default attributes if none are passed in
+        docAttrs_init = docAttrs_init || PovGridDesigner.DefaultAttributes;
+
+        /** document size input */
         var fldWidth = getDomElement('tbWidth');
         var fldHeight =  getDomElement('tbHeight');
+
         if(fldWidth.value.length != 0 && fldHeight.value.length != 0)
         {
             documentObj.width = fldWidth.value;
             documentObj.height = fldHeight.value;
         }
 
-        vpAttrs_init = vpAttrs_init || vpDefaultAttrs;
-
-        var mainGroup = new Kinetic.Group({
-            id: 'mainGroup',
+        var kjsMainGroup = new Kinetic.Group({
+            id: PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.Main],
             draggable: false
         });
 
         // This is the 'document' shape
         var kjsDocument = new Kinetic.Rect({
-            x: (vpStage.attrs.width - documentObj.width) / 2,
-            y: (vpStage.attrs.height - documentObj.height) / 2,
+            id: PovGridDesigner.shapeId[PovGridDesigner.shapeIdEnum.Document],
+            name: 'document',
+            x: (PovGridDesigner.MainStage.attrs.width - documentObj.width) / 2,
+            y: (PovGridDesigner.MainStage.attrs.height - documentObj.height) / 2,
             width: documentObj.width,
             height: documentObj.height,
             fill: documentObj.backgroundColor,
             stroke: 'black',
-            strokeWidth: .5,
+            strokeWidth: PovGridDesigner.DefaultAttributes.strokeWidth,
             shadowColor: 'black',
             shadowBlur: 10,
             shadowOffset: [10, 10],
@@ -101,28 +109,29 @@ function CreateMainLayer(vpAttrs_init)
         });
 
         // Draw the horizon line
-        var hlineY = (vpStage.getHeight() - 2) /2;
+        var hlineY = (PovGridDesigner.MainStage.getHeight() - 2) /2;
         var hlineX1 = 0;
-        var hlineX2 = vpStage.getWidth();
+        var hlineX2 = PovGridDesigner.MainStage.getWidth();
         PovGridDesigner.workspaceSettings.hLineMidPoint = (hlineX2 - hlineX1) / 2;
 
         var kjsHorizon = new Kinetic.Line({
             points: [hlineX1, hlineY, hlineX2, hlineY],
             stroke: 'green',
-            strokeWidth: PovGridDesigner.defaultLineWidth,
-            id: 'horzLine',
-            name: 'Horizon',
+            strokeWidth: PovGridDesigner.DefaultAttributes.strokeWidth,
+            id: PovGridDesigner.shapeId[PovGridDesigner.shapeIdEnum.Horizon],
+            name: 'horizon',
             draggable: false
         });
 
-        // add the shape to the layer
-        mainGroup.add(kjsDocument);
-        mainGroup.add(kjsHorizon);
+        // add the shape to the group
+        kjsMainGroup.add(kjsDocument);
+        kjsMainGroup.add(kjsHorizon);
 
-        vpLayer.add(mainGroup);
+        // add the group to the layer
+        kjsLayer.add(kjsMainGroup);
 
         // add the layer to the stage
-        vpStage.add(vpLayer);
+        PovGridDesigner.MainStage.add(kjsLayer);
 
         results = 1;
     }

@@ -10,35 +10,45 @@
 var PovGridDesigner = {
 
     // public property
-    version: 1.0,
+    version     : 1.0,
+    MainLayer   : "lyrMain",
 
     // public method
     getVersion: function(){ return 'Version ' + this.version; }
 };
 
-var segmentParams = Object.create(null);
-var vpDefaultAttrs = Object.create(null);
-var vpStage = Object.create(null);
-var vpShape = Object.create(null);
-var vp1 = Object.create(null);
-var vp2 = Object.create(null);
-var vp3 = Object.create(null);
+/**
+ var vp1 = Object.create(null);
+ var vp2 = Object.create(null);
+ var vp3 = Object.create(null);
+ */
+PovGridDesigner.segmentParams = Object.create(null);
+PovGridDesigner.DefaultAttributes = Object.create(null);
+PovGridDesigner.MainStage = Object.create(null);
 PovGridDesigner.workspaceSettings = Object.create(null);
-PovGridDesigner.gridDocument = Object.create(null);
-
-PovGridDesigner.defaultLineWidth = .5;
+PovGridDesigner.exportGridDocument = Object.create(null);
 PovGridDesigner.groupId = new Array("gpMain", "gpHorizon", "gpTraceLines", "gpVanishPoint1", "gpVanishPoint2", "gpVanishPoint3", "gpPerspLines1", "gpPerspLines2", "gpPerspLines3");
 PovGridDesigner.groupIdEnum = {
-        groupMain         : 0,
-        groupHorizon      : 1,
-        groupTraceLines   : 2,
-        groupVanishPoint1 : 3,
-        groupVanishPoint2 : 4,
-        groupVanishPoint3 : 5,
-        groupPerspLines1  : 6,
-        groupPerspLines2  : 7,
-        groupPerspLines3  : 8
+        Main         : 0,
+        Horizon      : 1,
+        TraceLines   : 2,
+        VanishPoint1 : 3,
+        VanishPoint2 : 4,
+        VanishPoint3 : 5,
+        PerspLines1  : 6,
+        PerspLines2  : 7,
+        PerspLines3  : 8
     };
+PovGridDesigner.shapeId = new Array("shpVP1", "shpVP2", "shpVP3", "shpHorizon", "shpDocument", "shpTraceLine1", "shpTraceLine2");
+PovGridDesigner.shapeIdEnum = {
+        VP1        : 0,
+        VP2        : 1,
+        VP3        : 2,
+        Horizon    : 3,
+        Document   : 4,
+        TraceLine1 : 5,
+        TraceLine2 : 6
+};
 
 // Object properties
 /**
@@ -46,7 +56,7 @@ PovGridDesigner.groupIdEnum = {
  *  This is the document that will get exported as an image after
  *  the grid and vanishing points are in place.
  */
-Object.defineProperties(PovGridDesigner.gridDocument, {
+Object.defineProperties(PovGridDesigner.exportGridDocument, {
     width:   {
         value:        1024
         , writable:     true
@@ -76,7 +86,7 @@ Object.defineProperties(PovGridDesigner.gridDocument, {
 *  Point1 is top anchor point on verticle line.
 *  Point2 is bottom anchor point on verticle line.
 */
-Object.defineProperties(segmentParams, {
+Object.defineProperties(PovGridDesigner.segmentParams, {
     staticPos:   { 
         value:        0
       , writable:     true
@@ -178,6 +188,7 @@ Object.defineProperties(PovGridDesigner.workspaceSettings, {
     }            
 });
 
+/**
 Object.defineProperties(vp1,
 {
     posX:
@@ -258,8 +269,9 @@ Object.defineProperties(vp3,
         , enumerable:   true 
     }      
 });
+ */
 
-Object.defineProperties(vpDefaultAttrs,
+Object.defineProperties(PovGridDesigner.DefaultAttributes,
 {
     fillColor:
     {
@@ -287,7 +299,7 @@ Object.defineProperties(vpDefaultAttrs,
 
     ,strokeWidth:
     {
-          value:        1
+          value:        .5
         , writable:     true
         , configurable: true
         , enumerable:   true 
@@ -308,7 +320,7 @@ Object.defineProperties(vpDefaultAttrs,
 * details about each shape. This container will be
 * added to a collection of shape containers and maintained
 * at all times.
-*/  
+
 Object.defineProperties(vpShape,
 {
     shapeID:
@@ -351,18 +363,43 @@ Object.defineProperties(vpShape,
         , enumerable:   true
     }
 });
+ */
 
 /** END PROPERTY DEFINITIONS */
 
 /** OBJECT DEFINITION */
 
 // Coordinate object
-function Coordinate(xPos, yPos)
+PovGridDesigner.Coordinate = function (xPos, yPos)
 {
     return  {x: xPos || 0, y: yPos || 0};
 }
 
-function DocumentObject(dWidth, dHeight, hexColor)
+PovGridDesigner.GetNode = function (shapeId)
+{
+    var node = Kinetic.Shape;
+
+    try
+    {
+        var objectId = '#' + shapeId;
+        var nodes = this.MainStage.get(objectId);
+        node = nodes[0];
+    }
+    catch(ex)
+    {
+        //LOG ERROR
+        LogError(ex.message);
+        return null;
+    }
+    finally
+    {
+        LogError('ShapeID: ' + node.attrs.id);
+        return node;
+    }
+}
+
+// Public methods
+PovGridDesigner.DocumentObject = function (dWidth, dHeight, hexColor)
 {
     hexColor = hexColor || "#ffffff";
     dWidth = dWidth || 512;

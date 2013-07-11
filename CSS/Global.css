@@ -68,6 +68,12 @@ ul#display-inline-block li
     width: 200px;
 }
 
+/* Override for padding added by jQuery mobile */
+#divContent
+{
+    padding: 0;
+}
+
 body 
 {
     margin: 0;
