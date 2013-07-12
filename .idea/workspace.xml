@@ -14,7 +14,7 @@
     <file path="/povgrid_canvas.html" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1365024540613" ignored="false" />
     <file path="/Dummy.regexp" changelist="dffa65c6-1358-439d-b91d-5ef99f148acb" time="1365018760315" ignored="false" />
     <file path="/Dummy.xpath" changelist="dffa65c6-1358-439d-b91d-5ef99f148acb" time="1365018760315" ignored="false" />
-    <file path="/Dummy.txt" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1373666107185" ignored="false" />
+    <file path="/Dummy.txt" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1373666143483" ignored="false" />
     <file path="/povgrid_object_def.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1373646509424" ignored="false" />
     <file path="/povgrid_UI_lib.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1373665817417" ignored="false" />
     <file path="/povgrid_main.html" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1373666051931" ignored="false" />
@@ -374,7 +374,11 @@
       <created>1373666112753</created>
       <updated>1373666112753</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Initial file listInitial file list">
+      <created>1373666146431</created>
+      <updated>1373666146431</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
