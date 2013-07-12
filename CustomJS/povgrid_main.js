@@ -20,7 +20,8 @@ $(document).ready(function () {
         if(CreateStage() < 0)
             throw new EvalError("create-stage-failed");
 
-        CreateTouchLayer();
+        if(CreateTouchLayer() < 0)
+            throw new EvalError("create-touchlayer-failed");
 
     }
     catch(ex)

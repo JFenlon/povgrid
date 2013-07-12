@@ -153,6 +153,8 @@ function CreateMainLayer(docAttrs_init)
 
 function CreateTouchLayer()
 {
+    var results = 0;
+
     try
     {
         var kjsLayer = new Kinetic.Layer({
@@ -199,9 +201,10 @@ function CreateTouchLayer()
     {
         //LOG ERROR
         LogError(ex.message);
+        results = -1;
     }
     finally
     {
-
+        return results;
     }
 }
