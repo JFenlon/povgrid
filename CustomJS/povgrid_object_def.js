@@ -12,6 +12,8 @@ var PovGridDesigner = {
     // public property
     version     : 1.0,
     MainLayer   : "lyrMain",
+    TouchLayer  : "lyrTouch",
+    TouchAnim   : "shpTouchAnim",
 
     // public method
     getVersion: function(){ return 'Version ' + this.version; }

@@ -133,6 +133,9 @@ function CreateMainLayer(docAttrs_init)
         // add the layer to the stage
         PovGridDesigner.MainStage.add(kjsLayer);
 
+        var tLayer = PovGridDesigner.GetNode(PovGridDesigner.TouchLayer);
+        tLayer.setZIndex(1);
+
         results = 1;
     }
     catch(ex)
@@ -145,5 +148,60 @@ function CreateMainLayer(docAttrs_init)
     finally
     {
         return results;
+    }
+}
+
+function CreateTouchLayer()
+{
+    try
+    {
+        var kjsLayer = new Kinetic.Layer({
+            id: PovGridDesigner.TouchLayer
+        });
+
+        var kjsTouchCircle = new Kinetic.Circle({
+            x: 665,
+            y: 255,
+            radius: 30,
+            fill: 'red',
+            stroke: 'gray',
+            opacity: 0.4,
+            strokeWidth: 2,
+            visible: false
+        });
+
+        // add the shape to the layer
+        kjsLayer.add(kjsTouchCircle);
+
+        // add the layer to the stage
+        PovGridDesigner.MainStage.add(kjsLayer);
+
+        // use event delegation
+        PovGridDesigner.MainStage.on('mousedown touchstart', function(evt) {
+            kjsLayer.clear();
+            kjsTouchCircle.setVisible(true);
+            kjsTouchCircle.setPosition(evt.layerX, evt.layerY);
+            kjsTouchCircle.draw();
+            //anim.start();
+        });
+
+        kjsTouchCircle.on('mousedown mouseout', function(evt) {
+
+            kjsLayer.clear();
+        });
+
+        PovGridDesigner.MainStage.on('mouseup touchend', function(evt) {
+            kjsLayer.clear();
+        });
+
+    }
+    catch(ex)
+    {
+        //LOG ERROR
+        LogError(ex.message);
+    }
+    finally
+    {
+
     }
 }
