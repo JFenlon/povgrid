@@ -8,7 +8,7 @@
 
 function EventBinding()
 {
-    $("#btnCreateDocument").bind("click", CreateMainLayer);
+    $("#btnCreateDocument").bind("click", AddNewDocument);
 
 }
 
@@ -20,6 +20,19 @@ function SetCanvasElementHeight()
 
     divContent.style.height = (getDocumentHeight() - divHeader.clientHeight - divGrid.clientHeight) - 35;
     divContent.style.maxHeight = divContent.style.height;
+}
+
+/**
+ * Dev creation method
+ */
+function AddNewDocument()
+{
+    // Clear existing document
+    PovGridDesigner.MainStage.clear();
+    var tLayer = PovGridDesigner.GetNode(PovGridDesigner.TouchLayer);
+    tLayer.setZIndex(1);
+
+    CreateMainLayer();
 }
 
 /**
@@ -133,8 +146,8 @@ function CreateMainLayer(docAttrs_init)
         // add the layer to the stage
         PovGridDesigner.MainStage.add(kjsLayer);
 
-        var tLayer = PovGridDesigner.GetNode(PovGridDesigner.TouchLayer);
-        tLayer.setZIndex(1);
+        //var tLayer = PovGridDesigner.GetNode(PovGridDesigner.TouchLayer);
+        kjsLayer.setZIndex(0);
 
         results = 1;
     }
