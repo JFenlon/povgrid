@@ -9,67 +9,48 @@
 //  [Returns: decimal]
 function getDistanceBetweenPoints(coordinate1, coordinate2)
 {
-    var x1 = coordinate1.x;
-    var x2 = coordinate2.x;
-    var y1 = coordinate1.y;
-    var y2 = coordinate2.y;
-
-    return Math.sqrt(((x2 - x1) * (x2 - x1)) + ((y2 - y1) * (y2 - y1)));
-}
-
-//   Draw the vanishing point on the current stage and returns a success status
-//   [Returns: bool]
-function drawVP(vanishingPoint, baseLayer)
-{
-    var isSuccess = false;
+    var mLine = new PovGridDesigner.LineCoordinate(coordinate1.x, coordinate1.y, coordinate2.x, coordinate2.y);
+    var measuremeant = 0.0;
 
     try
     {
-        if(vpStage != undefined)
-        {
-            var vpoint = new Kinetic.Circle({
-                x: vanishingPoint.posX,
-                y: vanishingPoint.posY,
-                radius: vpAttrs.radius,
-                fill: vpAttrs.fillColor,
-                stroke: vpAttrs.strokeColor,
-                strokeWidth: vpAttrs.strokeWidth,
-                opacity: vpAttrs.opacity,
-                id: vanishingPoint.id,
-                name: 'Vanishing Point',
-                draggable: true
-            });
-
-            baseLayer.add(vpoint);
-            isSuccess = true;
-        }
+        measuremeant = Math.sqrt(((mLine.x2 - mLine.x1) * (mLine.x2 - mLine.x1)) + ((mLine.y2 - mLine.y1) * (mLine.y2 - mLine.y1)));
     }
-    catch(err)
+    catch(ex)
     {
-        console.log(err);
+        //LOG ERROR
+        LogError(ex.message);
     }
-
-    return isSuccess;
+    finally
+    {
+        return measuremeant;
+    }
 }
 
+
 //   Get the upper and lower bounds of the passed object (usually the rectangle page).
-//   [Returns: decimal object of (x1,y1,x2,y2)]
+//   [Returns: PovGridDesigner.LineCoordinate]
 function getBounds(domObject)
 {
-    var objBoundaries = [{
-        "x1" : 0,
-        "x2" : 0,
-        "y1" : 0,
-        "y2" : 0
-    }];
+    var objBoundaries = new PovGridDesigner.LineCoordinate();
 
-    objBoundaries.x1 = domObject.getWidth() / 2 * -1;
-    objBoundaries.x2 = objBoundaries.x1 * -1;
+    try
+    {
+        objBoundaries.x1 = domObject.getWidth() / 2 * -1;
+        objBoundaries.x2 = objBoundaries.x1 * -1;
 
-    objBoundaries.y1 = domObject.getHeight() / 2 * -1;
-    objBoundaries.y2 = objBoundaries.y1 * -1;
-
-    return objBoundaries;
+        objBoundaries.y1 = domObject.getHeight() / 2 * -1;
+        objBoundaries.y2 = objBoundaries.y1 * -1;
+    }
+    catch(ex)
+    {
+        //LOG ERROR
+        LogError(ex.message);
+    }
+    finally
+    {
+        return objBoundaries;
+    }
 }
 
 //   Returns the points to which all grid lines should run
@@ -101,12 +82,15 @@ function getVPPolyGrid(segmentPoints, vpX, vpY)
             }
         }
     }
-    catch(err)
+    catch(ex)
     {
-        console.log(err);
+        //LOG ERROR
+        LogError(ex.message);
     }
-
-    return gPoints;
+    finally
+    {
+        return gPoints;
+    }
 }
 
 //   Returns the coordinates for a line that spans the full page
@@ -115,26 +99,37 @@ function getVPPolyGrid(segmentPoints, vpX, vpY)
 //   cXpos = circle center X point
 //   cYpos = circle center Y point
 //   lAngle = line angle in degrees
-//   [Returns: decimal object of (x1,y1,x2,y2)]
+//   [Returns: PovGridDesigner.LineCoordinate]
 function getSpokeLineCoords(cRadius, cXpos, cYpos, lAngle)
 {
-    var lineCoords = [{"x1": 0,"y1": 0, "x2" : 0, "y2" : 0}];
-    var reverseAngle = lAngle + 180;
+    var lineCoords = new PovGridDesigner.LineCoordinate();
 
-    if(reverseAngle > 360)
+    try
     {
-        reverseAngle = reverseAngle - 360;
+        var reverseAngle = lAngle + 180;
+
+        if(reverseAngle > 360)
+        {
+            reverseAngle = reverseAngle - 360;
+        }
+
+        var coordsBeg = getPointsFromAngle(cRadius, cXpos, cYpos,lAngle);
+        var coordsEnd = getPointsFromAngle(cRadius, cXpos, cYpos, reverseAngle);
+
+        lineCoords.x1 = coordsBeg.x;
+        lineCoords.y1 = coordsBeg.y;
+        lineCoords.x2 = coordsEnd.x;
+        lineCoords.y2 = coordsEnd.y;
     }
-
-    var coordsBeg = getPointsFromAngle(cRadius, cXpos, cYpos,lAngle);
-    var coordsEnd = getPointsFromAngle(cRadius, cXpos, cYpos, reverseAngle);
-
-    lineCoords.x1 = coordsBeg.x;
-    lineCoords.y1 = coordsBeg.y;
-    lineCoords.x2 = coordsEnd.x;
-    lineCoords.y2 = coordsEnd.y;
-
-    return lineCoords;
+    catch(ex)
+    {
+        //LOG ERROR
+        LogError(ex.message);
+    }
+    finally
+    {
+        return lineCoords;
+    }
 }
 
 //   Calculates the endpoint of a line given the
@@ -145,19 +140,30 @@ function getSpokeLineCoords(cRadius, cXpos, cYpos, lAngle)
 //   cXpos = circle center X point
 //   cYpos = circle center Y point
 //   lAngle = line angle in degrees
-//   [Returns: decimal object of (x,y)]
+//   [Returns: PovGridDesigner.Coordinate]
 function getPointsFromAngle(cRadius, cXpos, cYpos, lAngle)
 {
-    var newCoords = [{"x": 0,"y": 0}];
-    var actualAngle = lAngle - 90;
+    var resultCoords = new PovGridDesigner.Coordinate();
 
-    newCoords.x = cXpos + cRadius * Math.cos(actualAngle * (Math.PI / 180));
-    newCoords.y = cYpos + cRadius * Math.sin(actualAngle * (Math.PI / 180));
+    try
+    {
+        var actualAngle = lAngle - 90;
 
-    return newCoords;
+        resultCoords.x = cXpos + cRadius * Math.cos(actualAngle * (Math.PI / 180));
+        resultCoords.y = cYpos + cRadius * Math.sin(actualAngle * (Math.PI / 180));
+    }
+    catch(ex)
+    {
+        //LOG ERROR
+        LogError(ex.message);
+    }
+    finally
+    {
+        return resultCoords;
+    }
 }
 
-//  Returns an array of points indicating a segment along
+//  Returns an array of points indicating equal distant segments along
 //  a straight line.
 //  Breaking a line into 4 segments returns 4 coordinates
 //---------------------------------------------------------
@@ -168,7 +174,7 @@ function getPointsFromAngle(cRadius, cXpos, cYpos, lAngle)
 function getSegmentCoords(segmentParams)
 {
     var nPoints = [];
-    var x1, x2, y1, y2;
+    var sLine = new PovGridDesigner.LineCoordinate();
 
     try
     {
@@ -182,48 +188,53 @@ function getSegmentCoords(segmentParams)
 
             if(segmentParams.xIsStatic)
             {
-                x1 = segmentParams.staticPos;
-                x2 = x1;
-                y1 = segmentParams.point1;
-                y2 = segmentParams.point2;
+                sLine.x1 = segmentParams.staticPos;
+                sLine.x2 = sLine.x1;
+                sLine.y1 = segmentParams.point1;
+                sLine.y2 = segmentParams.point2;
             }
             else
             {
-                x1 = segmentParams.point1;
-                x2 = segmentParams.point2;
-                y1 = segmentParams.staticPos;
-                y2 = y1;
+                sLine.x1 = segmentParams.point1;
+                sLine.x2 = segmentParams.point2;
+                sLine.y1 = segmentParams.staticPos;
+                sLine.y2 = sLine.y1;
             }
 
-            nPoints.push(x1);
-            nPoints.push(y1);
+            nPoints.push(sLine.x1);
+            nPoints.push(sLine.y1);
 
             for(var i=1; i<segmentParams.segmentCount; i++)
             {
                 if(segmentParams.xIsStatic)
                 {
-                    x1 = segmentParams.staticPos;
-                    y1 = nextPoint;
+                    sLine.x1 = segmentParams.staticPos;
+                    sLine.y1 = nextPoint;
                 }
                 else
                 {
-                    x1 = nextPoint;
-                    y1 = segmentParams.staticPos;
+                    sLine.x1 = nextPoint;
+                    sLine.y1 = segmentParams.staticPos;
                 } 
 
-                nPoints.push(x1);
-                nPoints.push(y1);
+                nPoints.push(sLine.x1);
+                nPoints.push(sLine.y1);
                 nextPoint += segmentLength;
             }
 
-            nPoints.push(x2);
-            nPoints.push(y2);
+            nPoints.push(sLine.x2);
+            nPoints.push(sLine.y2);
         }
     }
-    catch (err)
+    catch (ex)
     {
-        console.log(err);                
+        //LOG ERROR
+        LogError(ex.message);
+    }
+    finally
+    {
+        return nPoints;
     }
 
-    return nPoints;
+
 }

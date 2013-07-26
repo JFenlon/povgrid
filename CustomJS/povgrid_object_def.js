@@ -14,6 +14,7 @@ var PovGridDesigner = {
     MainLayer   : "lyrMain",
     TouchLayer  : "lyrTouch",
     TouchAnim   : "shpTouchAnim",
+    VPLayer     : "lyrVanishingPoint",
 
     // public method
     getVersion: function(){ return 'Version ' + this.version; }
@@ -25,21 +26,20 @@ var PovGridDesigner = {
  var vp3 = Object.create(null);
  */
 PovGridDesigner.segmentParams = Object.create(null);
-PovGridDesigner.DefaultAttributes = Object.create(null);
+PovGridDesigner.VPAttributes = Object.create(null);
 PovGridDesigner.MainStage = Object.create(null);
 PovGridDesigner.workspaceSettings = Object.create(null);
 PovGridDesigner.exportGridDocument = Object.create(null);
-PovGridDesigner.groupId = new Array("gpMain", "gpHorizon", "gpTraceLines", "gpVanishPoint1", "gpVanishPoint2", "gpVanishPoint3", "gpPerspLines1", "gpPerspLines2", "gpPerspLines3");
+PovGridDesigner.groupId = new Array("gpMain", "gpTraceLines", "gpVanishPoint1", "gpVanishPoint2", "gpVanishPoint3", "gpPerspLines1", "gpPerspLines2", "gpPerspLines3");
 PovGridDesigner.groupIdEnum = {
         Main         : 0,
-        Horizon      : 1,
-        TraceLines   : 2,
-        VanishPoint1 : 3,
-        VanishPoint2 : 4,
-        VanishPoint3 : 5,
-        PerspLines1  : 6,
-        PerspLines2  : 7,
-        PerspLines3  : 8
+        TraceLines   : 1,
+        VanishPoint1 : 2,
+        VanishPoint2 : 3,
+        VanishPoint3 : 4,
+        PerspLines1  : 5,
+        PerspLines2  : 6,
+        PerspLines3  : 7
     };
 PovGridDesigner.shapeId = new Array("shpVP1", "shpVP2", "shpVP3", "shpHorizon", "shpDocument", "shpTraceLine1", "shpTraceLine2");
 PovGridDesigner.shapeIdEnum = {
@@ -191,89 +191,9 @@ Object.defineProperties(PovGridDesigner.workspaceSettings, {
 });
 
 /**
-Object.defineProperties(vp1,
-{
-    posX:
-    {
-          value:        0
-        , writable:     true
-        , configurable: true
-        , enumerable:   true
-    }
-
-    ,posY:
-    {
-          value:        0
-        , writable:     true
-        , configurable: true
-        , enumerable:   true 
-    }  
-
-    ,id:
-    {
-          value:        'vp1'
-        , writable:     false
-        , configurable: false
-        , enumerable:   true 
-    }              
-});
-
-Object.defineProperties(vp2,
-{
-    posX:
-    {
-          value:        0
-        , writable:     true
-        , configurable: true
-        , enumerable:   true
-    }
-
-    ,posY:
-    {
-          value:        0
-        , writable:     true
-        , configurable: true
-        , enumerable:   true 
-    }
-
-    ,id:
-    {
-          value:        'vp2'
-        , writable:     false
-        , configurable: false
-        , enumerable:   true 
-    }      
-});
-
-Object.defineProperties(vp3,
-{
-    posX:
-    {
-          value:        0
-        , writable:     true
-        , configurable: true
-        , enumerable:   true
-    }
-
-    ,posY:
-    {
-          value:        0
-        , writable:     true
-        , configurable: true
-        , enumerable:   true 
-    }
-
-    ,id:
-    {
-          value:        'vp3'
-        , writable:     false
-        , configurable: false
-        , enumerable:   true 
-    }      
-});
+ * Default shape attributes for a vanishing point
  */
-
-Object.defineProperties(PovGridDesigner.DefaultAttributes,
+Object.defineProperties(PovGridDesigner.VPAttributes,
 {
     fillColor:
     {
@@ -377,6 +297,21 @@ PovGridDesigner.Coordinate = function (xPos, yPos)
     return  {x: xPos || 0, y: yPos || 0};
 }
 
+PovGridDesigner.LineCoordinate = function (x1Pos, y1Pos, x2Pos, y2Pos)
+{
+    return {x1: x1Pos || 0, y1: y1Pos || 0, x2: x2Pos || 0, y2: y2Pos || 0};
+}
+
+PovGridDesigner.DocumentObject = function (dWidth, dHeight, hexColor)
+{
+    hexColor = hexColor || "#ffffff";
+    dWidth = dWidth || 512;
+    dHeight = dHeight || 384;
+    return {width: dWidth, height: dHeight, backgroundColor: hexColor}
+}
+
+
+// Public methods
 PovGridDesigner.GetNode = function (shapeId)
 {
     var node = Kinetic.Shape;
@@ -400,11 +335,26 @@ PovGridDesigner.GetNode = function (shapeId)
     }
 }
 
-// Public methods
-PovGridDesigner.DocumentObject = function (dWidth, dHeight, hexColor)
+PovGridDesigner.NodeExists = function (objectID)
 {
-    hexColor = hexColor || "#ffffff";
-    dWidth = dWidth || 512;
-    dHeight = dHeight || 384;
-    return {width: dWidth, height: dHeight, backgroundColor: hexColor}
+    var results = true;
+
+    try
+    {
+        var node = PovGridDesigner.GetNode(objectID);
+
+        if(typeof variable_here === 'undefined'){
+            results = false;
+        };
+    }
+    catch(ex)
+    {
+        // Generic error
+        LogError(ex.message);
+        results = false;
+    }
+    finally
+    {
+        return results;
+    }
 }

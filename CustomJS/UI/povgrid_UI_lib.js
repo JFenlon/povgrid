@@ -9,7 +9,9 @@
 function EventBinding()
 {
     $("#btnCreateDocument").bind("click", AddNewDocument);
-
+    $("#btnVanishPoint1").bind("click", function(){
+        ShowVanishingPoint(PovGridDesigner.shapeIdEnum.VP1);
+    });
 }
 
 function SetCanvasElementHeight()
@@ -23,16 +25,150 @@ function SetCanvasElementHeight()
 }
 
 /**
+ *
+ * @vanishing point enumID
+ */
+function ShowVanishingPoint(shapeEnumId)
+{
+    try
+    {
+        if(PovGridDesigner.NodeExists(PovGridDesigner.shapeId[shapeEnumId]))
+        {
+            // just make it visible
+        }
+        else
+        {
+            // we need to create it
+            var shapeCoords = new PovGridDesigner.Coordinate();
+            var baseLayer = PovGridDesigner.GetNode(PovGridDesigner.MainLayer);
+
+            switch(shapeEnumId)
+            {
+                case PovGridDesigner.shapeIdEnum.VP1:
+                    //place on horizon, to left of document
+                    var horizon = PovGridDesigner.GetNode(PovGridDesigner.shapeId[PovGridDesigner.shapeIdEnum.Horizon]);
+                    var document = PovGridDesigner.GetNode(PovGridDesigner.shapeId[PovGridDesigner.shapeIdEnum.Document]);
+
+                    shapeCoords.y = horizon.getAttrs().points[0].y;
+                    shapeCoords.x = document.getPosition().x + PovGridDesigner.VPAttributes.radius;
+
+                    CreateVanishingPoint(shapeCoords, baseLayer, shapeEnumId, 0);
+
+                case PovGridDesigner.shapeIdEnum.VP2:
+                    //place on horizon, to right of document
+
+                case PovGridDesigner.shapeIdEnum.VP3:
+                    //place in center, bottom of document
+
+            }
+        }
+    }
+    catch (ex)
+    {
+        // Generic error
+        LogError(ex.message);
+    }
+}
+
+/**
  * Dev creation method
  */
 function AddNewDocument()
 {
-    // Clear existing document
-    PovGridDesigner.MainStage.clear();
-    var tLayer = PovGridDesigner.GetNode(PovGridDesigner.TouchLayer);
-    tLayer.setZIndex(1);
+    try
+    {
+        // Clear existing document
+        PovGridDesigner.MainStage.clear();
+        var tLayer = PovGridDesigner.GetNode(PovGridDesigner.TouchLayer);
+        tLayer.setZIndex(1);
 
-    CreateMainLayer();
+        if(CreateMainLayer() < 0)
+            throw new EvalError("create-main_layer-failed");
+
+        // Generate groups
+        if(CreateRequiredGroups() < 0)
+            throw new EvalError("create-groups-failed");
+
+        EnableGroupDragability();
+
+    }
+    catch(ex)
+    {
+        if (ex instanceof EvalError) {
+            LogError(ex.message);
+        }
+        else
+        {
+            // Generic error
+            LogError(ex.message);
+        }
+    }
+    finally
+    {
+
+    }
+}
+
+/**
+ *
+ * @param initialCoords
+ * @param baseLayer
+ * @param enumId
+ * @returns {boolean}
+ */
+function CreateVanishingPoint(shapeCoords, layerObject, enumId, zIndex)
+{
+    var isSuccess = false;
+
+    try
+    {
+        if(PovGridDesigner.MainStage != undefined)
+        {
+/*            var vPoint = new Kinetic.Circle({
+                x: shapeCoords.x,
+                y: shapeCoords.y,
+                radius: PovGridDesigner.VPAttributes.radius,
+                fill: PovGridDesigner.VPAttributes.fillColor,
+                stroke: PovGridDesigner.VPAttributes.strokeColor,
+                strokeWidth: PovGridDesigner.VPAttributes.strokeWidth,
+                opacity: PovGridDesigner.VPAttributes.opacity,
+                id: PovGridDesigner.shapeId[enumId],
+                name: 'Vanishing Point',
+                visible: true,
+                draggable: false
+            });*/
+
+            var kjsLayer = new Kinetic.Layer({
+                id: "lyrTest"
+            });
+
+            var kjsTouchCircle = new Kinetic.Circle({
+                x: 100,
+                y: 100,
+                radius: 30,
+                fill: 'red',
+                stroke: 'gray',
+                opacity: 0.4,
+                strokeWidth: 2,
+                visible: true
+            });
+
+            //Each shape requires a layer !!!
+            kjsLayer.add(kjsTouchCircle);
+            PovGridDesigner.MainStage.add(kjsLayer);
+            //kjsTouchCircle.setZIndex(zIndex);
+            isSuccess = true;
+        }
+    }
+    catch(ex)
+    {
+        //LOG ERROR
+        LogError(ex.message);
+    }
+    finally
+    {
+        return isSuccess;
+    }
 }
 
 /**
@@ -113,12 +249,13 @@ function CreateMainLayer(docAttrs_init)
             height: documentObj.height,
             fill: documentObj.backgroundColor,
             stroke: 'black',
-            strokeWidth: PovGridDesigner.DefaultAttributes.strokeWidth,
+            strokeWidth: PovGridDesigner.VPAttributes.strokeWidth,
             shadowColor: 'black',
             shadowBlur: 10,
             shadowOffset: [10, 10],
             shadowOpacity: .5,
-            shadowEnabled: true
+            shadowEnabled: true,
+            opacity:.75
         });
 
         // Draw the horizon line
@@ -130,7 +267,7 @@ function CreateMainLayer(docAttrs_init)
         var kjsHorizon = new Kinetic.Line({
             points: [hlineX1, hlineY, hlineX2, hlineY],
             stroke: 'green',
-            strokeWidth: PovGridDesigner.DefaultAttributes.strokeWidth,
+            strokeWidth: PovGridDesigner.VPAttributes.strokeWidth,
             id: PovGridDesigner.shapeId[PovGridDesigner.shapeIdEnum.Horizon],
             name: 'horizon',
             draggable: false
@@ -161,6 +298,61 @@ function CreateMainLayer(docAttrs_init)
     finally
     {
         return results;
+    }
+}
+
+/**
+ * @returns {number}
+ */
+function CreateRequiredGroups()
+{
+    var results = 0;
+
+    try
+    {
+        var baseLayer = PovGridDesigner.GetNode(PovGridDesigner.MainLayer);
+
+        for(var i = 0; i < PovGridDesigner.groupId.length; i++)
+        {
+            if(PovGridDesigner.groupId[i] != PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.Main])
+            {
+                var group = new Kinetic.Group({
+                    id: PovGridDesigner.groupId[i],
+                    draggable: false
+                });
+
+                baseLayer.add(group);
+            }
+        }
+    }
+    catch(ex)
+    {
+        //LOG ERROR
+        LogError(ex.message);
+        results = -1;
+    }
+    finally
+    {
+        return results;
+    }
+}
+
+function EnableGroupDragability()
+{
+    try
+    {
+        var vp1 = PovGridDesigner.GetNode(PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.VanishPoint1]);
+        var vp2 = PovGridDesigner.GetNode(PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.VanishPoint2]);
+        var vp3 = PovGridDesigner.GetNode(PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.VanishPoint3]);
+
+        vp1.draggable = true;
+        vp2.draggable = true;
+        vp3.draggable =true;
+    }
+    catch(ex)
+    {
+        //LOG ERROR
+        LogError(ex.message);
     }
 }
 
@@ -221,3 +413,4 @@ function CreateTouchLayer()
         return results;
     }
 }
+
