@@ -244,7 +244,7 @@ function CreateMainLayer(docAttrs_init)
             height: documentObj.height,
             fill: documentObj.backgroundColor,
             stroke: 'black',
-            strokeWidth: PovGridDesigner.VPAttributes.strokeWidth,
+            strokeWidth: 0.5,
             shadowColor: 'black',
             shadowBlur: 10,
             shadowOffset: [10, 10],

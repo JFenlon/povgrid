@@ -27,6 +27,7 @@ var PovGridDesigner = {
  */
 PovGridDesigner.segmentParams = Object.create(null);
 PovGridDesigner.VPAttributes = Object.create(null);
+PovGridDesigner.GeneralShapeAttributes = Object.create(null);
 PovGridDesigner.MainStage = Object.create(null);
 PovGridDesigner.workspaceSettings = Object.create(null);
 PovGridDesigner.exportGridDocument = Object.create(null);
@@ -190,6 +191,33 @@ Object.defineProperties(PovGridDesigner.workspaceSettings, {
     }            
 });
 
+Object.defineProperties(PovGridDesigner.GeneralShapeAttributes,
+{
+    strokeWidth:
+    {
+        value:          0.5
+        ,writable:      true
+        ,configurable:  true
+        ,enumerable:    true
+    }
+
+    ,strokeColor:
+    {
+        value:          'black'
+        ,writable:      true
+        ,configurable:  true
+        ,enumerable:    true
+    }
+
+    ,opacity:
+    {
+        value:          1
+        ,writable:      true
+        ,configurable:  true
+        ,enumerable:    true
+    }
+});
+
 /**
  * Default shape attributes for a vanishing point
  */
@@ -197,7 +225,7 @@ Object.defineProperties(PovGridDesigner.VPAttributes,
 {
     fillColor:
     {
-          value:        'yellow'
+          value:        '#DAFA0A'
         , writable:     true
         , configurable: true
         , enumerable:   true
@@ -205,7 +233,7 @@ Object.defineProperties(PovGridDesigner.VPAttributes,
 
     ,strokeColor:
     {
-          value:        '#3D3D3D'
+          value:        '#9FB030'
         , writable:     true
         , configurable: true
         , enumerable:   true 
@@ -221,7 +249,7 @@ Object.defineProperties(PovGridDesigner.VPAttributes,
 
     ,strokeWidth:
     {
-          value:        .5
+          value:        2
         , writable:     true
         , configurable: true
         , enumerable:   true 
