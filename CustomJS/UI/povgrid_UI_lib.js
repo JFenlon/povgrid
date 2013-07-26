@@ -124,7 +124,7 @@ function CreateVanishingPoint(shapeCoords, layerObject, enumId, zIndex)
     {
         if(PovGridDesigner.MainStage != undefined)
         {
-/*            var vPoint = new Kinetic.Circle({
+            var vPoint = new Kinetic.Circle({
                 x: shapeCoords.x,
                 y: shapeCoords.y,
                 radius: PovGridDesigner.VPAttributes.radius,
@@ -136,27 +136,22 @@ function CreateVanishingPoint(shapeCoords, layerObject, enumId, zIndex)
                 name: 'Vanishing Point',
                 visible: true,
                 draggable: false
-            });*/
+            });
 
             var kjsLayer = new Kinetic.Layer({
                 id: "lyrTest"
             });
 
-            var kjsTouchCircle = new Kinetic.Circle({
-                x: 100,
-                y: 100,
-                radius: 30,
-                fill: 'red',
-                stroke: 'gray',
-                opacity: 0.4,
-                strokeWidth: 2,
-                visible: true
+            //Each shape requires a layer !!!
+            var kjsGroup = new Kinetic.Group({
+               id: PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.VanishPoint1],
+               draggable: true
             });
 
-            //Each shape requires a layer !!!
-            kjsLayer.add(kjsTouchCircle);
+            kjsGroup.add(vPoint);
+            kjsLayer.add(kjsGroup);
             PovGridDesigner.MainStage.add(kjsLayer);
-            //kjsTouchCircle.setZIndex(zIndex);
+
             isSuccess = true;
         }
     }
@@ -254,8 +249,7 @@ function CreateMainLayer(docAttrs_init)
             shadowBlur: 10,
             shadowOffset: [10, 10],
             shadowOpacity: .5,
-            shadowEnabled: true,
-            opacity:.75
+            shadowEnabled: true
         });
 
         // Draw the horizon line
