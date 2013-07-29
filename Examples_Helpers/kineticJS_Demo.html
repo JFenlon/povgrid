@@ -3,7 +3,7 @@
     <script src="../jQuery/jquery-1.9.1.js"></script>
     <script src="../jQuery/jquery.mobile-1.3.0.js"></script>
     <script src="../ThirdPartyJS/kineticJS/kinetic-v4.4.0.js"></script>
-    <script src="kjs_objDef.js"></script>  
+    <script src="../CustomJS/povgrid_object_def.js"></script>
 
     <style>
       body 
@@ -56,7 +56,7 @@
               y: (600-400)/2,
               width: 600,
               height: 400,
-              fill: workspaceSettings.paperColor,
+              fill: 'white',
               stroke: 'black',
               strokeWidth: .5,
               shadow: {
@@ -70,12 +70,12 @@
             var hlineY = (vpStage.getHeight() - 2) /2;
             var hlineX1 = 0
             var hlineX2 = vpStage.getWidth();
-            workspaceSettings.hLineMidPoint = (hlineX2 - hlineX1) / 2;
+            var hLineMidPoint = (hlineX2 - hlineX1) / 2;
 
             var horzLine = new Kinetic.Line({
                 points: [hlineX1, hlineY, hlineX2, hlineY],
                 stroke: 'green',
-                strokeWidth: lineWidth,
+                strokeWidth:.5,
                 id: 'horzLine',
                 name: 'Horizon',
                 draggable: true
@@ -92,7 +92,7 @@
             var vertLine = new Kinetic.Line({
                 points: [vX1,vY1,vX2,vY2],
                 stroke: 'black',
-                strokeWidth: lineWidth,
+                strokeWidth: 0.5,
                 id: 'vert1',
                 name: 'Vertical Line',
                 draggable: false
@@ -103,7 +103,7 @@
             // to use to drag the line around. Mostly required for touch events. Bounding box should be
             // no smaller than 3 wide and 1.5 above and below a line. Dragging the handle with drag the
             //  line and all other lines anchored to it.
-            var vHandle = new Kinetic.Rect({
+/*            var vHandle = new Kinetic.Rect({
               x: vX1 - workspaceSettings.touchPadding,
               y: vY1 - workspaceSettings.touchPadding,
               width: workspaceSettings.touchPadding * 2,
@@ -113,7 +113,7 @@
               strokeWidth: 1,
               opacity: workspaceSettings.touchOpacity,
               draggable: true
-            });                  
+            });   */
  
  /*
             vpStage.on("touchmove", function(evt){
@@ -157,17 +157,17 @@
             vp2.posX = (vpStage.attrs.width - vp1.posX);
             vp2.posY = hlineY;
 
-            vp3.posX = 400 - vpAttrs.radius;
+            vp3.posX = 400 - 10;
             vp3.posY = hlineY;
 
             // Set params and pass object to getSegmentCoords
-            segmentParams.staticPos = vX1;
-            segmentParams.xIsStatic = true;
-            segmentParams.point1 = vY1;
-            segmentParams.point2 = vY2;
-            segmentParams.segmentCount = 6;
+            PovGridDesigner.segmentParams.staticPos = vX1;
+            PovGridDesigner.segmentParams.xIsStatic = true;
+            PovGridDesigner.segmentParams.point1 = vY1;
+            PovGridDesigner.segmentParams.point2 = vY2;
+            PovGridDesigner.segmentParams.segmentCount = 6;
 
-            var pts = getSegmentCoords(segmentParams);
+            var pts = getSegmentCoords(PovGridDesigner.segmentParams);
             var npts = getVPPolyGrid(pts,vp1.posX,hlineY);            
 
             // Let's draw a grid
@@ -176,7 +176,7 @@
               stroke: "blue",
               lineCap: "round",
               lineJoin: "round",            
-              strokeWidth: lineWidth
+              strokeWidth: 0.5
             });
 
             npts = getVPPolyGrid(pts,vp2.posX,hlineY);
@@ -186,7 +186,7 @@
               stroke: "blue",
               lineCap: "round",
               lineJoin: "round",            
-              strokeWidth: lineWidth
+              strokeWidth: 0.5
             });            
 
 
@@ -221,12 +221,12 @@
             }        
  
              // add the shape to the layer
-            vpLayer.add(rect);
+/*            vpLayer.add(rect);
             vpLayer.add(grid1);            
-            vpLayer.add(grid2);
+            vpLayer.add(grid2);*/
             vpLayer.add(horzLine);
             vpLayer.add(vertLine);
-            vpLayer.add(vHandle);
+            //vpLayer.add(vHandle);
             for(n=0; n<12; n++)
             {
                 vpLayer.add(rotLine[n]);
@@ -256,12 +256,12 @@
                     hlineY = vp1.posY;
 
                     // Set params and pass object to getSegmentCoords
-                    segmentParams.staticPos = vertLine.getPosition().x + vertLine.getPoints()[0].x;
-                    segmentParams.xIsStatic = true;
-                    segmentParams.point1 = vertLine.getPosition().y + vertLine.getPoints()[0].y;
-                    segmentParams.point2 = ((vertLine.getPosition().y + vertLine.getPoints()[0].y) + fgrLineHeight);
+                    PovGridDesigner.segmentParams.staticPos = vertLine.getPosition().x + vertLine.getPoints()[0].x;
+                    PovGridDesigner.segmentParams.xIsStatic = true;
+                    PovGridDesigner.segmentParams.point1 = vertLine.getPosition().y + vertLine.getPoints()[0].y;
+                    PovGridDesigner.segmentParams.point2 = ((vertLine.getPosition().y + vertLine.getPoints()[0].y) + fgrLineHeight);
 
-                    var pts2 = getSegmentCoords(segmentParams);
+                    var pts2 = getSegmentCoords(PovGridDesigner.segmentParams);
                     var newPts = getVPPolyGrid(pts2,vp1.posX,hlineY);                      
                     grid1.setPoints(newPts);
 
@@ -310,11 +310,11 @@
                     var vpoint = new Kinetic.Circle({
                         x: vanishingPoint.posX,
                         y: vanishingPoint.posY,
-                        radius: vpAttrs.radius,
-                        fill: vpAttrs.fillColor,
-                        stroke: vpAttrs.strokeColor,
-                        strokeWidth: vpAttrs.strokeWidth,
-                        opacity: vpAttrs.opacity,
+                        radius: 10,
+                        fill: 'yellow',
+                        stroke: 'black',
+                        strokeWidth: 1,
+                        opacity: 1,
                         id: vanishingPoint.id,
                         name: 'Vanishing Point',
                         draggable: true

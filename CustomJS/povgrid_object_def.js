@@ -14,17 +14,16 @@ var PovGridDesigner = {
     MainLayer   : "lyrMain",
     TouchLayer  : "lyrTouch",
     TouchAnim   : "shpTouchAnim",
-    VPLayer     : "lyrVanishingPoint",
 
     // public method
     getVersion: function(){ return 'Version ' + this.version; }
 };
 
-/**
+
  var vp1 = Object.create(null);
  var vp2 = Object.create(null);
  var vp3 = Object.create(null);
- */
+
 PovGridDesigner.segmentParams = Object.create(null);
 PovGridDesigner.VPAttributes = Object.create(null);
 PovGridDesigner.GeneralShapeAttributes = Object.create(null);
@@ -51,6 +50,18 @@ PovGridDesigner.shapeIdEnum = {
         Document   : 4,
         TraceLine1 : 5,
         TraceLine2 : 6
+};
+PovGridDesigner.layerId = new Array("lyrVP1", "lyrVP2", "lyrVP3", "lyrTraceLines","lyrPerspectiveLines1", "lyrPerspectiveLines2", "lyrPerspectiveLines3");
+PovGridDesigner.layerIdEnum = {
+    VP1              : 0,
+    VP2              : 1,
+    VP3              : 2,
+    TraceLines       : 3,
+    PerpectiveLines1 : 4,
+    PerpectiveLines2 : 5,
+    PerpectiveLines3 : 6
+
+
 };
 
 // Object properties

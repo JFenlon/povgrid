@@ -96,11 +96,10 @@ function getVPPolyGrid(segmentPoints, vpX, vpY)
 //   Returns the coordinates for a line that spans the full page
 // ---------------------------------------------------
 //   cRadius = circle radius
-//   cXpos = circle center X point
-//   cYpos = circle center Y point
+//   ccCoords = circle center coordinates
 //   lAngle = line angle in degrees
 //   [Returns: PovGridDesigner.LineCoordinate]
-function getSpokeLineCoords(cRadius, cXpos, cYpos, lAngle)
+function getSpokeLineCoords(cRadius, ccCoords, lAngle)
 {
     var lineCoords = new PovGridDesigner.LineCoordinate();
 
@@ -113,8 +112,8 @@ function getSpokeLineCoords(cRadius, cXpos, cYpos, lAngle)
             reverseAngle = reverseAngle - 360;
         }
 
-        var coordsBeg = getPointsFromAngle(cRadius, cXpos, cYpos,lAngle);
-        var coordsEnd = getPointsFromAngle(cRadius, cXpos, cYpos, reverseAngle);
+        var coordsBeg = getPointsFromAngle(cRadius, ccCoords, lAngle);
+        var coordsEnd = getPointsFromAngle(cRadius, ccCoords, reverseAngle);
 
         lineCoords.x1 = coordsBeg.x;
         lineCoords.y1 = coordsBeg.y;
@@ -141,7 +140,7 @@ function getSpokeLineCoords(cRadius, cXpos, cYpos, lAngle)
 //   cYpos = circle center Y point
 //   lAngle = line angle in degrees
 //   [Returns: PovGridDesigner.Coordinate]
-function getPointsFromAngle(cRadius, cXpos, cYpos, lAngle)
+function getPointsFromAngle(cRadius, ccCoords, lAngle)
 {
     var resultCoords = new PovGridDesigner.Coordinate();
 
@@ -149,8 +148,8 @@ function getPointsFromAngle(cRadius, cXpos, cYpos, lAngle)
     {
         var actualAngle = lAngle - 90;
 
-        resultCoords.x = cXpos + cRadius * Math.cos(actualAngle * (Math.PI / 180));
-        resultCoords.y = cYpos + cRadius * Math.sin(actualAngle * (Math.PI / 180));
+        resultCoords.x = ccCoords.x + cRadius * Math.cos(actualAngle * (Math.PI / 180));
+        resultCoords.y = ccCoords.y + cRadius * Math.sin(actualAngle * (Math.PI / 180));
     }
     catch(ex)
     {
