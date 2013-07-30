@@ -17,11 +17,16 @@ $(document).ready(function () {
         /** Initialize UI  */
         SetCanvasElementHeight();
 
-        if(CreateStage() < 0)
-            throw new EvalError("create-stage-failed");
+        if(SetupStage() < 0)
+            throw new EvalError("setup-stage-failed");
 
+        /*
         if(CreateTouchLayer() < 0)
             throw new EvalError("create-touchlayer-failed");
+        */
+
+        if(CreateRequiredGroups() < 0)
+            throw new EvalError("create-groups-failed");
 
     }
     catch(ex)
