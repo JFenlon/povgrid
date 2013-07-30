@@ -54,7 +54,7 @@ function ShowVanishingPoint(shapeEnumId)
 
                     CreateVanishingPoint(shapeCoords, baseLayer, shapeEnumId, 0);
 
-                    CreateVanishingPointGrid(PovGridDesigner.layerIdEnum.PerpectiveLines1, shapeEnumId, PovGridDesigner.groupIdEnum.PerspLines1);
+                    new CreateVanishingPointGrid(shapeEnumId);
 
                 case PovGridDesigner.shapeIdEnum.VP2:
                     //place on horizon, to right of document
@@ -154,6 +154,22 @@ function CreateVanishingPoint(shapeCoords, layerObject, enumId, zIndex)
             kjsLayer.add(kjsGroup);
             PovGridDesigner.MainStage.add(kjsLayer);
 
+            PovGridDesigner.MainStage.on('mouseup', function(evt){
+                var shape = evt.target;
+                shape.moveTo(PovGridDesigner.DragLayer);
+
+                PovGridDesigner.MainStage.draw();
+
+                shape.startDrag();
+            });
+
+            PovGridDesigner.MainStage.on('mousedown', function(evt){
+                var shape = evt.target;
+                shape.moveTo(kjsLayer);
+
+                PovGridDesigner.MainStage.draw();
+            });
+
             isSuccess = true;
         }
     }
@@ -168,6 +184,8 @@ function CreateVanishingPoint(shapeCoords, layerObject, enumId, zIndex)
     }
 }
 
+
+
 /**
  * @return {number}
  */
@@ -180,7 +198,6 @@ function CreateStage()
         var stageParent = getDomElement('divContent');
         var stageWidth = stageParent.clientWidth;
         var stageHeight = stageParent.clientHeight;
-        //var stageDiagonal = getDistanceBetweenPoints(new Coordinate(0, 0),new Coordinate(stageWidth, stageHeight));
 
         PovGridDesigner.MainStage = new Kinetic.Stage({
             container: "canvasContainer",
@@ -217,6 +234,10 @@ function CreateMainLayer(docAttrs_init)
         var kjsLayer = new Kinetic.Layer({
             id: PovGridDesigner.MainLayer
         });
+
+        PovGridDesigner.DragLayer = new Kinetic.Layer({
+            id: 'lyrDrag'
+        })
 
         // Grab default attributes if none are passed in
         docAttrs_init = docAttrs_init || PovGridDesigner.DefaultAttributes;
@@ -278,6 +299,7 @@ function CreateMainLayer(docAttrs_init)
 
         // add the layer to the stage
         PovGridDesigner.MainStage.add(kjsLayer);
+        PovGridDesigner.MainStage.add(PovGridDesigner.DragLayer);
 
         //var tLayer = PovGridDesigner.GetNode(PovGridDesigner.TouchLayer);
         kjsLayer.setZIndex(0);
@@ -299,28 +321,29 @@ function CreateMainLayer(docAttrs_init)
 
 /**
  *
- * @param shapeEnumId
+ * @param vpEnumId
  * @constructor
  */
-function CreateVanishingPointGrid(layerEnumId, vpEnumId, grpEnumId)
+function CreateVanishingPointGrid(vpEnumId)
 {
-    var perspGroup = PovGridDesigner.GetNode(PovGridDesigner.groupId[grpEnumId]);
-    var perspectiveLayer = Object.create(null);
+    var perspGroup = Object.create(null);
+    var vpGroup = Object.create(null);
+    var mainLayer = PovGridDesigner.GetNode(PovGridDesigner.MainLayer);
     var lineCount = parseInt($("#slider-12").val());
     var angleIncrement = 360 / (lineCount * 2);
 
-    perspGroup.destroyChildren();
+    switch(vpEnumId)
+    {
+        case PovGridDesigner.shapeIdEnum.VP1:
+            perspGroup = PovGridDesigner.GetNode(PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.PerspLines1]);
+            vpGroup = PovGridDesigner.GetNode(PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.VanishPoint1]);
+            break;
+        case PovGridDesigner.shapeIdEnum.VP2:
 
-    if(PovGridDesigner.NodeExists(layerEnumId))
-    {
-        perspectiveLayer.clear();
-        perspectiveLayer.remove();
-    }
-    else
-    {
-       perspectiveLayer = new Kinetic.Layer({
-           id: PovGridDesigner.layerId[layerEnumId]
-       });
+            break;
+        case PovGridDesigner.shapeIdEnum.VP3:
+
+            break;
     }
 
     var vanishingPoint = PovGridDesigner.GetNode(PovGridDesigner.shapeId[vpEnumId]);
@@ -343,18 +366,16 @@ function CreateVanishingPointGrid(layerEnumId, vpEnumId, grpEnumId)
         angle += angleIncrement;
     }
 
-    // add the lines to the layer
+    // add the lines to the group
     for(n = 0; n < lineCount; n++)
     {
         perspGroup.add(perspectiveLine[n]);
     }
 
-    perspectiveLayer.add(perspGroup);
-
-    PovGridDesigner.MainStage.add(perspectiveLayer);
-
+    vpGroup.add(perspGroup);
     perspGroup.setVisible(true);
-    perspectiveLayer.setZIndex(1);
+    perspGroup.setZIndex(0);
+    PovGridDesigner.MainStage.draw();
 }
 
 /**

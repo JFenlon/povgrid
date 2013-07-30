@@ -28,6 +28,7 @@ PovGridDesigner.segmentParams = Object.create(null);
 PovGridDesigner.VPAttributes = Object.create(null);
 PovGridDesigner.GeneralShapeAttributes = Object.create(null);
 PovGridDesigner.MainStage = Object.create(null);
+PovGridDesigner.DragLayer= Object.create(null);
 PovGridDesigner.workspaceSettings = Object.create(null);
 PovGridDesigner.exportGridDocument = Object.create(null);
 PovGridDesigner.groupId = new Array("gpMain", "gpTraceLines", "gpVanishPoint1", "gpVanishPoint2", "gpVanishPoint3", "gpPerspLines1", "gpPerspLines2", "gpPerspLines3");
@@ -50,18 +51,6 @@ PovGridDesigner.shapeIdEnum = {
         Document   : 4,
         TraceLine1 : 5,
         TraceLine2 : 6
-};
-PovGridDesigner.layerId = new Array("lyrVP1", "lyrVP2", "lyrVP3", "lyrTraceLines","lyrPerspectiveLines1", "lyrPerspectiveLines2", "lyrPerspectiveLines3");
-PovGridDesigner.layerIdEnum = {
-    VP1              : 0,
-    VP2              : 1,
-    VP3              : 2,
-    TraceLines       : 3,
-    PerpectiveLines1 : 4,
-    PerpectiveLines2 : 5,
-    PerpectiveLines3 : 6
-
-
 };
 
 // Object properties
