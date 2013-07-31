@@ -10,26 +10,31 @@
 var PovGridDesigner = {
 
     // public property
-    version            : 1.0,
-    GridColors         : ["#66FFFF", "#00FF00", "#FF00FF", "#FF9900", "#0066FF"],
+    version             : 1.0,
+    GridColors          : ["#CC0000", "#00CCFF", "#6600CC", "#00CC00", "#FF00FF", "#663300", "#CC0066", "#0066FF", "#4A6E6E"],
 
     // public methods
     getVersion: function(){ return 'Version ' + this.version; },
 
-    getNextGridLineColor: function()
+    getNextGridLineColor: function(colorIncrement)
     {
-        var retColor = PovGridDesigner.GridColors[PovGridDesigner.GridColorIndex.value];
+        var requestedColorIndex = PovGridDesigner.GridColorIndex.value + colorIncrement;
 
-        PovGridDesigner.GridColorIndex.value ++;
+        if(requestedColorIndex > PovGridDesigner.GridColors.length)
+            requestedColorIndex = 0 + colorIncrement;
 
-        if(PovGridDesigner.GridColorIndex.value >= PovGridDesigner.GridColors.length)
-            PovGridDesigner.GridColorIndex.value = 0;
-
-        return retColor;
+        return PovGridDesigner.GridColors[requestedColorIndex];
     },
 
     getLineDensity: function(){ return PovGridDesigner.CurrentLineDensity.value;},
-    setLineDensity: function(newLineDensity){PovGridDesigner.CurrentLineDensity.value = newLineDensity;}
+    setLineDensity: function(newLineDensity){PovGridDesigner.CurrentLineDensity.value = newLineDensity;},
+    incrementGridColorIndex: function()
+    {
+        PovGridDesigner.GridColorIndex.value++;
+
+        if(PovGridDesigner.GridColorIndex.value > PovGridDesigner.GridColors.length)
+            PovGridDesigner.GridColorIndex.value = 0;
+    }
 };
 
  var vp1 = Object.create(null);
@@ -45,6 +50,7 @@ PovGridDesigner.MainLayer = Object.create(null);
 PovGridDesigner.BaseLayer = Object.create(null);
 PovGridDesigner.TouchLayer = Object.create(null);
 
+PovGridDesigner.DBRecordCount = Object.create(null);
 PovGridDesigner.GridColorIndex = Object.create(null);
 PovGridDesigner.CurrentLineDensity = Object.create(null);
 PovGridDesigner.segmentParams = Object.create(null);
@@ -100,6 +106,18 @@ Object.defineProperties(PovGridDesigner.exportGridDocument, {
         , writable:     true
         , configurable: true
         , enumerable:   true
+    }
+});
+
+/**
+ * Tracking record count to manage memory quota
+ */
+Object.defineProperties(PovGridDesigner.DBRecordCount, {
+    value:   {
+        value:        0
+        , writable:     true
+        , configurable: false
+        , enumerable:   false
     }
 });
 
@@ -270,10 +288,18 @@ Object.defineProperties(PovGridDesigner.VPAttributes,
 {
     fillColor:
     {
-          value:        '#DAFA0A'
+          value:        '#FFCC00'
         , writable:     true
         , configurable: true
         , enumerable:   true
+    }
+
+    ,hoverFillColor:
+    {
+          value:        '#FFFF00'
+        , writable:      false
+        , configurable:  true
+        , enumerable:    true
     }
 
     ,strokeColor:
@@ -400,7 +426,7 @@ PovGridDesigner.GetNode = function (shapeId)
     }
     finally
     {
-        LogError('ShapeID: ' + node.attrs.id);
+        //LogError('ShapeID: ' + node.attrs.id);
         return node;
     }
 }
@@ -418,7 +444,7 @@ PovGridDesigner.NodeExists = function (objectID)
     {
         var node = PovGridDesigner.GetNode(objectID);
 
-        if(typeof variable_here === 'undefined'){
+        if(typeof node === 'undefined'){
             results = false;
         };
     }

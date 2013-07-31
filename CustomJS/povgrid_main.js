@@ -25,9 +25,6 @@ $(document).ready(function () {
             throw new EvalError("create-touchlayer-failed");
         */
 
-        if(CreateRequiredGroups() < 0)
-            throw new EvalError("create-groups-failed");
-
     }
     catch(ex)
     {

@@ -30,7 +30,9 @@ function LogError(message)
     var nowDate = new Date(new Date().getTime());
     var logMsg = {message:message,timeStamp:nowDate.toString()};
 
-    logFile.nuke();
+    //if(PovGridDesigner.DBRecordCount.value > 5)
+        logFile.nuke();
+
     logFile.save({value:logMsg});
 
     console.log('write done');
@@ -41,5 +43,9 @@ function LogError(message)
 		{
 			console.log('[' + arrRecords[i].value.timeStamp + '] | ' + arrRecords[i].value.message);
 		}
+
+        PovGridDesigner.DBRecordCount.value = arrRecords.length;
 	});
+
+    console.log(PovGridDesigner.DBRecordCount.value);
 }

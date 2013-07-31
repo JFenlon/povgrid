@@ -25,6 +25,13 @@ function EventBinding()
 
         UpdateLineDensity();
     });
+    $("#btnCycleColors").bind("click", function(){
+        PovGridDesigner.incrementGridColorIndex();
+
+        //Force grid lines to take on new colors
+        UpdateGridLineColors();
+    });
+
 }
 
 function SetCanvasElementHeight()
@@ -45,10 +52,12 @@ function ToggleVanishPoint(shapeEnumId)
 {
     try
     {
-        if(PovGridDesigner.NodeExists(PovGridDesigner.shapeId[shapeEnumId]))
+        if(PovGridDesigner.NodeExists(PovGridDesigner.groupId[shapeEnumId]))
         {
-            // determine if it's visible or not and reverse it
+            var group = PovGridDesigner.GetNode(PovGridDesigner.groupId[shapeEnumId]);
 
+            group.setVisible(!group.getVisible());
+            PovGridDesigner.MainLayer.draw();
         }
 
     }
@@ -69,8 +78,6 @@ function AddNewDocument()
         // Clear existing document
         PovGridDesigner.MainStage.clear();
 
-        //PovGridDesigner.TouchLayer.setZIndex(1);
-
         var docSettings = new PovGridDesigner.DocumentObject(1024, 400);
 
         if(CreateDocument(docSettings) < 0)
@@ -78,8 +85,6 @@ function AddNewDocument()
 
         if(GenerateVanishingPoints() < 0)
             throw new EvalError("generate-vpoints-failed");
-
-        EnableGroupDragability();
 
     }
     catch(ex)
@@ -104,6 +109,10 @@ function AddNewDocument()
     }
 }
 
+/**
+ *
+ * @returns {number}
+ */
 function GenerateVanishingPoints()
 {
     var results = 0;
@@ -149,7 +158,7 @@ function GenerateVanishingPoints()
     }
     finally
     {
-
+        return results;
     }
 }
 
@@ -168,6 +177,7 @@ function CreateVanishingPoint(shapeCoords, enumId)
     {
         if(PovGridDesigner.MainStage != undefined)
         {
+            var vpGroup = PovGridDesigner.GetNode(PovGridDesigner.groupId[enumId]);
             var vPoint = new Kinetic.Circle({
                 x: shapeCoords.x,
                 y: shapeCoords.y,
@@ -182,22 +192,21 @@ function CreateVanishingPoint(shapeCoords, enumId)
                 draggable: false
             });
 
-            var vpGroup = PovGridDesigner.GetNode(PovGridDesigner.groupId[enumId]);
-
             vpGroup.add(vPoint);
-            vpGroup.setZIndex(enumId+1);
+
+            /** event binding for vanishing point group (where needed) */
+            vPoint.on('mouseover', function(){
+                this.setFill(PovGridDesigner.VPAttributes.hoverFillColor);
+
+                PovGridDesigner.MainLayer.draw();
+            });
+
+            vPoint.on('mouseout', function(){
+                this.setFill(PovGridDesigner.VPAttributes.fillColor);
+                PovGridDesigner.MainLayer.draw();
+            });
 
             PovGridDesigner.MainLayer.draw();
-
-            PovGridDesigner.MainStage.on('mouseup', function(evt){
-
-                PovGridDesigner.MainLayer.draw();
-            });
-
-            PovGridDesigner.MainStage.on('mousedown', function(evt){
-
-                PovGridDesigner.MainLayer.draw();
-            });
 
             isSuccess = true;
         }
@@ -376,9 +385,9 @@ function UpdateLineDensity()
             PovGridDesigner.MainLayer.draw();
 
             var vanishingPoint = PovGridDesigner.GetNode("shpVP" + g);
-            var perspectiveLine = new Array();
+            var perspectiveLine = [];
             var angle = 0;
-            var gridLineColor = PovGridDesigner.getNextGridLineColor();
+            var gridLineColor = PovGridDesigner.getNextGridLineColor(g-1); // grid color is a zero-based array
 
             for(var n = 0; n < lineCount; n++)
             {
@@ -388,7 +397,7 @@ function UpdateLineDensity()
                     points: [endPoint.x1,endPoint.y1,endPoint.x2,endPoint.y2],
                     stroke: gridLineColor,
                     strokeWidth: PovGridDesigner.GeneralShapeAttributes.strokeWidth,
-                    opacity: 0.5,
+                    opacity: 0.6,
                     id: 'perpectiveLines_' + g + '_' + n,
                     draggable: false
                 });
@@ -403,7 +412,6 @@ function UpdateLineDensity()
                 perspGroup.add(perspectiveLine[n]);
             }
 
-            //vpGroup.add(perspGroup);
             perspGroup.setVisible(true);
         }
 
@@ -432,31 +440,58 @@ function CreateVanishingPointGrid(groupCoords, vpEnumId)
 
     try
     {
-        var perspGroup = Object.create(null);
-        var vpGroup = Object.create(null);
         var lineCount = parseInt(PovGridDesigner.getLineDensity());
         var angleIncrement = 360 / (lineCount * 2);
+        var vpGroup = Object.create(null);
+        var perspGroup = Object.create(null);
 
         switch(vpEnumId)
         {
             case PovGridDesigner.shapeIdEnum.VP1:
-                perspGroup = PovGridDesigner.GetNode(PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.PerspLines1]);
-                vpGroup = PovGridDesigner.GetNode(PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.VanishPoint1]);
+                vpGroup = new Kinetic.Group({
+                    id: PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.VanishPoint1],
+                    draggable: true,
+                    visible: false
+                });
+
+                perspGroup =  new Kinetic.Group({
+                    id: PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.PerspLines1],
+                    draggable: true
+                });
+
                 break;
             case PovGridDesigner.shapeIdEnum.VP2:
-                perspGroup = PovGridDesigner.GetNode(PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.PerspLines2]);
-                vpGroup = PovGridDesigner.GetNode(PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.VanishPoint2]);
+                vpGroup = new Kinetic.Group({
+                    id: PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.VanishPoint2],
+                    draggable: true,
+                    visible: false
+                });
+
+                perspGroup =  new Kinetic.Group({
+                    id: PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.PerspLines2],
+                    draggable: true
+                });
+
                 break;
             case PovGridDesigner.shapeIdEnum.VP3:
-                perspGroup = PovGridDesigner.GetNode(PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.PerspLines3]);
-                vpGroup = PovGridDesigner.GetNode(PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.VanishPoint3]);
+                vpGroup = new Kinetic.Group({
+                    id: PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.VanishPoint3],
+                    draggable: true,
+                    visible: false
+                });
+
+                perspGroup =  new Kinetic.Group({
+                    id: PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.PerspLines3],
+                    draggable: true
+                });
+
                 break;
         }
 
         var stageDiag = getDistanceBetweenPoints(new PovGridDesigner.Coordinate(0,PovGridDesigner.MainStage.getHeight()), new PovGridDesigner.Coordinate(PovGridDesigner.MainStage.getWidth(),0));
-        var perspectiveLine = new Array();
+        var perspectiveLine = [];
         var angle = 0;
-        var gridLineColor = PovGridDesigner.getNextGridLineColor();
+        var gridLineColor = PovGridDesigner.getNextGridLineColor(vpEnumId);
 
         for(var n = 0; n < lineCount; n++)
         {
@@ -466,7 +501,7 @@ function CreateVanishingPointGrid(groupCoords, vpEnumId)
                 points: [endPoint.x1,endPoint.y1,endPoint.x2,endPoint.y2],
                 stroke: gridLineColor,
                 strokeWidth: PovGridDesigner.GeneralShapeAttributes.strokeWidth,
-                opacity: 0.5,
+                opacity: 0.6,
                 id: 'perpectiveLines' + n,
                 draggable: false
             });
@@ -482,9 +517,42 @@ function CreateVanishingPointGrid(groupCoords, vpEnumId)
         }
 
         vpGroup.add(perspGroup);
-        perspGroup.setVisible(true);
 
-        PovGridDesigner.MainLayer.draw();
+        PovGridDesigner.MainLayer.add(vpGroup);
+    }
+    catch (ex)
+    {
+        //LOG ERROR
+        LogError(ex.message + ' [' + arguments.callee.name + ']');
+        results = -1;
+    }
+    finally
+    {
+        return results;
+    }
+}
+
+function UpdateGridLineColors()
+{
+    var results = 0;
+
+    try
+    {
+        for(var g = 1; g < 4; g++)
+        {
+            var group = PovGridDesigner.GetNode("gpPerspLines" + g);
+
+            var children = group.getChildren();
+
+            for(var l = 0; l < children.length; l++)
+            {
+               children[l].setStroke(PovGridDesigner.getNextGridLineColor(g-1));
+            }
+
+            group.draw();
+            group.getParent().draw();
+            PovGridDesigner.MainLayer.draw();
+        }
     }
     catch (ex)
     {
