@@ -46,22 +46,21 @@ PovGridDesigner.BaseLayer = Object.create(null);
 PovGridDesigner.TouchLayer = Object.create(null);
 
 PovGridDesigner.GridColorIndex = Object.create(null);
-PovGridDesigner.CurrentLineDensity = Object._create(null);
+PovGridDesigner.CurrentLineDensity = Object.create(null);
 PovGridDesigner.segmentParams = Object.create(null);
 PovGridDesigner.VPAttributes = Object.create(null);
 PovGridDesigner.GeneralShapeAttributes = Object.create(null);
 PovGridDesigner.WorkspaceSettings = Object.create(null);
 PovGridDesigner.exportGridDocument = Object.create(null);
-PovGridDesigner.groupId = new Array("gpMain", "gpTraceLines", "gpVanishPoint1", "gpVanishPoint2", "gpVanishPoint3", "gpPerspLines1", "gpPerspLines2", "gpPerspLines3");
+PovGridDesigner.groupId = new Array("gpVanishPoint1", "gpVanishPoint2", "gpVanishPoint3", "gpTraceLines", "gpPerspLines1", "gpPerspLines2", "gpPerspLines3");
 PovGridDesigner.groupIdEnum = {
-        Main         : 0,
-        TraceLines   : 1,
-        VanishPoint1 : 2,
-        VanishPoint2 : 3,
-        VanishPoint3 : 4,
-        PerspLines1  : 5,
-        PerspLines2  : 6,
-        PerspLines3  : 7
+        VanishPoint1 : 0,
+        VanishPoint2 : 1,
+        VanishPoint3 : 2,
+        TraceLines   : 3,
+        PerspLines1  : 4,
+        PerspLines2  : 5,
+        PerspLines3  : 6
     };
 PovGridDesigner.shapeId = new Array("shpVP1", "shpVP2", "shpVP3", "shpHorizon", "shpDocument", "shpTraceLine1", "shpTraceLine2","shpTouchAnim");
 PovGridDesigner.shapeIdEnum = {
