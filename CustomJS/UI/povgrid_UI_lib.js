@@ -25,6 +25,13 @@ function EventBinding()
 
         UpdateLineDensity();
     });
+    $( "#sldLineOpacity" ).bind( "change", function(event, ui) {
+        // set line opacity property
+        PovGridDesigner.setLineOpacity(event.target.value / 100);
+
+        UpdateLineOpacity();
+    });
+
     $("#btnCycleColors").bind("click", function(){
         PovGridDesigner.incrementGridColorIndex();
 
@@ -34,6 +41,9 @@ function EventBinding()
 
 }
 
+/**
+ * Adjust area to device screen size
+ */
 function SetCanvasElementHeight()
 {
     var divHeader = getDomElement('divHeader');
@@ -78,7 +88,12 @@ function AddNewDocument()
         // Clear existing document
         PovGridDesigner.MainStage.clear();
 
-        var docSettings = new PovGridDesigner.DocumentObject(1024, 400);
+        /** DEV ONLY */
+        CreateDebugWindow();
+
+        var docSettings = GetNewDocSettings() || new PovGridDesigner.DocumentObject(1024, 400);
+
+        SetFieldData('txtDocSize', docSettings.width +  ' X ' + docSettings.height);
 
         if(CreateDocument(docSettings) < 0)
             throw new EvalError("create-main_layer-failed");
@@ -109,6 +124,178 @@ function AddNewDocument()
     }
 }
 
+function GetNewDocSettings()
+{
+    var docSettings = Object.create(null);
+
+    try
+    {
+        // This will change when the UI is more polished.
+        var width = getDomElement('tbWidth').value;
+        var height = getDomElement('tbHeight').value;
+
+        if((width == null || width.trim() == "") || (height == null || height.trim() == "") )
+        {
+            delete docSettings;
+            docSettings =  null;
+        }
+        else
+        {
+            docSettings = new PovGridDesigner.DocumentObject(width, height);
+        }
+    }
+    catch (ex)
+    {
+        // Generic error
+        LogError(ex.message + ' [' + arguments.callee.name + ']');
+    }
+    finally
+    {
+        return docSettings;
+    }
+}
+
+/**
+ * DEV ONLY!!!
+ */
+function CreateDebugWindow()
+{
+    /** TEST CODE */
+    var label = new Kinetic.Label({
+        x: 15,
+        y: 320,
+        height: 600,
+        opacity: 0.8,
+        draggable: true
+    });
+
+    // add a tag to the label
+    label.add(new Kinetic.Tag({
+        fill: '#bbb',
+        stroke: '#333',
+        lineJoin: 'round',
+        pointerDirection: 'left',
+        pointerWidth: 0,
+        pointerHeight: 0,
+        cornerRadius: 5
+    }));
+
+
+
+    // Literals
+    label.add(new Kinetic.Text({
+        text: 'Development Details',
+        fontFamily: 'Courier',
+        fontStyle: 'bold',
+        fontSize: 20,
+        lineHeight: 1.2,
+        padding: 10,
+        fill: 'green',
+        width: 350,
+        height: 600
+    }));
+
+    label.add(new Kinetic.Text({
+        y: -250,
+        text: 'App Version: ' + PovGridDesigner.version(),
+        fontFamily: 'Courier',
+        fontSize: 15,
+        lineHeight: 1.2,
+        padding: 10,
+        fill: 'blue'
+    }));
+
+    label.add(new Kinetic.Text({
+        y: -220,
+        text: 'Mouse Coords:',
+        fontFamily: 'Courier',
+        fontSize: 15,
+        lineHeight: 1.2,
+        padding: 10,
+        fill: 'blue'
+    }));
+
+    label.add(new Kinetic.Text({
+        y: -190,
+        text: 'Document Size:',
+        fontFamily: 'Courier',
+        fontSize: 15,
+        lineHeight: 1.2,
+        padding: 10,
+        fill: 'blue'
+    }));
+
+    label.add(new Kinetic.Text({
+        y: -160,
+        text: 'Current VP:',
+        fontFamily: 'Courier',
+        fontSize: 15,
+        lineHeight: 1.2,
+        padding: 10,
+        fill: 'blue'
+    }));
+
+    // Field data
+    label.add(new Kinetic.Text({
+        y: -220,
+        x: 130,
+        text: 'x = 0000 | y = 0000',
+        id: 'txtCoords',
+        fontFamily: 'Courier',
+        fontSize: 15,
+        lineHeight: 1.2,
+        padding: 10,
+        fill: 'red'
+    }));
+
+    label.add(new Kinetic.Text({
+        y: -190,
+        x: 130,
+        text: '...',
+        id: 'txtDocSize',
+        fontFamily: 'Courier',
+        fontSize: 15,
+        lineHeight: 1.2,
+        padding: 10,
+        fill: 'red'
+    }));
+
+    label.add(new Kinetic.Text({
+        y: -160,
+        x: 130,
+        text: '...',
+        id: 'txtCurrentVP',
+        fontFamily: 'Courier',
+        fontSize: 15,
+        lineHeight: 1.2,
+        padding: 10,
+        fill: 'red'
+    }));
+
+    var devLayer = new Kinetic.Layer({
+        id: 'lyrDev'
+    });
+
+    PovGridDesigner.MainStage.on('mousemove', function(evt) {
+        var node = PovGridDesigner.GetNode("txtCoords");
+
+        node.setText('x = ' + evt.x + ' | y = ' + evt.y);
+        PovGridDesigner.MainStage.draw();
+    });
+
+    devLayer.add(label);
+    PovGridDesigner.MainStage.add(devLayer);
+
+    PovGridDesigner.MainStage.draw();
+}
+
+function SetFieldData(fieldLableId, txtData)
+{
+    var node = PovGridDesigner.GetNode(fieldLableId);
+
+    node.setText(txtData);
+}
+
 /**
  *
  * @returns {number}
@@ -131,17 +318,17 @@ function GenerateVanishingPoints()
                 case PovGridDesigner.shapeIdEnum.VP1:
                     //place on horizon, to left of document
                     shapeCoords.y = horizon.getAttrs().points[0].y;
-                    shapeCoords.x = document.getPosition().x + PovGridDesigner.VPAttributes.radius;
+                    shapeCoords.x = parseFloat(document.getPosition().x) + PovGridDesigner.VPAttributes.radius;
                     break;
                 case PovGridDesigner.shapeIdEnum.VP2:
                     //place on horizon, to right of document
                     shapeCoords.y = horizon.getAttrs().points[0].y;
-                    shapeCoords.x = document.getPosition().x + document.getWidth() - PovGridDesigner.VPAttributes.radius;
+                    shapeCoords.x = parseFloat(document.getPosition().x) + parseFloat(document.getWidth()) - PovGridDesigner.VPAttributes.radius;
                     break;
                 case PovGridDesigner.shapeIdEnum.VP3:
                     //place in center, bottom of document
-                    shapeCoords.y = (document.getPosition().y + document.getHeight()) - PovGridDesigner.VPAttributes.radius ;
-                    shapeCoords.x = document.getPosition().x + ((document.getWidth() / 2) - (PovGridDesigner.VPAttributes.radius / 2));
+                    shapeCoords.y = (parseFloat(document.getPosition().y) + parseFloat(document.getHeight())) - PovGridDesigner.VPAttributes.radius ;
+                    shapeCoords.x = parseFloat(document.getPosition().x) + ((parseFloat(document.getWidth()) / 2) - (PovGridDesigner.VPAttributes.radius / 2));
                     break;
             }
 
@@ -189,22 +376,77 @@ function CreateVanishingPoint(shapeCoords, enumId)
                 id: PovGridDesigner.shapeId[enumId],
                 name: 'Vanishing Point',
                 visible: true,
-                draggable: false
+                draggable: false,
+                shadowColor: '#00E600',
+                shadowOpacity: 1,
+                shadowOffsetX: 1,
+                shadowOffsetY: 1,
+                shadowBlur: 45,
+                shadowEnabled: false
+            });
+
+            var numberLabel = enumId + 1;
+            var simpleText = new Kinetic.Text({
+                x: shapeCoords.x - (PovGridDesigner.VPAttributes.radius/2),
+                y: shapeCoords.y - (PovGridDesigner.VPAttributes.radius/2),
+                text: numberLabel.toString(),
+                fontSize: 14,
+                fontFamily: 'Courier',
+                fontStyle: 'bold',
+                width: PovGridDesigner.VPAttributes.radius,
+                align: 'center',
+                fill: 'black'
             });
 
             vpGroup.add(vPoint);
+            vpGroup.add(simpleText);
 
             /** event binding for vanishing point group (where needed) */
+            simpleText.on('click', function(){
+                PovGridDesigner.setSelectedVP(vpGroup);
+                vpGroup.setZIndex(3);
+            });
+
+            vpGroup.on('click', function(){
+                  PovGridDesigner.setSelectedVP(this);
+            });
+
             vPoint.on('mouseover', function(){
                 this.setFill(PovGridDesigner.VPAttributes.hoverFillColor);
+                this.setShadowEnabled(true);
+                vpGroup.setZIndex(3);
+                PovGridDesigner.MainLayer.draw();
+            });
 
+            simpleText.on('mouseover', function(){
+                vPoint.setFill(PovGridDesigner.VPAttributes.hoverFillColor);
+                vPoint.setShadowEnabled(true);
+                vpGroup.setZIndex(3);
                 PovGridDesigner.MainLayer.draw();
             });
 
             vPoint.on('mouseout', function(){
                 this.setFill(PovGridDesigner.VPAttributes.fillColor);
+                this.setShadowEnabled(false);
                 PovGridDesigner.MainLayer.draw();
             });
+
+            simpleText.on('mouseout', function(){
+                vPoint.setFill(PovGridDesigner.VPAttributes.fillColor);
+                vPoint.setShadowEnabled(false);
+                PovGridDesigner.MainLayer.draw();
+            });
+
+            if(vpGroup.id == PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.VP1])
+            {
+                vpGroup.on('dragend', function(evt){
+                    // move the horizon vertically with vp1
+                    var horizon = PovGridDesigner.GetNode(PovGridDesigner.shapeId[PovGridDesigner.shapeIdEnum.Horizon]);
+
+                    horizon.attrs.points[0] = new PovGridDesigner.Coordinate(horizon.attrs.points[0].x, evt.y);
+                    horizon.attrs.points[1] = new PovGridDesigner.Coordinate(horizon.attrs.points[1].x, evt.y);
+                });
+            }
 
             PovGridDesigner.MainLayer.draw();
 
@@ -329,8 +571,8 @@ function CreateDocument(docInit)
 
         var kjsHorizon = new Kinetic.Line({
             points: [hlineX1, hlineY, hlineX2, hlineY],
-            stroke: 'green',
-            strokeWidth: PovGridDesigner.GeneralShapeAttributes.strokeWidth,
+            stroke: 'black',
+            strokeWidth: PovGridDesigner.GeneralShapeAttributes.strokeWidth + 0.2,
             id: PovGridDesigner.shapeId[PovGridDesigner.shapeIdEnum.Horizon],
             name: 'horizon',
             draggable: false
@@ -362,6 +604,45 @@ function CreateDocument(docInit)
     }
 }
 
+function UpdateLineOpacity()
+{
+    var results = 0;
+
+    try
+    {
+        for(var g = 1; g < 4; g++)
+        {
+            var group = PovGridDesigner.GetNode("gpPerspLines" + g);
+
+            var children = group.getChildren();
+
+            for(var l = 0; l < children.length; l++)
+            {
+                children[l].setOpacity(PovGridDesigner.getLineOpacity());
+            }
+
+            group.draw();
+            group.getParent().draw();
+            PovGridDesigner.MainLayer.draw();
+        }
+    }
+    catch (ex)
+    {
+        //LOG ERROR
+        LogError(ex.message + ' [' + arguments.callee.name + ']');
+        //Set results to negative
+        results = -1;
+    }
+    finally
+    {
+        return results;
+    }
+}
+
+/**
+ *
+ * @returns {number}
+ */
 function UpdateLineDensity()
 {
     var results = 0;
@@ -532,6 +813,10 @@ function CreateVanishingPointGrid(groupCoords, vpEnumId)
     }
 }
 
+/**
+ *
+ * @returns {number}
+ */
 function UpdateGridLineColors()
 {
     var results = 0;
@@ -566,58 +851,6 @@ function UpdateGridLineColors()
     }
 }
 
-/**
- * @returns {number}
- */
-function CreateRequiredGroups()
-{
-    var results = 0;
-
-    try
-    {
-        for(var i = 0; i < PovGridDesigner.groupId.length; i++)
-        {
-            if(PovGridDesigner.groupId[i] != PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.Main])
-            {
-                var group = new Kinetic.Group({
-                    id: PovGridDesigner.groupId[i],
-                    draggable: false
-                });
-
-                PovGridDesigner.MainLayer.add(group);
-            }
-        }
-    }
-    catch(ex)
-    {
-        //LOG ERROR
-        LogError(ex.message + ' [' + arguments.callee.name + ']');
-        results = -1;
-    }
-    finally
-    {
-        return results;
-    }
-}
-
-function EnableGroupDragability()
-{
-    try
-    {
-        var vp1 = PovGridDesigner.GetNode(PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.VanishPoint1]);
-        var vp2 = PovGridDesigner.GetNode(PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.VanishPoint2]);
-        var vp3 = PovGridDesigner.GetNode(PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.VanishPoint3]);
-
-        vp1.setDraggable(true);
-        vp2.setDraggable(true);
-        vp3.setDraggable(true);
-    }
-    catch(ex)
-    {
-        //LOG ERROR
-        LogError(ex.message + ' [' + arguments.callee.name + ']');
-    }
-}
 
 function CreateTouchLayer()
 {
@@ -655,7 +888,6 @@ function CreateTouchLayer()
         PovGridDesigner.MainStage.on('mouseup touchend', function(evt) {
             PovGridDesigner.TouchLayer.clear();
         });
-
     }
     catch(ex)
     {

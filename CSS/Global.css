@@ -68,6 +68,13 @@ ul#display-inline-block li
     width: 200px;
 }
 
+.leftMiddleText
+{
+    vertical-align: middle;
+    text-align: left;
+    margin-bottom: 5px;
+}
+
 /* Override for padding added by jQuery mobile */
 #divContent
 {

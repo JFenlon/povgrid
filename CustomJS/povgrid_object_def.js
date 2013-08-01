@@ -10,36 +10,43 @@
 var PovGridDesigner = {
 
     // public property
-    version             : 1.0,
+    version_major             : 1,
+    version_minor             : 0,
+    version_revision          : 0,
     GridColors          : ["#CC0000", "#00CCFF", "#6600CC", "#00CC00", "#FF00FF", "#663300", "#CC0066", "#0066FF", "#4A6E6E"],
 
     // public methods
-    getVersion: function(){ return 'Version ' + this.version; },
-
     getNextGridLineColor: function(colorIncrement)
     {
-        var requestedColorIndex = PovGridDesigner.GridColorIndex.value + colorIncrement;
+        var requestedColorIndex = this.GridColorIndex.value + colorIncrement;
 
-        if(requestedColorIndex > PovGridDesigner.GridColors.length)
+        if(requestedColorIndex > this.GridColors.length)
             requestedColorIndex = 0 + colorIncrement;
 
-        return PovGridDesigner.GridColors[requestedColorIndex];
+        return this.GridColors[requestedColorIndex];
     },
 
-    getLineDensity: function(){ return PovGridDesigner.CurrentLineDensity.value;},
-    setLineDensity: function(newLineDensity){PovGridDesigner.CurrentLineDensity.value = newLineDensity;},
+    getLineDensity: function(){ return this.CurrentLineDensity.value;},
+    setLineDensity: function(newLineDensity){this.CurrentLineDensity.value = newLineDensity;},
+    getLineOpacity: function(){ return this.CurrentLineOpacity.value;},
+    setLineOpacity: function(newLineOpacity){this.CurrentLineOpacity.value = newLineOpacity;},
+    setSelectedVP: function(vpGroup)
+    {
+        this.CurrentSelectedVP = vpGroup;
+        var txtVP = PovGridDesigner.GetNode('txtCurrentVP');
+
+        txtVP.setText(vpGroup.attrs.id);
+    },
+    getSelectedVP: function(){ return this.CurrentSelectedVP;},
+    version: function() { return this.version_major.toString() + '.' + this.version_minor.toString() + '.' + this.version_revision.toString();},
     incrementGridColorIndex: function()
     {
-        PovGridDesigner.GridColorIndex.value++;
+        this.GridColorIndex.value++;
 
-        if(PovGridDesigner.GridColorIndex.value > PovGridDesigner.GridColors.length)
-            PovGridDesigner.GridColorIndex.value = 0;
+        if(this.GridColorIndex.value > this.GridColors.length)
+            this.GridColorIndex.value = 0;
     }
 };
-
- var vp1 = Object.create(null);
- var vp2 = Object.create(null);
- var vp3 = Object.create(null);
 
 /**
  * Main stage and layers
@@ -53,6 +60,8 @@ PovGridDesigner.TouchLayer = Object.create(null);
 PovGridDesigner.DBRecordCount = Object.create(null);
 PovGridDesigner.GridColorIndex = Object.create(null);
 PovGridDesigner.CurrentLineDensity = Object.create(null);
+PovGridDesigner.CurrentLineOpacity = Object.create(null);
+PovGridDesigner.CurrentSelectedVP = Object.create(null);
 PovGridDesigner.segmentParams = Object.create(null);
 PovGridDesigner.VPAttributes = Object.create(null);
 PovGridDesigner.GeneralShapeAttributes = Object.create(null);
@@ -139,6 +148,18 @@ Object.defineProperties(PovGridDesigner.GridColorIndex, {
 Object.defineProperties(PovGridDesigner.CurrentLineDensity, {
     value:   {
         value:        5
+        , writable:     true
+        , configurable: false
+        , enumerable:   false
+    }
+});
+
+/**
+ * Line density for perspective grid
+ */
+Object.defineProperties(PovGridDesigner.CurrentLineOpacity, {
+    value:   {
+        value:        0.6
         , writable:     true
         , configurable: false
         , enumerable:   false
