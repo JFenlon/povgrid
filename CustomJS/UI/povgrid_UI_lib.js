@@ -542,7 +542,7 @@ function CreateDocument(docInit)
 
         var kjsMainGroup = new Kinetic.Group({
             id: PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.Main],
-            draggable: false
+            draggable: true
         });
 
         // This is the 'document' shape
@@ -584,8 +584,6 @@ function CreateDocument(docInit)
 
         // add the group to the layer
         PovGridDesigner.BaseLayer.add(kjsMainGroup);
-
-        //PovGridDesigner.BaseLayer.setZIndex(0);
 
         PovGridDesigner.MainStage.draw();
 

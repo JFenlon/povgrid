@@ -67,7 +67,7 @@ PovGridDesigner.VPAttributes = Object.create(null);
 PovGridDesigner.GeneralShapeAttributes = Object.create(null);
 PovGridDesigner.WorkspaceSettings = Object.create(null);
 PovGridDesigner.exportGridDocument = Object.create(null);
-PovGridDesigner.groupId = new Array("gpVanishPoint1", "gpVanishPoint2", "gpVanishPoint3", "gpTraceLines", "gpPerspLines1", "gpPerspLines2", "gpPerspLines3");
+PovGridDesigner.groupId = new Array("gpVanishPoint1", "gpVanishPoint2", "gpVanishPoint3", "gpTraceLines", "gpPerspLines1", "gpPerspLines2", "gpPerspLines3", "gpMain");
 PovGridDesigner.groupIdEnum = {
         VanishPoint1 : 0,
         VanishPoint2 : 1,
@@ -75,7 +75,8 @@ PovGridDesigner.groupIdEnum = {
         TraceLines   : 3,
         PerspLines1  : 4,
         PerspLines2  : 5,
-        PerspLines3  : 6
+        PerspLines3  : 6,
+        Main         : 7
     };
 PovGridDesigner.shapeId = new Array("shpVP1", "shpVP2", "shpVP3", "shpHorizon", "shpDocument", "shpTraceLine1", "shpTraceLine2","shpTouchAnim");
 PovGridDesigner.shapeIdEnum = {
