@@ -164,7 +164,7 @@ function CreateDebugWindow()
     var label = new Kinetic.Label({
         x: 15,
         y: 320,
-        height: 600,
+        height: 400,
         opacity: 0.8,
         draggable: true
     });
@@ -235,6 +235,36 @@ function CreateDebugWindow()
         fill: 'blue'
     }));
 
+    label.add(new Kinetic.Text({
+        y: -130,
+        text: 'VP Position:',
+        fontFamily: 'Courier',
+        fontSize: 15,
+        lineHeight: 1.2,
+        padding: 10,
+        fill: 'blue'
+    }));
+
+    label.add(new Kinetic.Text({
+        y: -100,
+        text: 'Horizon:',
+        fontFamily: 'Courier',
+        fontSize: 15,
+        lineHeight: 1.2,
+        padding: 10,
+        fill: 'blue'
+    }));
+
+    label.add(new Kinetic.Text({
+        y: -70,
+        text: 'Selected Obj:',
+        fontFamily: 'Courier',
+        fontSize: 15,
+        lineHeight: 1.2,
+        padding: 10,
+        fill: 'blue'
+    }));
+
     // Field data
     label.add(new Kinetic.Text({
         y: -220,
@@ -265,6 +295,42 @@ function CreateDebugWindow()
         x: 130,
         text: '...',
         id: 'txtCurrentVP',
+        fontFamily: 'Courier',
+        fontSize: 15,
+        lineHeight: 1.2,
+        padding: 10,
+        fill: 'red'
+    }));
+
+    label.add(new Kinetic.Text({
+        y: -130,
+        x: 130,
+        text: '...',
+        id: 'txtVPPos',
+        fontFamily: 'Courier',
+        fontSize: 15,
+        lineHeight: 1.2,
+        padding: 10,
+        fill: 'red'
+    }));
+
+    label.add(new Kinetic.Text({
+        y: -100,
+        x: 130,
+        text: '...',
+        id: 'txtMidPoint',
+        fontFamily: 'Courier',
+        fontSize: 15,
+        lineHeight: 1.2,
+        padding: 10,
+        fill: 'red'
+    }));
+
+    label.add(new Kinetic.Text({
+        y: -70,
+        x: 130,
+        text: '...',
+        id: 'txtSelected',
         fontFamily: 'Courier',
         fontSize: 15,
         lineHeight: 1.2,
@@ -411,6 +477,12 @@ function CreateVanishingPoint(shapeCoords, enumId)
                   PovGridDesigner.setSelectedVP(this);
             });
 
+            vpGroup.on('mouseup', function(){
+                var node = PovGridDesigner.GetNode('txtVPPos');
+
+                node.setText('x = ' + this.getPosition().x + ' | y = ' + this.getPosition().y);
+            });
+
             vPoint.on('mouseover', function(){
                 this.setFill(PovGridDesigner.VPAttributes.hoverFillColor);
                 this.setShadowEnabled(true);
@@ -443,8 +515,8 @@ function CreateVanishingPoint(shapeCoords, enumId)
                     // move the horizon vertically with vp1
                     var horizon = PovGridDesigner.GetNode(PovGridDesigner.shapeId[PovGridDesigner.shapeIdEnum.Horizon]);
 
-                    horizon.attrs.points[0] = new PovGridDesigner.Coordinate(horizon.attrs.points[0].x, evt.y);
-                    horizon.attrs.points[1] = new PovGridDesigner.Coordinate(horizon.attrs.points[1].x, evt.y);
+                    //horizon.attrs.points[0] = new PovGridDesigner.Coordinate(horizon.attrs.points[0].x, evt.y);
+                    //horizon.attrs.points[1] = new PovGridDesigner.Coordinate(horizon.attrs.points[1].x, evt.y);
                 });
             }
 
@@ -485,7 +557,8 @@ function SetupStage()
             container: "canvasContainer",
             id: 'stgMain',
             width: stageWidth,
-            height: stageHeight - 30
+            height: stageHeight - 30,
+            draggable: true
         });
 
         PovGridDesigner.MainLayer = new Kinetic.Layer({
@@ -500,9 +573,61 @@ function SetupStage()
             id: 'lyrTouch'
         });
 
+        PovGridDesigner.MainLayer.on('click', function(evt){
+            var shape = evt.targetNode;
+            /**
+             * DEV DEBUG DATA
+             */
+            var node = PovGridDesigner.GetNode('txtSelected');
+            node.setText(shape.getName());
+
+        });
+
         PovGridDesigner.MainStage.add(PovGridDesigner.BaseLayer);
         PovGridDesigner.MainStage.add(PovGridDesigner.MainLayer);
         PovGridDesigner.MainStage.add(PovGridDesigner.TouchLayer);
+
+        // animation ** Allows drag and move of multiple shapes
+        var anim = new Kinetic.Animation({
+            func: function (frame) {
+
+                // For some reason, the getPosition coords must add/subtract the original start position as an offset.
+                vertLine.setPosition((vHandle.getPosition().x -  vertLine.getPoints()[0].x) + workspaceSettings.touchPadding, (vHandle.getPosition().y -  vertLine.getPoints()[0].y) + workspaceSettings.touchPadding);
+
+                // Set vanishing point positions
+                var vPoint1 = vpLayer.get('#vp1')[0];
+                var vPoint2 = vpLayer.get('#vp2')[0];
+                vp1.posY = vPoint1.getPosition().y;
+                vp1.posX = vPoint1.getPosition().x;
+                vp2.posY = vPoint1.getPosition().y;
+                vp2.posX = vPoint2.getPosition().x;
+                hlineY = vp1.posY;
+
+                // Set params and pass object to getSegmentCoords
+                PovGridDesigner.segmentParams.staticPos = vertLine.getPosition().x + vertLine.getPoints()[0].x;
+                PovGridDesigner.segmentParams.xIsStatic = true;
+                PovGridDesigner.segmentParams.point1 = vertLine.getPosition().y + vertLine.getPoints()[0].y;
+                PovGridDesigner.segmentParams.point2 = ((vertLine.getPosition().y + vertLine.getPoints()[0].y) + fgrLineHeight);
+
+                var pts2 = getSegmentCoords(PovGridDesigner.segmentParams);
+                var newPts = getVPPolyGrid(pts2,vp1.posX,hlineY);
+                grid1.setPoints(newPts);
+
+                newPts = getVPPolyGrid(pts2,vp2.posX,hlineY);
+
+                grid2.setPoints(newPts);
+
+                var horzPts =[hlineX1,vp1.posY,hlineX2,vp1.posY];
+
+                horzLine.setPoints(horzPts);
+                vPoint2.setPosition(vPoint2.getPosition().x, vp1.posY);
+            },
+
+            node:vpLayer
+
+        });
+
+        anim.start();
 
         results = 1;
     }
@@ -541,8 +666,7 @@ function CreateDocument(docInit)
         }
 
         var kjsMainGroup = new Kinetic.Group({
-            id: PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.Main],
-            draggable: true
+            id: PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.Main]
         });
 
         // This is the 'document' shape
@@ -568,6 +692,12 @@ function CreateDocument(docInit)
         var hlineX1 = 0;
         var hlineX2 = PovGridDesigner.MainStage.getWidth();
         PovGridDesigner.WorkspaceSettings.hLineMidPoint = (hlineX2 - hlineX1) / 2;
+
+        /**
+        * DEV DEBUG DATA
+        */
+        var node = PovGridDesigner.GetNode('txtMidPoint');
+        node.setText(hlineY);
 
         var kjsHorizon = new Kinetic.Line({
             points: [hlineX1, hlineY, hlineX2, hlineY],

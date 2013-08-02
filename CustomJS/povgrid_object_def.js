@@ -334,7 +334,7 @@ Object.defineProperties(PovGridDesigner.VPAttributes,
 
     ,radius:
     {
-          value:        13
+          value:        15
         , writable:     true
         , configurable: true
         , enumerable:   true 

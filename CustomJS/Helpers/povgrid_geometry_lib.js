@@ -5,8 +5,13 @@
 *************************************************************
 */
 
-//   Returns the distance/length of a line between two coordinates
-//  [Returns: decimal]
+
+/**
+ * Returns the distance/length of a line between two coordinates
+ * @param coordinate1
+ * @param coordinate2
+ * @returns {number}
+ */
 function getDistanceBetweenPoints(coordinate1, coordinate2)
 {
     var mLine = new PovGridDesigner.LineCoordinate(coordinate1.x, coordinate1.y, coordinate2.x, coordinate2.y);
@@ -19,7 +24,7 @@ function getDistanceBetweenPoints(coordinate1, coordinate2)
     catch(ex)
     {
         //LOG ERROR
-        LogError(ex.message);
+        LogError(ex.message + ' [' + arguments.callee.name + ']');
     }
     finally
     {
@@ -27,9 +32,39 @@ function getDistanceBetweenPoints(coordinate1, coordinate2)
     }
 }
 
+/**
+ * Returns the angle/slope of a line between 2 coordinates
+ * @param lineCoords
+ * @returns {number}
+ */
+function getAngleFromCoords(lineCoords)
+{
+    var angle = 0.0;
+    try
+    {
+        var xDiff = lineCoords.x2 - lineCoords.x1;
+        var yDiff = lineCoords.y2 - lineCoords.y1;
 
-//   Get the upper and lower bounds of the passed object (usually the rectangle page).
-//   [Returns: PovGridDesigner.LineCoordinate]
+        angle =  Math.Atan2(yDiff, xDiff) * (180 / Math.PI);
+    }
+    catch (ex)
+    {
+        //LOG ERROR
+        LogError(ex.ex.message + ' [' + arguments.arguments.callee.arguments.callee.name + ']');
+        angle = 0;
+    }
+    finally
+    {
+       return angle;
+    }
+}
+
+
+/**
+ * Get the upper and lower bounds of the passed object (usually the rectangle page).
+ * @param domObject
+ * @returns {PovGridDesigner.LineCoordinate}
+ */
 function getBounds(domObject)
 {
     var objBoundaries = new PovGridDesigner.LineCoordinate();
@@ -45,7 +80,7 @@ function getBounds(domObject)
     catch(ex)
     {
         //LOG ERROR
-        LogError(ex.message);
+        LogError(ex.message + ' [' + arguments.callee.name + ']');
     }
     finally
     {
@@ -53,13 +88,19 @@ function getBounds(domObject)
     }
 }
 
-//   Returns the points to which all grid lines should run
-//   from a given vanishing point (Polygon point array).
-//-----------------------------------------------------------------
-//   x1 = position of x1 point on line.
-//   segmentPoints = array of points to which grid lines will run.
-//   vanishingPoint = point source of grid lines (vp1, vp2 or vp3).
-//   [Returns: decimal array]
+
+/**
+ * Returns the points to which all grid lines should run
+ *rom a given vanishing point (Polygon point array).
+ * -----------------------------------------------------------------
+ * x1 = position of x1 point on line.
+ * segmentPoints = array of points to which grid lines will run.
+ * vanishingPoint = point source of grid lines (vp1, vp2 or vp3).
+ * @param segmentPoints
+ * @param vpX
+ * @param vpY
+ * @returns {Array}
+ */
 function getVPPolyGrid(segmentPoints, vpX, vpY)
 {
     var gPoints = [];
@@ -85,7 +126,7 @@ function getVPPolyGrid(segmentPoints, vpX, vpY)
     catch(ex)
     {
         //LOG ERROR
-        LogError(ex.message);
+        LogError(ex.message + ' [' + arguments.callee.name + ']');
     }
     finally
     {
@@ -93,12 +134,17 @@ function getVPPolyGrid(segmentPoints, vpX, vpY)
     }
 }
 
-//   Returns the coordinates for a line that spans the full page
-// ---------------------------------------------------
-//   cRadius = circle radius
-//   ccCoords = circle center coordinates
-//   lAngle = line angle in degrees
-//   [Returns: PovGridDesigner.LineCoordinate]
+/**
+ * Returns the coordinates for a line that spans the full page
+ * ---------------------------------------------------
+ * cRadius = circle radius
+ * ccCoords = circle center coordinates
+ * lAngle = line angle in degrees
+ * @param cRadius
+ * @param ccCoords
+ * @param lAngle
+ * @returns {PovGridDesigner.LineCoordinate}
+ */
 function getSpokeLineCoords(cRadius, ccCoords, lAngle)
 {
     var lineCoords = new PovGridDesigner.LineCoordinate();
@@ -123,7 +169,7 @@ function getSpokeLineCoords(cRadius, ccCoords, lAngle)
     catch(ex)
     {
         //LOG ERROR
-        LogError(ex.message);
+        LogError(ex.message + ' [' + arguments.callee.name + ']');
     }
     finally
     {
@@ -131,15 +177,21 @@ function getSpokeLineCoords(cRadius, ccCoords, lAngle)
     }
 }
 
-//   Calculates the endpoint of a line given the
-//   radius of the outer circle, center points of
-//   the circle and desired angle.
-// ---------------------------------------------------
-//   cRadius = circle radius
-//   cXpos = circle center X point
-//   cYpos = circle center Y point
-//   lAngle = line angle in degrees
-//   [Returns: PovGridDesigner.Coordinate]
+
+/**
+ * Calculates the endpoint of a line given the
+ * radius of the outer circle, center points of
+ * the circle and desired angle.
+ * ---------------------------------------------------
+ * cRadius = circle radius
+ * cXpos = circle center X point
+ * cYpos = circle center Y point
+ * lAngle = line angle in degrees
+ * @param cRadius
+ * @param ccCoords
+ * @param lAngle
+ * @returns {PovGridDesigner.Coordinate}
+ */
 function getPointsFromAngle(cRadius, ccCoords, lAngle)
 {
     var resultCoords = new PovGridDesigner.Coordinate();
@@ -154,7 +206,7 @@ function getPointsFromAngle(cRadius, ccCoords, lAngle)
     catch(ex)
     {
         //LOG ERROR
-        LogError(ex.message);
+        LogError(ex.message + ' [' + arguments.callee.name + ']');
     }
     finally
     {
@@ -228,12 +280,10 @@ function getSegmentCoords(segmentParams)
     catch (ex)
     {
         //LOG ERROR
-        LogError(ex.message);
+        LogError(ex.message + ' [' + arguments.callee.name + ']');
     }
     finally
     {
         return nPoints;
     }
-
-
 }
