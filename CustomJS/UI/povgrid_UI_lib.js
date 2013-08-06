@@ -19,13 +19,13 @@ function EventBinding()
         ToggleVanishPoint(PovGridDesigner.shapeIdEnum.VP3);
     });
 
-    $( "#sldLineDensity" ).bind( "change", function(event, ui) {
+    $( "#sldLineDensity" ).bind( "change", function(event) {
         // set line density property
         PovGridDesigner.setLineDensity(event.target.value);
 
         UpdateLineDensity();
     });
-    $( "#sldLineOpacity" ).bind( "change", function(event, ui) {
+    $( "#sldLineOpacity" ).bind( "change", function(event) {
         // set line opacity property
         PovGridDesigner.setLineOpacity(event.target.value / 100);
 
@@ -39,6 +39,16 @@ function EventBinding()
         UpdateGridLineColors();
     });
 
+}
+
+function disableSelection(target){
+    if (typeof target.onselectstart!="undefined") //IE route
+        target.onselectstart=function(){return false;}
+    else if (typeof target.style.MozUserSelect!="undefined") //Firefox route
+        target.style.MozUserSelect="none";
+    else //All other route (ie: Opera)
+        target.onmousedown=function(){return false;}
+    target.style.cursor = "default";
 }
 
 /**
@@ -418,7 +428,6 @@ function GenerateVanishingPoints()
 /**
  *
  * @param initialCoords
- * @param baseLayer
  * @param enumId
  * @returns {boolean}
  */
@@ -587,47 +596,34 @@ function SetupStage()
         PovGridDesigner.MainStage.add(PovGridDesigner.MainLayer);
         PovGridDesigner.MainStage.add(PovGridDesigner.TouchLayer);
 
-        // animation ** Allows drag and move of multiple shapes
-        var anim = new Kinetic.Animation({
-            func: function (frame) {
+        PovGridDesigner.MainStage.getContent().addEventListener('touchmove', function(evt) {
+            var touch1 = evt.touches[0];
+            var touch2 = evt.touches[1];
 
-                // For some reason, the getPosition coords must add/subtract the original start position as an offset.
-                vertLine.setPosition((vHandle.getPosition().x -  vertLine.getPoints()[0].x) + workspaceSettings.touchPadding, (vHandle.getPosition().y -  vertLine.getPoints()[0].y) + workspaceSettings.touchPadding);
+            if(touch1 && touch2 && activeShape) {
+                var dist = getDistance({
+                    x: touch1.clientX,
+                    y: touch1.clientY
+                }, {
+                    x: touch2.clientX,
+                    y: touch2.clientY
+                });
 
-                // Set vanishing point positions
-                var vPoint1 = vpLayer.get('#vp1')[0];
-                var vPoint2 = vpLayer.get('#vp2')[0];
-                vp1.posY = vPoint1.getPosition().y;
-                vp1.posX = vPoint1.getPosition().x;
-                vp2.posY = vPoint1.getPosition().y;
-                vp2.posX = vPoint2.getPosition().x;
-                hlineY = vp1.posY;
+                if(!lastDist) {
+                    lastDist = dist;
+                }
 
-                // Set params and pass object to getSegmentCoords
-                PovGridDesigner.segmentParams.staticPos = vertLine.getPosition().x + vertLine.getPoints()[0].x;
-                PovGridDesigner.segmentParams.xIsStatic = true;
-                PovGridDesigner.segmentParams.point1 = vertLine.getPosition().y + vertLine.getPoints()[0].y;
-                PovGridDesigner.segmentParams.point2 = ((vertLine.getPosition().y + vertLine.getPoints()[0].y) + fgrLineHeight);
+                var scale = activeShape.getScale().x * dist / lastDist;
 
-                var pts2 = getSegmentCoords(PovGridDesigner.segmentParams);
-                var newPts = getVPPolyGrid(pts2,vp1.posX,hlineY);
-                grid1.setPoints(newPts);
+                activeShape.setScale(scale);
+                layer.draw();
+                lastDist = dist;
+            }
+        }, false);
 
-                newPts = getVPPolyGrid(pts2,vp2.posX,hlineY);
-
-                grid2.setPoints(newPts);
-
-                var horzPts =[hlineX1,vp1.posY,hlineX2,vp1.posY];
-
-                horzLine.setPoints(horzPts);
-                vPoint2.setPosition(vPoint2.getPosition().x, vp1.posY);
-            },
-
-            node:vpLayer
-
-        });
-
-        anim.start();
+        PovGridDesigner.MainStage.getContent().addEventListener('touchend', function() {
+            lastDist = 0;
+        }, false);
 
         results = 1;
     }

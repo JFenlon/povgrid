@@ -25,6 +25,8 @@ $(document).ready(function () {
             throw new EvalError("create-touchlayer-failed");
         */
 
+
+        disableSelection(document.body);
     }
     catch(ex)
     {
