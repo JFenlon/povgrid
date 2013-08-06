@@ -592,6 +592,12 @@ function SetupStage()
 
         });
 
+        var zoom = function(e) {
+            var zoomAmount = e.wheelDeltaY*0.0005;
+            PovGridDesigner.BaseLayer.setScale(PovGridDesigner.BaseLayer.getScale().x+zoomAmount)
+            PovGridDesigner.MainStage.draw();
+        }
+
         PovGridDesigner.MainStage.add(PovGridDesigner.BaseLayer);
         PovGridDesigner.MainStage.add(PovGridDesigner.MainLayer);
         PovGridDesigner.MainStage.add(PovGridDesigner.TouchLayer);
@@ -620,6 +626,8 @@ function SetupStage()
                 lastDist = dist;
             }
         }, false);
+
+        document.addEventListener("mousewheel", zoom, false);
 
         PovGridDesigner.MainStage.getContent().addEventListener('touchend', function() {
             lastDist = 0;
