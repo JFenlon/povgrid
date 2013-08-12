@@ -56,6 +56,7 @@ PovGridDesigner.MainStage = Object.create(null);
 PovGridDesigner.MainLayer = Object.create(null);
 PovGridDesigner.BaseLayer = Object.create(null);
 PovGridDesigner.TouchLayer = Object.create(null);
+PovGridDesigner.HorizonLayer = Object.create(null);
 
 PovGridDesigner.DBRecordCount = Object.create(null);
 PovGridDesigner.GridColorIndex = Object.create(null);

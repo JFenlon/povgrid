@@ -275,17 +275,17 @@ function CreateVanishingPoint(shapeCoords, enumId)
                 vpGroup.setZIndex(3);
             });
 
-            vpGroup.on('click', function(){
+            vpGroup.on('click touchstart', function(){
                   PovGridDesigner.setSelectedVP(this);
             });
 
-            vpGroup.on('mouseup', function(){
+            vpGroup.on('mouseup touchend', function(){
                 var node = PovGridDesigner.GetNode('txtVPPos');
 
                 node.setText('x = ' + this.getPosition().x + ' | y = ' + this.getPosition().y);
             });
 
-            vPoint.on('mouseover', function(){
+            vPoint.on('mouseover touchstart', function(){
                 this.setFill(PovGridDesigner.VPAttributes.hoverFillColor);
                 this.setShadowEnabled(true);
                 vpGroup.setZIndex(3);
@@ -323,6 +323,14 @@ function CreateVanishingPoint(shapeCoords, enumId)
             }
 
             PovGridDesigner.MainLayer.draw();
+
+            // keep stem in sync with center
+            PovGridDesigner.MainLayer.on('draw', function() {
+                var horizon = PovGridDesigner.GetNode(PovGridDesigner.shapeId[PovGridDesigner.shapeIdEnum.Horizon]);
+
+                horizon.attrs.points[0] = vPoint.getPosition();
+                PovGridDesigner.HorizonLayer.draw();
+            });
 
             isSuccess = true;
         }
@@ -505,12 +513,18 @@ function CreateDocument(docInit)
             draggable: false
         });
 
+        PovGridDesigner.HorizonLayer = new Kinetic.Layer({
+            id: 'lyrHorizon',
+            draggable: false
+        });
+
         // add the shape to the group
         kjsMainGroup.add(kjsDocument);
-        kjsMainGroup.add(kjsHorizon);
+        PovGridDesigner.HorizonLayer.add(kjsHorizon);
 
         // add the group to the layer
         PovGridDesigner.BaseLayer.add(kjsMainGroup);
+        PovGridDesigner.MainLayer.add(PovGridDesigner.HorizonLayer);
 
         PovGridDesigner.MainStage.draw();
 
