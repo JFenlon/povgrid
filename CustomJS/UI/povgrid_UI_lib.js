@@ -39,6 +39,26 @@ function EventBinding()
         UpdateGridLineColors();
     });
 
+    $("[name='link']").bind('click', function (event) {
+        event.preventDefault();
+        var theme = $(this).text();
+        $.mobile.activePage.find('.ui-btn')
+            .removeClass('ui-btn-up-a ui-btn-up-b ui-btn-up-c ui-btn-up-d ui-btn-up-e ui-btn-hover-a ui-btn-hover-b ui-btn-hover-c ui-btn-hover-d ui-btn-hover-e')
+            .addClass('ui-btn-up-' + theme)
+            .attr('data-theme', theme);
+        $.mobile.activePage.find('.ui-bar')
+            .removeClass('ui-bar-a ui-bar-b ui-bar-c ui-bar-d ui-bar-e')
+            .addClass('ui-bar-' + theme)
+            .attr('data-theme', theme);
+        $.mobile.activePage.find('.ui-header, .ui-footer')
+            .removeClass('ui-bar-a ui-bar-b ui-bar-c ui-bar-d ui-bar-e')
+            .addClass('ui-bar-' + theme)
+            .attr('data-theme', theme);
+        $.mobile.activePage.removeClass('ui-body-a ui-body-b ui-body-c ui-body-d ui-body-e')
+            .addClass('ui-body-' + theme)
+            .attr('data-theme', theme);
+    });
+
 }
 
 function disableSelection(target){
@@ -56,11 +76,10 @@ function disableSelection(target){
  */
 function SetCanvasElementHeight()
 {
-    var divHeader = getDomElement('divHeader');
     var divGrid = getDomElement('divTopGrid');
     var divContent = getDomElement('divContent');
 
-    divContent.style.height = (getDocumentHeight() - divHeader.clientHeight - divGrid.clientHeight) - 35;
+    divContent.style.height = (getDocumentHeight() - divGrid.clientHeight) - 35;
     divContent.style.maxHeight = divContent.style.height;
 }
 
@@ -269,7 +288,7 @@ function CreateVanishingPoint(shapeCoords, enumId)
             vpGroup.add(vPoint);
             vpGroup.add(simpleText);
 
-            /** event binding for vanishing point group (where needed) */
+            /** Event binding for vanishing point group (where needed) */
             simpleText.on('click', function(){
                 PovGridDesigner.setSelectedVP(vpGroup);
                 vpGroup.setZIndex(3);
@@ -282,7 +301,7 @@ function CreateVanishingPoint(shapeCoords, enumId)
             vpGroup.on('mouseup touchend', function(){
                 var node = PovGridDesigner.GetNode('txtVPPos');
 
-                node.setText('x = ' + this.getPosition().x + ' | y = ' + this.getPosition().y);
+                node.setText('x = ' + this.getAbsolutePosition().x + ' | y = ' + this.getAbsolutePosition().y);
             });
 
             vPoint.on('mouseover touchstart', function(){
@@ -317,20 +336,13 @@ function CreateVanishingPoint(shapeCoords, enumId)
                     // move the horizon vertically with vp1
                     var horizon = PovGridDesigner.GetNode(PovGridDesigner.shapeId[PovGridDesigner.shapeIdEnum.Horizon]);
 
-                    //horizon.attrs.points[0] = new PovGridDesigner.Coordinate(horizon.attrs.points[0].x, evt.y);
+                    horizon.attrs.points[0] = vpGroup.getAbsolutePosition();
                     //horizon.attrs.points[1] = new PovGridDesigner.Coordinate(horizon.attrs.points[1].x, evt.y);
+                    PovGridDesigner.BaseLayer.draw();
                 });
             }
 
             PovGridDesigner.MainLayer.draw();
-
-            // keep stem in sync with center
-            PovGridDesigner.MainLayer.on('draw', function() {
-                var horizon = PovGridDesigner.GetNode(PovGridDesigner.shapeId[PovGridDesigner.shapeIdEnum.Horizon]);
-
-                horizon.attrs.points[0] = vPoint.getPosition();
-                PovGridDesigner.HorizonLayer.draw();
-            });
 
             isSuccess = true;
         }
@@ -395,9 +407,16 @@ function SetupStage()
 
         var zoom = function(e) {
             var zoomAmount = e.wheelDeltaY*0.0005;
+            var newCoords = new PovGridDesigner.Coordinate();
+            newCoords.x = PovGridDesigner.BaseLayer.getPosition().x - zoomAmount;
+            newCoords.y = PovGridDesigner.BaseLayer.getPosition().y - zoomAmount;
             PovGridDesigner.BaseLayer.setScale(PovGridDesigner.BaseLayer.getScale().x+zoomAmount)
+            PovGridDesigner.MainLayer.setScale(PovGridDesigner.MainLayer.getScale().x+zoomAmount)
+            PovGridDesigner.BaseLayer.setPosition(newCoords);
             PovGridDesigner.MainStage.draw();
         }
+
+        PovGridDesigner.BaseLayer.setOffset(PovGridDesigner.BaseLayer.getWidth()/2,PovGridDesigner.BaseLayer.getHeight()/2);
 
         PovGridDesigner.MainStage.add(PovGridDesigner.BaseLayer);
         PovGridDesigner.MainStage.add(PovGridDesigner.MainLayer);

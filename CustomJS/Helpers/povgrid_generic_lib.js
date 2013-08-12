@@ -10,8 +10,6 @@ function getDomElement( id ) {
     return document.getElementById( id );
 }
 
-
-
 function getDocumentHeight()
 {
     return Math.max(

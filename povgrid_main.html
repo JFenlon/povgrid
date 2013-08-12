@@ -19,46 +19,49 @@
 </head>
 
 <body>
-<div data-role="header" id="divHeader">
-    <a href="#" data-icon="home">Home</a>
-    <h1>PovGrid</h1>
-    <a href="#" data-icon="bars">Menu</a>
-</div>
-<div class="ui-grid-d" id="divTopGrid">
+<div class="ui-grid-d" id="divTopGrid" data-theme="d">
     <div class="ui-block-a">
-        <div class="ui-bar ui-bar-e" style="height:125px">
-            <input type='text' id='tbWidth' size="4" maxlength="4" data-mini="true"/>
-            <input type='text' id='tbHeight' size="4" maxlength="4" data-mini="true"/>
-            <input type='button' id='btnCreateDocument' value="Create Document" />
+        <div class="ui-bar ui-bar-d" style="height:125px">
+            <input type='text' id='tbWidth' size="4" maxlength="4" data-mini="true" data-theme="d"/>
+            <input type='text' id='tbHeight' size="4" maxlength="4" data-mini="true" data-theme="d"/>
+            <input type='button' id='btnCreateDocument' value="Create Document"  data-theme="d"/>
         </div>
     </div>
-    <div class="ui-block-b">
-        <div class="ui-bar ui-bar-e" style="height:125px">
+    <div class="ui-block-b" data-theme="d">
+        <div class="ui-bar ui-bar-d" style="height:125px" data-theme="d">
             <div data-role="controlgroup">
-                <a href="#" id="btnVanishPoint1" data-role="button" data-icon="plus" data-theme="a" data-iconpos="left">Vanishing Point 1</a>
-                <a href="#" id="btnVanishPoint2" data-role="button" data-icon="plus" data-theme="a" data-iconpos="left">Vanishing Point 2</a>
-                <a href="#" id="btnVanishPoint3" data-role="button" data-icon="plus" data-theme="a" data-iconpos="left">Vanishing Point 3</a>
+                <a href="#" id="btnVanishPoint1" data-role="button" data-icon="plus" data-theme="d" data-iconpos="left">Vanishing Point 1</a>
+                <a href="#" id="btnVanishPoint2" data-role="button" data-icon="plus" data-theme="d" data-iconpos="left">Vanishing Point 2</a>
+                <a href="#" id="btnVanishPoint3" data-role="button" data-icon="plus" data-theme="d" data-iconpos="left">Vanishing Point 3</a>
             </div>
         </div>
     </div>
-    <div class="ui-block-b">
-        <div class="ui-bar ui-bar-e" style="height:125px">
-            <label for="sldLineDensity">Line Density:</label>
-            <input type="range" name="sldLineDensity" id="sldLineDensity" data-highlight="true" min="5" max="60" value="5" data-theme="a" data-mini="true">
-            <label for="sldLineOpacity">Line Opacity:</label>
-            <input type="range" name="sldLineOpacity" id="sldLineOpacity" data-highlight="true" min="0" max="100" value="60" data-theme="a" data-mini="true">
+    <div class="ui-block-b" data-theme="d">
+        <div class="ui-bar ui-bar-d" style="height:125px" data-theme="d">
+            <label data-theme="d" for="sldLineDensity">Line Density:</label>
+            <input data-theme="d" type="range" name="sldLineDensity" id="sldLineDensity" data-highlight="true" min="5" max="60" value="5" data-mini="true">
+            <label data-theme="d" for="sldLineOpacity">Line Opacity:</label>
+            <input data-theme="d" type="range" name="sldLineOpacity" id="sldLineOpacity" data-highlight="true" min="0" max="100" value="60" data-mini="true">
         </div>
     </div>
     <div class="ui-block-b">
-        <div class="ui-bar ui-bar-e" style="height:125px">
+        <div class="ui-bar ui-bar-d" style="height:125px" data-theme="d">
             <div data-role="controlgroup">
-                <a href="#" id="btnCycleColors" data-role="button" data-icon="refresh" data-theme="a" data-iconpos="left">Cycle Colors</a>
+                <a href="#" id="btnCycleColors" data-role="button" data-icon="refresh" data-theme="d" data-iconpos="left">Cycle Colors</a>
             </div>
         </div>
     </div>
-    <div class="ui-block-b">
-        <div class="ui-bar ui-bar-e" style="height:125px">
-            Empty Slot...
+    <div class="ui-block-b" data-theme="d">
+        <div class="ui-bar ui-bar-d" style="height:235px" data-theme="d">
+            <div data-role="content">
+                <ul data-role="listview">
+                    <li><a name="link" href="#">a</a></li>
+                    <li><a name="link" href="#">b</a></li>
+                    <li><a name="link" href="#">c</a></li>
+                    <li><a name="link" href="#">d</a></li>
+                    <li><a name="link" href="#">e</a></li>
+                </ul>
+            </div>
         </div>
     </div>
 </div>
