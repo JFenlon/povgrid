@@ -298,6 +298,11 @@ function CreateVanishingPoint(shapeCoords, enumId)
                   PovGridDesigner.setSelectedVP(this);
             });
 
+            /*
+                Todo - DEBUG - REMOVE
+                @author: John.Fenlon
+                @date: 8/14/13
+             */
             vpGroup.on('mouseup touchend', function(){
                 var node = PovGridDesigner.GetNode('txtVPPos');
 
@@ -311,7 +316,7 @@ function CreateVanishingPoint(shapeCoords, enumId)
                 PovGridDesigner.MainLayer.draw();
             });
 
-            simpleText.on('mouseover', function(){
+            simpleText.on('mouseover touchstart', function(){
                 vPoint.setFill(PovGridDesigner.VPAttributes.hoverFillColor);
                 vPoint.setShadowEnabled(true);
                 vpGroup.setZIndex(3);
@@ -329,18 +334,13 @@ function CreateVanishingPoint(shapeCoords, enumId)
                 vPoint.setShadowEnabled(false);
                 PovGridDesigner.MainLayer.draw();
             });
-
-            if(vpGroup.id == PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.VP1])
-            {
-                vpGroup.on('dragend', function(evt){
-                    // move the horizon vertically with vp1
-                    var horizon = PovGridDesigner.GetNode(PovGridDesigner.shapeId[PovGridDesigner.shapeIdEnum.Horizon]);
-
-                    horizon.attrs.points[0] = vpGroup.getAbsolutePosition();
-                    //horizon.attrs.points[1] = new PovGridDesigner.Coordinate(horizon.attrs.points[1].x, evt.y);
-                    PovGridDesigner.BaseLayer.draw();
-                });
-            }
+            
+            /*
+                Todo - Add binding to handle horizon line updates upon VP1,VP2 drag & drop
+                @author: John.Fenlon
+                @date: 8/14/13
+             */ 
+            
 
             PovGridDesigner.MainLayer.draw();
 
@@ -395,16 +395,23 @@ function SetupStage()
             id: 'lyrTouch'
         });
 
+        /*
+            Todo - DEBUG - REMOVE
+            @author: John.Fenlon
+            @date: 8/14/13
+         */
         PovGridDesigner.MainLayer.on('click', function(evt){
             var shape = evt.targetNode;
-            /**
-             * DEV DEBUG DATA
-             */
             var node = PovGridDesigner.GetNode('txtSelected');
             node.setText(shape.getName());
 
         });
 
+        /*
+            Todo - Update to zoom on center
+            @author: John.Fenlon
+            @date: 8/14/13
+         */
         var zoom = function(e) {
             var zoomAmount = e.wheelDeltaY*0.0005;
             var newCoords = new PovGridDesigner.Coordinate();
@@ -422,6 +429,11 @@ function SetupStage()
         PovGridDesigner.MainStage.add(PovGridDesigner.MainLayer);
         PovGridDesigner.MainStage.add(PovGridDesigner.TouchLayer);
 
+        /*
+            Todo - Add touch-zoom functionality
+            @author: John.Fenlon
+            @date: 8/14/13
+         */
         PovGridDesigner.MainStage.getContent().addEventListener('touchmove', function(evt) {
             var touch1 = evt.touches[0];
             var touch2 = evt.touches[1];
@@ -517,9 +529,11 @@ function CreateDocument(docInit)
         var hlineX2 = PovGridDesigner.MainStage.getWidth();
         PovGridDesigner.WorkspaceSettings.hLineMidPoint = (hlineX2 - hlineX1) / 2;
 
-        /**
-        * DEV DEBUG DATA
-        */
+        /*
+            Todo - DEBUG - REMOVE
+            @author: John.Fenlon
+            @date: 8/14/13
+         */
         var node = PovGridDesigner.GetNode('txtMidPoint');
         node.setText(hlineY);
 
