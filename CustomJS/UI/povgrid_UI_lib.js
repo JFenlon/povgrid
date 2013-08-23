@@ -194,6 +194,42 @@ function GenerateVanishingPoints()
 
     try
     {
+        /*
+            Todo - Add the creation of a horizon line on the first VP added to DOC
+            @author: John.Fenlon
+            @date: 8/23/13
+         */
+
+
+         // Draw the horizon line
+/*         var hlineY = (PovGridDesigner.MainStage.getHeight() - 2) /2;
+         var hlineX1 = 0;
+         var hlineX2 = PovGridDesigner.MainStage.getWidth();
+         PovGridDesigner.WorkspaceSettings.hLineMidPoint = (hlineX2 - hlineX1) / 2;
+
+         *//*
+         Todo - DEBUG - REMOVE
+         @author: John.Fenlon
+         @date: 8/14/13
+         *//*
+        var node = PovGridDesigner.GetNode('txtMidPoint');
+        node.setText(hlineY);
+
+        var kjsHorizon = new Kinetic.Line({
+            points: [hlineX1, hlineY, hlineX2, hlineY],
+            stroke: 'black',
+            strokeWidth: PovGridDesigner.GeneralShapeAttributes.strokeWidth + 0.2,
+            id: PovGridDesigner.shapeId[PovGridDesigner.shapeIdEnum.Horizon],
+            name: 'horizon',
+            draggable: false
+        });
+
+        PovGridDesigner.HorizonLayer = new Kinetic.Layer({
+            id: 'lyrHorizon'
+        });
+        kjsMainGroup.add(kjsHorizon);*/
+
+
         // we need to create it
         var shapeCoords = new PovGridDesigner.Coordinate(0,0);
         var horizon = PovGridDesigner.GetNode(PovGridDesigner.shapeId[PovGridDesigner.shapeIdEnum.Horizon]);
@@ -205,12 +241,13 @@ function GenerateVanishingPoints()
             {
                 case PovGridDesigner.shapeIdEnum.VP1:
                     //place on horizon, to left of document
-                    shapeCoords.y = horizon.getAttrs().points[0].y;
+                    shapeCoords.y = 50; //horizon.getAttrs().points[0].y;
                     shapeCoords.x = parseFloat(document.getPosition().x) + PovGridDesigner.VPAttributes.radius;
                     break;
                 case PovGridDesigner.shapeIdEnum.VP2:
                     //place on horizon, to right of document
-                    shapeCoords.y = horizon.getAttrs().points[0].y;
+                    shapeCoords.y = 50; //horizon.getAttrs().points[0].y;
+                    shapeCoords.y = 50; //horizon.getAttrs().points[0].y;
                     shapeCoords.x = parseFloat(document.getPosition().x) + parseFloat(document.getWidth()) - PovGridDesigner.VPAttributes.radius;
                     break;
                 case PovGridDesigner.shapeIdEnum.VP3:
@@ -339,10 +376,7 @@ function CreateVanishingPoint(shapeCoords, enumId)
                 Todo - Add binding to handle horizon line updates upon VP1,VP2 drag & drop
                 @author: John.Fenlon
                 @date: 8/14/13
-             */ 
-            
-
-            PovGridDesigner.MainLayer.draw();
+             */
 
             isSuccess = true;
         }
@@ -523,41 +557,12 @@ function CreateDocument(docInit)
             shadowEnabled: documentObj.shadowEnabled
         });
 
-        // Draw the horizon line
-        var hlineY = (PovGridDesigner.MainStage.getHeight() - 2) /2;
-        var hlineX1 = 0;
-        var hlineX2 = PovGridDesigner.MainStage.getWidth();
-        PovGridDesigner.WorkspaceSettings.hLineMidPoint = (hlineX2 - hlineX1) / 2;
-
-        /*
-            Todo - DEBUG - REMOVE
-            @author: John.Fenlon
-            @date: 8/14/13
-         */
-        var node = PovGridDesigner.GetNode('txtMidPoint');
-        node.setText(hlineY);
-
-        var kjsHorizon = new Kinetic.Line({
-            points: [hlineX1, hlineY, hlineX2, hlineY],
-            stroke: 'black',
-            strokeWidth: PovGridDesigner.GeneralShapeAttributes.strokeWidth + 0.2,
-            id: PovGridDesigner.shapeId[PovGridDesigner.shapeIdEnum.Horizon],
-            name: 'horizon',
-            draggable: false
-        });
-
-        PovGridDesigner.HorizonLayer = new Kinetic.Layer({
-            id: 'lyrHorizon',
-            draggable: false
-        });
-
         // add the shape to the group
         kjsMainGroup.add(kjsDocument);
-        PovGridDesigner.HorizonLayer.add(kjsHorizon);
+
 
         // add the group to the layer
         PovGridDesigner.BaseLayer.add(kjsMainGroup);
-        PovGridDesigner.MainLayer.add(PovGridDesigner.HorizonLayer);
 
         PovGridDesigner.MainStage.draw();
 

@@ -328,7 +328,7 @@ Object.defineProperties(PovGridDesigner.VPAttributes,
 
     ,strokeColor:
     {
-          value:        '#9FB030'
+          value:        '#404040'
         , writable:     true
         , configurable: true
         , enumerable:   true 
@@ -344,7 +344,7 @@ Object.defineProperties(PovGridDesigner.VPAttributes,
 
     ,strokeWidth:
     {
-          value:        2
+          value:        4
         , writable:     true
         , configurable: true
         , enumerable:   true 
