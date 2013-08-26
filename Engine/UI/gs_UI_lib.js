@@ -1,6 +1,6 @@
 /**
  *************************************************************
- * POVGRID Custom UI function library
+ * Gridspective UI engine library
  * Created 04/03/2013
  *************************************************************
  *
@@ -10,30 +10,30 @@ function EventBinding()
 {
     $("#btnCreateDocument").bind("click", AddNewDocument);
     $("#btnVanishPoint1").bind("click", function(){
-        ToggleVanishPoint(PovGridDesigner.shapeIdEnum.VP1);
+        ToggleVanishPoint(GSDesigner.shapeIdEnum.VP1);
     });
     $("#btnVanishPoint2").bind("click", function(){
-        ToggleVanishPoint(PovGridDesigner.shapeIdEnum.VP2);
+        ToggleVanishPoint(GSDesigner.shapeIdEnum.VP2);
     });
     $("#btnVanishPoint3").bind("click", function(){
-        ToggleVanishPoint(PovGridDesigner.shapeIdEnum.VP3);
+        ToggleVanishPoint(GSDesigner.shapeIdEnum.VP3);
     });
 
     $( "#sldLineDensity" ).bind( "change", function(event) {
         // set line density property
-        PovGridDesigner.setLineDensity(event.target.value);
+        GSDesigner.setLineDensity(event.target.value);
 
         UpdateLineDensity();
     });
     $( "#sldLineOpacity" ).bind( "change", function(event) {
         // set line opacity property
-        PovGridDesigner.setLineOpacity(event.target.value / 100);
+        GSDesigner.setLineOpacity(event.target.value / 100);
 
         UpdateLineOpacity();
     });
 
     $("#btnCycleColors").bind("click", function(){
-        PovGridDesigner.incrementGridColorIndex();
+        GSDesigner.incrementGridColorIndex();
 
         //Force grid lines to take on new colors
         UpdateGridLineColors();
@@ -91,12 +91,12 @@ function ToggleVanishPoint(shapeEnumId)
 {
     try
     {
-        if(PovGridDesigner.NodeExists(PovGridDesigner.groupId[shapeEnumId]))
+        if(GSDesigner.NodeExists(GSDesigner.groupId[shapeEnumId]))
         {
-            var group = PovGridDesigner.GetNode(PovGridDesigner.groupId[shapeEnumId]);
+            var group = GSDesigner.GetNode(GSDesigner.groupId[shapeEnumId]);
 
             group.setVisible(!group.getVisible());
-            PovGridDesigner.MainLayer.draw();
+            GSDesigner.MainLayer.draw();
         }
 
     }
@@ -115,12 +115,12 @@ function AddNewDocument()
     try
     {
         // Clear existing document
-        PovGridDesigner.MainStage.clear();
+        GSDesigner.MainStage.clear();
 
         /** DEV ONLY */
         CreateDebugWindow();
 
-        var docSettings = GetNewDocSettings() || new PovGridDesigner.DocumentObject(1024, 400);
+        var docSettings = GetNewDocSettings() || new GSDesigner.DocumentObject(1024, 400);
 
         SetFieldData('txtDocSize', docSettings.width +  ' X ' + docSettings.height);
 
@@ -170,7 +170,7 @@ function GetNewDocSettings()
         }
         else
         {
-            docSettings = new PovGridDesigner.DocumentObject(width, height);
+            docSettings = new GSDesigner.DocumentObject(width, height);
         }
     }
     catch (ex)
@@ -202,58 +202,58 @@ function GenerateVanishingPoints()
 
 
          // Draw the horizon line
-/*         var hlineY = (PovGridDesigner.MainStage.getHeight() - 2) /2;
+/*         var hlineY = (GSDesigner.MainStage.getHeight() - 2) /2;
          var hlineX1 = 0;
-         var hlineX2 = PovGridDesigner.MainStage.getWidth();
-         PovGridDesigner.WorkspaceSettings.hLineMidPoint = (hlineX2 - hlineX1) / 2;
+         var hlineX2 = GSDesigner.MainStage.getWidth();
+         GSDesigner.WorkspaceSettings.hLineMidPoint = (hlineX2 - hlineX1) / 2;
 
          *//*
          Todo - DEBUG - REMOVE
          @author: John.Fenlon
          @date: 8/14/13
          *//*
-        var node = PovGridDesigner.GetNode('txtMidPoint');
+        var node = GSDesigner.GetNode('txtMidPoint');
         node.setText(hlineY);
 
         var kjsHorizon = new Kinetic.Line({
             points: [hlineX1, hlineY, hlineX2, hlineY],
             stroke: 'black',
-            strokeWidth: PovGridDesigner.GeneralShapeAttributes.strokeWidth + 0.2,
-            id: PovGridDesigner.shapeId[PovGridDesigner.shapeIdEnum.Horizon],
+            strokeWidth: GSDesigner.GeneralShapeAttributes.strokeWidth + 0.2,
+            id: GSDesigner.shapeId[GSDesigner.shapeIdEnum.Horizon],
             name: 'horizon',
             draggable: false
         });
 
-        PovGridDesigner.HorizonLayer = new Kinetic.Layer({
+        GSDesigner.HorizonLayer = new Kinetic.Layer({
             id: 'lyrHorizon'
         });
         kjsMainGroup.add(kjsHorizon);*/
 
 
         // we need to create it
-        var shapeCoords = new PovGridDesigner.Coordinate(0,0);
-        var horizon = PovGridDesigner.GetNode(PovGridDesigner.shapeId[PovGridDesigner.shapeIdEnum.Horizon]);
-        var document = PovGridDesigner.GetNode(PovGridDesigner.shapeId[PovGridDesigner.shapeIdEnum.Document]);
+        var shapeCoords = new GSDesigner.Coordinate(0,0);
+        var horizon = GSDesigner.GetNode(GSDesigner.shapeId[GSDesigner.shapeIdEnum.Horizon]);
+        var document = GSDesigner.GetNode(GSDesigner.shapeId[GSDesigner.shapeIdEnum.Document]);
 
         for(var i =0; i < 3; i++)
         {
             switch(i)
             {
-                case PovGridDesigner.shapeIdEnum.VP1:
+                case GSDesigner.shapeIdEnum.VP1:
                     //place on horizon, to left of document
                     shapeCoords.y = 50; //horizon.getAttrs().points[0].y;
-                    shapeCoords.x = parseFloat(document.getPosition().x) + PovGridDesigner.VPAttributes.radius;
+                    shapeCoords.x = parseFloat(document.getPosition().x) + GSDesigner.VPAttributes.radius;
                     break;
-                case PovGridDesigner.shapeIdEnum.VP2:
+                case GSDesigner.shapeIdEnum.VP2:
                     //place on horizon, to right of document
                     shapeCoords.y = 50; //horizon.getAttrs().points[0].y;
                     shapeCoords.y = 50; //horizon.getAttrs().points[0].y;
-                    shapeCoords.x = parseFloat(document.getPosition().x) + parseFloat(document.getWidth()) - PovGridDesigner.VPAttributes.radius;
+                    shapeCoords.x = parseFloat(document.getPosition().x) + parseFloat(document.getWidth()) - GSDesigner.VPAttributes.radius;
                     break;
-                case PovGridDesigner.shapeIdEnum.VP3:
+                case GSDesigner.shapeIdEnum.VP3:
                     //place in center, bottom of document
-                    shapeCoords.y = (parseFloat(document.getPosition().y) + parseFloat(document.getHeight())) - PovGridDesigner.VPAttributes.radius ;
-                    shapeCoords.x = parseFloat(document.getPosition().x) + ((parseFloat(document.getWidth()) / 2) - (PovGridDesigner.VPAttributes.radius / 2));
+                    shapeCoords.y = (parseFloat(document.getPosition().y) + parseFloat(document.getHeight())) - GSDesigner.VPAttributes.radius ;
+                    shapeCoords.x = parseFloat(document.getPosition().x) + ((parseFloat(document.getWidth()) / 2) - (GSDesigner.VPAttributes.radius / 2));
                     break;
             }
 
@@ -286,18 +286,18 @@ function CreateVanishingPoint(shapeCoords, enumId)
 
     try
     {
-        if(PovGridDesigner.MainStage != undefined)
+        if(GSDesigner.MainStage != undefined)
         {
-            var vpGroup = PovGridDesigner.GetNode(PovGridDesigner.groupId[enumId]);
+            var vpGroup = GSDesigner.GetNode(GSDesigner.groupId[enumId]);
             var vPoint = new Kinetic.Circle({
                 x: shapeCoords.x,
                 y: shapeCoords.y,
-                radius: PovGridDesigner.VPAttributes.radius,
-                fill: PovGridDesigner.VPAttributes.fillColor,
-                stroke: PovGridDesigner.VPAttributes.strokeColor,
-                strokeWidth: PovGridDesigner.VPAttributes.strokeWidth,
-                opacity: PovGridDesigner.VPAttributes.opacity,
-                id: PovGridDesigner.shapeId[enumId],
+                radius: GSDesigner.VPAttributes.radius,
+                fill: GSDesigner.VPAttributes.fillColor,
+                stroke: GSDesigner.VPAttributes.strokeColor,
+                strokeWidth: GSDesigner.VPAttributes.strokeWidth,
+                opacity: GSDesigner.VPAttributes.opacity,
+                id: GSDesigner.shapeId[enumId],
                 name: 'Vanishing Point',
                 visible: true,
                 draggable: false,
@@ -311,13 +311,13 @@ function CreateVanishingPoint(shapeCoords, enumId)
 
             var numberLabel = enumId + 1;
             var simpleText = new Kinetic.Text({
-                x: shapeCoords.x - (PovGridDesigner.VPAttributes.radius/2),
-                y: shapeCoords.y - (PovGridDesigner.VPAttributes.radius/2),
+                x: shapeCoords.x - (GSDesigner.VPAttributes.radius/2),
+                y: shapeCoords.y - (GSDesigner.VPAttributes.radius/2),
                 text: numberLabel.toString(),
                 fontSize: 14,
                 fontFamily: 'Courier',
                 fontStyle: 'bold',
-                width: PovGridDesigner.VPAttributes.radius,
+                width: GSDesigner.VPAttributes.radius,
                 align: 'center',
                 fill: 'black'
             });
@@ -327,12 +327,12 @@ function CreateVanishingPoint(shapeCoords, enumId)
 
             /** Event binding for vanishing point group (where needed) */
             simpleText.on('click', function(){
-                PovGridDesigner.setSelectedVP(vpGroup);
+                GSDesigner.setSelectedVP(vpGroup);
                 vpGroup.setZIndex(3);
             });
 
             vpGroup.on('click touchstart', function(){
-                  PovGridDesigner.setSelectedVP(this);
+                  GSDesigner.setSelectedVP(this);
             });
 
             /*
@@ -341,35 +341,35 @@ function CreateVanishingPoint(shapeCoords, enumId)
                 @date: 8/14/13
              */
             vpGroup.on('mouseup touchend', function(){
-                var node = PovGridDesigner.GetNode('txtVPPos');
+                var node = GSDesigner.GetNode('txtVPPos');
 
                 node.setText('x = ' + this.getAbsolutePosition().x + ' | y = ' + this.getAbsolutePosition().y);
             });
 
             vPoint.on('mouseover touchstart', function(){
-                this.setFill(PovGridDesigner.VPAttributes.hoverFillColor);
+                this.setFill(GSDesigner.VPAttributes.hoverFillColor);
                 this.setShadowEnabled(true);
                 vpGroup.setZIndex(3);
-                PovGridDesigner.MainLayer.draw();
+                GSDesigner.MainLayer.draw();
             });
 
             simpleText.on('mouseover touchstart', function(){
-                vPoint.setFill(PovGridDesigner.VPAttributes.hoverFillColor);
+                vPoint.setFill(GSDesigner.VPAttributes.hoverFillColor);
                 vPoint.setShadowEnabled(true);
                 vpGroup.setZIndex(3);
-                PovGridDesigner.MainLayer.draw();
+                GSDesigner.MainLayer.draw();
             });
 
             vPoint.on('mouseout', function(){
-                this.setFill(PovGridDesigner.VPAttributes.fillColor);
+                this.setFill(GSDesigner.VPAttributes.fillColor);
                 this.setShadowEnabled(false);
-                PovGridDesigner.MainLayer.draw();
+                GSDesigner.MainLayer.draw();
             });
 
             simpleText.on('mouseout', function(){
-                vPoint.setFill(PovGridDesigner.VPAttributes.fillColor);
+                vPoint.setFill(GSDesigner.VPAttributes.fillColor);
                 vPoint.setShadowEnabled(false);
-                PovGridDesigner.MainLayer.draw();
+                GSDesigner.MainLayer.draw();
             });
             
             /*
@@ -409,7 +409,7 @@ function SetupStage()
         var stageWidth = stageParent.clientWidth;
         var stageHeight = stageParent.clientHeight;
 
-        PovGridDesigner.MainStage = new Kinetic.Stage({
+        GSDesigner.MainStage = new Kinetic.Stage({
             container: "canvasContainer",
             id: 'stgMain',
             width: stageWidth,
@@ -417,15 +417,15 @@ function SetupStage()
             draggable: true
         });
 
-        PovGridDesigner.MainLayer = new Kinetic.Layer({
+        GSDesigner.MainLayer = new Kinetic.Layer({
             id: 'lyrMain'
         });
 
-        PovGridDesigner.BaseLayer = new Kinetic.Layer({
+        GSDesigner.BaseLayer = new Kinetic.Layer({
             id: 'lyrBase'
         });
 
-        PovGridDesigner.TouchLayer = new Kinetic.Layer({
+        GSDesigner.TouchLayer = new Kinetic.Layer({
             id: 'lyrTouch'
         });
 
@@ -434,9 +434,9 @@ function SetupStage()
             @author: John.Fenlon
             @date: 8/14/13
          */
-        PovGridDesigner.MainLayer.on('click', function(evt){
+        GSDesigner.MainLayer.on('click', function(evt){
             var shape = evt.targetNode;
-            var node = PovGridDesigner.GetNode('txtSelected');
+            var node = GSDesigner.GetNode('txtSelected');
             node.setText(shape.getName());
 
         });
@@ -448,27 +448,27 @@ function SetupStage()
          */
         var zoom = function(e) {
             var zoomAmount = e.wheelDeltaY*0.0005;
-            var newCoords = new PovGridDesigner.Coordinate();
-            newCoords.x = PovGridDesigner.BaseLayer.getPosition().x - zoomAmount;
-            newCoords.y = PovGridDesigner.BaseLayer.getPosition().y - zoomAmount;
-            PovGridDesigner.BaseLayer.setScale(PovGridDesigner.BaseLayer.getScale().x+zoomAmount)
-            PovGridDesigner.MainLayer.setScale(PovGridDesigner.MainLayer.getScale().x+zoomAmount)
-            PovGridDesigner.BaseLayer.setPosition(newCoords);
-            PovGridDesigner.MainStage.draw();
+            var newCoords = new GSDesigner.Coordinate();
+            newCoords.x = GSDesigner.BaseLayer.getPosition().x - zoomAmount;
+            newCoords.y = GSDesigner.BaseLayer.getPosition().y - zoomAmount;
+            GSDesigner.BaseLayer.setScale(GSDesigner.BaseLayer.getScale().x+zoomAmount)
+            GSDesigner.MainLayer.setScale(GSDesigner.MainLayer.getScale().x+zoomAmount)
+            GSDesigner.BaseLayer.setPosition(newCoords);
+            GSDesigner.MainStage.draw();
         }
 
-        PovGridDesigner.BaseLayer.setOffset(PovGridDesigner.BaseLayer.getWidth()/2,PovGridDesigner.BaseLayer.getHeight()/2);
+        GSDesigner.BaseLayer.setOffset(GSDesigner.BaseLayer.getWidth()/2,GSDesigner.BaseLayer.getHeight()/2);
 
-        PovGridDesigner.MainStage.add(PovGridDesigner.BaseLayer);
-        PovGridDesigner.MainStage.add(PovGridDesigner.MainLayer);
-        PovGridDesigner.MainStage.add(PovGridDesigner.TouchLayer);
+        GSDesigner.MainStage.add(GSDesigner.BaseLayer);
+        GSDesigner.MainStage.add(GSDesigner.MainLayer);
+        GSDesigner.MainStage.add(GSDesigner.TouchLayer);
 
         /*
             Todo - Add touch-zoom functionality
             @author: John.Fenlon
             @date: 8/14/13
          */
-        PovGridDesigner.MainStage.getContent().addEventListener('touchmove', function(evt) {
+        GSDesigner.MainStage.getContent().addEventListener('touchmove', function(evt) {
             var touch1 = evt.touches[0];
             var touch2 = evt.touches[1];
 
@@ -495,7 +495,7 @@ function SetupStage()
 
         document.addEventListener("mousewheel", zoom, false);
 
-        PovGridDesigner.MainStage.getContent().addEventListener('touchend', function() {
+        GSDesigner.MainStage.getContent().addEventListener('touchend', function() {
             lastDist = 0;
         }, false);
 
@@ -523,7 +523,7 @@ function CreateDocument(docInit)
 
     try
     {
-        var documentObj = (typeof docInit === "undefined") ? new PovGridDesigner.DocumentObject(docInit) : docInit;
+        var documentObj = (typeof docInit === "undefined") ? new GSDesigner.DocumentObject(docInit) : docInit;
 
         /** document size input */
         var fldWidth = getDomElement('tbWidth');
@@ -536,15 +536,15 @@ function CreateDocument(docInit)
         }
 
         var kjsMainGroup = new Kinetic.Group({
-            id: PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.Main]
+            id: GSDesigner.groupId[GSDesigner.groupIdEnum.Main]
         });
 
         // This is the 'document' shape
         var kjsDocument = new Kinetic.Rect({
-            id: PovGridDesigner.shapeId[PovGridDesigner.shapeIdEnum.Document],
+            id: GSDesigner.shapeId[GSDesigner.shapeIdEnum.Document],
             name: documentObj.name,
-            x: (PovGridDesigner.MainStage.attrs.width - documentObj.width) / 2,
-            y: (PovGridDesigner.MainStage.attrs.height - documentObj.height) / 2,
+            x: (GSDesigner.MainStage.attrs.width - documentObj.width) / 2,
+            y: (GSDesigner.MainStage.attrs.height - documentObj.height) / 2,
             width: documentObj.width,
             height: documentObj.height,
             fill: documentObj.backgroundColor,
@@ -562,9 +562,9 @@ function CreateDocument(docInit)
 
 
         // add the group to the layer
-        PovGridDesigner.BaseLayer.add(kjsMainGroup);
+        GSDesigner.BaseLayer.add(kjsMainGroup);
 
-        PovGridDesigner.MainStage.draw();
+        GSDesigner.MainStage.draw();
 
         results = 1;
     }
@@ -589,18 +589,18 @@ function UpdateLineOpacity()
     {
         for(var g = 1; g < 4; g++)
         {
-            var group = PovGridDesigner.GetNode("gpPerspLines" + g);
+            var group = GSDesigner.GetNode("gpPerspLines" + g);
 
             var children = group.getChildren();
 
             for(var l = 0; l < children.length; l++)
             {
-                children[l].setOpacity(PovGridDesigner.getLineOpacity());
+                children[l].setOpacity(GSDesigner.getLineOpacity());
             }
 
             group.draw();
             group.getParent().draw();
-            PovGridDesigner.MainLayer.draw();
+            GSDesigner.MainLayer.draw();
         }
     }
     catch (ex)
@@ -628,33 +628,33 @@ function UpdateLineDensity()
     {
         var perspGroup = Object.create(null);
         var vpGroup = Object.create(null);
-        var lineCount = PovGridDesigner.getLineDensity();
+        var lineCount = GSDesigner.getLineDensity();
         var angleIncrement = 360 / (lineCount * 2);
-        var stageDiag = getDistanceBetweenPoints(new PovGridDesigner.Coordinate(0,PovGridDesigner.MainStage.getHeight()), new PovGridDesigner.Coordinate(PovGridDesigner.MainStage.getWidth(),0));
+        var stageDiag = getDistanceBetweenPoints(new GSDesigner.Coordinate(0,GSDesigner.MainStage.getHeight()), new GSDesigner.Coordinate(GSDesigner.MainStage.getWidth(),0));
 
         for(var g = 1; g < 4; g++)
         {
-            perspGroup = PovGridDesigner.GetNode("gpPerspLines" + g);
-            vpGroup = PovGridDesigner.GetNode("gpVanishPoint" + g);
+            perspGroup = GSDesigner.GetNode("gpPerspLines" + g);
+            vpGroup = GSDesigner.GetNode("gpVanishPoint" + g);
 
             if(perspGroup.hasChildren())
                 perspGroup.destroyChildren();
 
-            PovGridDesigner.MainLayer.draw();
+            GSDesigner.MainLayer.draw();
 
-            var vanishingPoint = PovGridDesigner.GetNode("shpVP" + g);
+            var vanishingPoint = GSDesigner.GetNode("shpVP" + g);
             var perspectiveLine = [];
             var angle = 0;
-            var gridLineColor = PovGridDesigner.getNextGridLineColor(g-1); // grid color is a zero-based array
+            var gridLineColor = GSDesigner.getNextGridLineColor(g-1); // grid color is a zero-based array
 
             for(var n = 0; n < lineCount; n++)
             {
-                var endPoint = getSpokeLineCoords(stageDiag, new PovGridDesigner.Coordinate(vanishingPoint.getPosition().x, vanishingPoint.getPosition().y), Math.abs(angle));
+                var endPoint = getSpokeLineCoords(stageDiag, new GSDesigner.Coordinate(vanishingPoint.getPosition().x, vanishingPoint.getPosition().y), Math.abs(angle));
 
                 var line = new Kinetic.Line({
                     points: [endPoint.x1,endPoint.y1,endPoint.x2,endPoint.y2],
                     stroke: gridLineColor,
-                    strokeWidth: PovGridDesigner.GeneralShapeAttributes.strokeWidth,
+                    strokeWidth: GSDesigner.GeneralShapeAttributes.strokeWidth,
                     opacity: 0.6,
                     id: 'perpectiveLines_' + g + '_' + n,
                     draggable: false
@@ -673,7 +673,7 @@ function UpdateLineDensity()
             perspGroup.setVisible(true);
         }
 
-        PovGridDesigner.MainLayer.draw();
+        GSDesigner.MainLayer.draw();
     }
     catch (ex)
     {
@@ -698,58 +698,58 @@ function CreateVanishingPointGrid(groupCoords, vpEnumId)
 
     try
     {
-        var lineCount = parseInt(PovGridDesigner.getLineDensity());
+        var lineCount = parseInt(GSDesigner.getLineDensity());
         var angleIncrement = 360 / (lineCount * 2);
         var vpGroup = Object.create(null);
         var perspGroup = Object.create(null);
 
         switch(vpEnumId)
         {
-            case PovGridDesigner.shapeIdEnum.VP1:
+            case GSDesigner.shapeIdEnum.VP1:
                 vpGroup = new Kinetic.Group({
-                    id: PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.VanishPoint1],
+                    id: GSDesigner.groupId[GSDesigner.groupIdEnum.VanishPoint1],
                     draggable: true,
                     visible: false
                 });
 
                 perspGroup =  new Kinetic.Group({
-                    id: PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.PerspLines1],
+                    id: GSDesigner.groupId[GSDesigner.groupIdEnum.PerspLines1],
                     draggable: true
                 });
 
                 break;
-            case PovGridDesigner.shapeIdEnum.VP2:
+            case GSDesigner.shapeIdEnum.VP2:
                 vpGroup = new Kinetic.Group({
-                    id: PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.VanishPoint2],
+                    id: GSDesigner.groupId[GSDesigner.groupIdEnum.VanishPoint2],
                     draggable: true,
                     visible: false
                 });
 
                 perspGroup =  new Kinetic.Group({
-                    id: PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.PerspLines2],
+                    id: GSDesigner.groupId[GSDesigner.groupIdEnum.PerspLines2],
                     draggable: true
                 });
 
                 break;
-            case PovGridDesigner.shapeIdEnum.VP3:
+            case GSDesigner.shapeIdEnum.VP3:
                 vpGroup = new Kinetic.Group({
-                    id: PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.VanishPoint3],
+                    id: GSDesigner.groupId[GSDesigner.groupIdEnum.VanishPoint3],
                     draggable: true,
                     visible: false
                 });
 
                 perspGroup =  new Kinetic.Group({
-                    id: PovGridDesigner.groupId[PovGridDesigner.groupIdEnum.PerspLines3],
+                    id: GSDesigner.groupId[GSDesigner.groupIdEnum.PerspLines3],
                     draggable: true
                 });
 
                 break;
         }
 
-        var stageDiag = getDistanceBetweenPoints(new PovGridDesigner.Coordinate(0,PovGridDesigner.MainStage.getHeight()), new PovGridDesigner.Coordinate(PovGridDesigner.MainStage.getWidth(),0));
+        var stageDiag = getDistanceBetweenPoints(new GSDesigner.Coordinate(0,GSDesigner.MainStage.getHeight()), new GSDesigner.Coordinate(GSDesigner.MainStage.getWidth(),0));
         var perspectiveLine = [];
         var angle = 0;
-        var gridLineColor = PovGridDesigner.getNextGridLineColor(vpEnumId);
+        var gridLineColor = GSDesigner.getNextGridLineColor(vpEnumId);
 
         for(var n = 0; n < lineCount; n++)
         {
@@ -758,7 +758,7 @@ function CreateVanishingPointGrid(groupCoords, vpEnumId)
             var line = new Kinetic.Line({
                 points: [endPoint.x1,endPoint.y1,endPoint.x2,endPoint.y2],
                 stroke: gridLineColor,
-                strokeWidth: PovGridDesigner.GeneralShapeAttributes.strokeWidth,
+                strokeWidth: GSDesigner.GeneralShapeAttributes.strokeWidth,
                 opacity: 0.6,
                 id: 'perpectiveLines' + n,
                 draggable: false
@@ -776,7 +776,7 @@ function CreateVanishingPointGrid(groupCoords, vpEnumId)
 
         vpGroup.add(perspGroup);
 
-        PovGridDesigner.MainLayer.add(vpGroup);
+        GSDesigner.MainLayer.add(vpGroup);
     }
     catch (ex)
     {
@@ -802,18 +802,18 @@ function UpdateGridLineColors()
     {
         for(var g = 1; g < 4; g++)
         {
-            var group = PovGridDesigner.GetNode("gpPerspLines" + g);
+            var group = GSDesigner.GetNode("gpPerspLines" + g);
 
             var children = group.getChildren();
 
             for(var l = 0; l < children.length; l++)
             {
-               children[l].setStroke(PovGridDesigner.getNextGridLineColor(g-1));
+               children[l].setStroke(GSDesigner.getNextGridLineColor(g-1));
             }
 
             group.draw();
             group.getParent().draw();
-            PovGridDesigner.MainLayer.draw();
+            GSDesigner.MainLayer.draw();
         }
     }
     catch (ex)
@@ -847,11 +847,11 @@ function CreateTouchLayer()
         });
 
         // add the shape to the layer
-        PovGridDesigner.TouchLayer.add(kjsTouchCircle);
+        GSDesigner.TouchLayer.add(kjsTouchCircle);
 
         // use event delegation
-        PovGridDesigner.MainStage.on('mousedown touchstart', function(evt) {
-            PovGridDesigner.TouchLayer.clear();
+        GSDesigner.MainStage.on('mousedown touchstart', function(evt) {
+            GSDesigner.TouchLayer.clear();
             kjsTouchCircle.setVisible(true);
             kjsTouchCircle.setPosition(evt.layerX, evt.layerY);
             kjsTouchCircle.draw();
@@ -859,11 +859,11 @@ function CreateTouchLayer()
         });
 
         kjsTouchCircle.on('mousedown mouseout', function(evt) {
-            PovGridDesigner.TouchLayer.clear();
+            GSDesigner.TouchLayer.clear();
         });
 
-        PovGridDesigner.MainStage.on('mouseup touchend', function(evt) {
-            PovGridDesigner.TouchLayer.clear();
+        GSDesigner.MainStage.on('mouseup touchend', function(evt) {
+            GSDesigner.TouchLayer.clear();
         });
     }
     catch(ex)

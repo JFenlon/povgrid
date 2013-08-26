@@ -1,6 +1,6 @@
 /**
 *************************************************************
-* POVGRID Custom UI function library
+* Gridspective Custom UI function library
 * Created 04/03/2013
 *************************************************************
 */
