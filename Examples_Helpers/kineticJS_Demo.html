@@ -3,7 +3,7 @@
     <script src="../jQuery/jquery-1.9.1.js"></script>
     <script src="../jQuery/jquery.mobile-1.3.0.js"></script>
     <script src="../ThirdPartyJS/kineticJS/kinetic-v4.4.0.js"></script>
-    <script src="../CustomJS/povgrid_object_def.js"></script>
+    <script src="../Engine/gs_object_def.js"></script>
 
     <style>
       body 
@@ -161,13 +161,13 @@
             vp3.posY = hlineY;
 
             // Set params and pass object to getSegmentCoords
-            PovGridDesigner.segmentParams.staticPos = vX1;
-            PovGridDesigner.segmentParams.xIsStatic = true;
-            PovGridDesigner.segmentParams.point1 = vY1;
-            PovGridDesigner.segmentParams.point2 = vY2;
-            PovGridDesigner.segmentParams.segmentCount = 6;
+            GSDesigner.segmentParams.staticPos = vX1;
+            GSDesigner.segmentParams.xIsStatic = true;
+            GSDesigner.segmentParams.point1 = vY1;
+            GSDesigner.segmentParams.point2 = vY2;
+            GSDesigner.segmentParams.segmentCount = 6;
 
-            var pts = getSegmentCoords(PovGridDesigner.segmentParams);
+            var pts = getSegmentCoords(GSDesigner.segmentParams);
             var npts = getVPPolyGrid(pts,vp1.posX,hlineY);            
 
             // Let's draw a grid
@@ -256,12 +256,12 @@
                     hlineY = vp1.posY;
 
                     // Set params and pass object to getSegmentCoords
-                    PovGridDesigner.segmentParams.staticPos = vertLine.getPosition().x + vertLine.getPoints()[0].x;
-                    PovGridDesigner.segmentParams.xIsStatic = true;
-                    PovGridDesigner.segmentParams.point1 = vertLine.getPosition().y + vertLine.getPoints()[0].y;
-                    PovGridDesigner.segmentParams.point2 = ((vertLine.getPosition().y + vertLine.getPoints()[0].y) + fgrLineHeight);
+                    GSDesigner.segmentParams.staticPos = vertLine.getPosition().x + vertLine.getPoints()[0].x;
+                    GSDesigner.segmentParams.xIsStatic = true;
+                    GSDesigner.segmentParams.point1 = vertLine.getPosition().y + vertLine.getPoints()[0].y;
+                    GSDesigner.segmentParams.point2 = ((vertLine.getPosition().y + vertLine.getPoints()[0].y) + fgrLineHeight);
 
-                    var pts2 = getSegmentCoords(PovGridDesigner.segmentParams);
+                    var pts2 = getSegmentCoords(GSDesigner.segmentParams);
                     var newPts = getVPPolyGrid(pts2,vp1.posX,hlineY);                      
                     grid1.setPoints(newPts);
 

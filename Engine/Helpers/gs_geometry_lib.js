@@ -14,7 +14,7 @@
  */
 function getDistanceBetweenPoints(coordinate1, coordinate2)
 {
-    var mLine = new PovGridDesigner.LineCoordinate(coordinate1.x, coordinate1.y, coordinate2.x, coordinate2.y);
+    var mLine = new GSDesigner.LineCoordinate(coordinate1.x, coordinate1.y, coordinate2.x, coordinate2.y);
     var measuremeant = 0.0;
 
     try
@@ -63,11 +63,11 @@ function getAngleFromCoords(lineCoords)
 /**
  * Get the upper and lower bounds of the passed object (usually the rectangle page).
  * @param domObject
- * @returns {PovGridDesigner.LineCoordinate}
+ * @returns {GSDesigner.LineCoordinate}
  */
 function getBounds(domObject)
 {
-    var objBoundaries = new PovGridDesigner.LineCoordinate();
+    var objBoundaries = new GSDesigner.LineCoordinate();
 
     try
     {
@@ -143,11 +143,11 @@ function getVPPolyGrid(segmentPoints, vpX, vpY)
  * @param cRadius
  * @param ccCoords
  * @param lAngle
- * @returns {PovGridDesigner.LineCoordinate}
+ * @returns {GSDesigner.LineCoordinate}
  */
 function getSpokeLineCoords(cRadius, ccCoords, lAngle)
 {
-    var lineCoords = new PovGridDesigner.LineCoordinate();
+    var lineCoords = new GSDesigner.LineCoordinate();
 
     try
     {
@@ -190,11 +190,11 @@ function getSpokeLineCoords(cRadius, ccCoords, lAngle)
  * @param cRadius
  * @param ccCoords
  * @param lAngle
- * @returns {PovGridDesigner.Coordinate}
+ * @returns {GSDesigner.Coordinate}
  */
 function getPointsFromAngle(cRadius, ccCoords, lAngle)
 {
-    var resultCoords = new PovGridDesigner.Coordinate();
+    var resultCoords = new GSDesigner.Coordinate();
 
     try
     {
@@ -225,7 +225,7 @@ function getPointsFromAngle(cRadius, ccCoords, lAngle)
 function getSegmentCoords(segmentParams)
 {
     var nPoints = [];
-    var sLine = new PovGridDesigner.LineCoordinate();
+    var sLine = new GSDesigner.LineCoordinate();
 
     try
     {

@@ -1,7 +1,7 @@
-# PovGrid
+# Gridspective
 
 **iOS/Android** HTML5 Hybrid application for artists.
 
 **(Details coming soon...)**
 
-[Visit the PovGrid devlog](http://www.digitalife.org/PovGrid)
+[Visit the Gridspective devlog](http://gridspective.blogspot.com)

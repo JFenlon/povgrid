@@ -7,7 +7,7 @@
 
 /* Declaration */
 // Object literal declaration {namespace}
-var PovGridDesigner = {
+var GSDesigner = {
 
     // public property
     version_major             : 1,
@@ -34,7 +34,7 @@ var PovGridDesigner = {
     setSelectedVP: function(vpGroup)
     {
         this.CurrentSelectedVP = vpGroup;
-        var txtVP = PovGridDesigner.GetNode('txtCurrentVP');
+        var txtVP = GSDesigner.GetNode('txtCurrentVP');
 
         txtVP.setText(vpGroup.attrs.id);
     },
@@ -53,24 +53,24 @@ var PovGridDesigner = {
  * Main stage and layers
  * @type {*}
  */
-PovGridDesigner.MainStage = Object.create(null);
-PovGridDesigner.MainLayer = Object.create(null);
-PovGridDesigner.BaseLayer = Object.create(null);
-PovGridDesigner.TouchLayer = Object.create(null);
-PovGridDesigner.HorizonLayer = Object.create(null);
+GSDesigner.MainStage = Object.create(null);
+GSDesigner.MainLayer = Object.create(null);
+GSDesigner.BaseLayer = Object.create(null);
+GSDesigner.TouchLayer = Object.create(null);
+GSDesigner.HorizonLayer = Object.create(null);
 
-PovGridDesigner.DBRecordCount = Object.create(null);
-PovGridDesigner.GridColorIndex = Object.create(null);
-PovGridDesigner.CurrentLineDensity = Object.create(null);
-PovGridDesigner.CurrentLineOpacity = Object.create(null);
-PovGridDesigner.CurrentSelectedVP = Object.create(null);
-PovGridDesigner.segmentParams = Object.create(null);
-PovGridDesigner.VPAttributes = Object.create(null);
-PovGridDesigner.GeneralShapeAttributes = Object.create(null);
-PovGridDesigner.WorkspaceSettings = Object.create(null);
-PovGridDesigner.exportGridDocument = Object.create(null);
-PovGridDesigner.groupId = new Array("gpVanishPoint1", "gpVanishPoint2", "gpVanishPoint3", "gpTraceLines", "gpPerspLines1", "gpPerspLines2", "gpPerspLines3", "gpMain");
-PovGridDesigner.groupIdEnum = {
+GSDesigner.DBRecordCount = Object.create(null);
+GSDesigner.GridColorIndex = Object.create(null);
+GSDesigner.CurrentLineDensity = Object.create(null);
+GSDesigner.CurrentLineOpacity = Object.create(null);
+GSDesigner.CurrentSelectedVP = Object.create(null);
+GSDesigner.segmentParams = Object.create(null);
+GSDesigner.VPAttributes = Object.create(null);
+GSDesigner.GeneralShapeAttributes = Object.create(null);
+GSDesigner.WorkspaceSettings = Object.create(null);
+GSDesigner.exportGridDocument = Object.create(null);
+GSDesigner.groupId = new Array("gpVanishPoint1", "gpVanishPoint2", "gpVanishPoint3", "gpTraceLines", "gpPerspLines1", "gpPerspLines2", "gpPerspLines3", "gpMain");
+GSDesigner.groupIdEnum = {
         VanishPoint1 : 0,
         VanishPoint2 : 1,
         VanishPoint3 : 2,
@@ -80,8 +80,8 @@ PovGridDesigner.groupIdEnum = {
         PerspLines3  : 6,
         Main         : 7
     };
-PovGridDesigner.shapeId = new Array("shpVP1", "shpVP2", "shpVP3", "shpHorizon", "shpDocument", "shpTraceLine1", "shpTraceLine2","shpTouchAnim");
-PovGridDesigner.shapeIdEnum = {
+GSDesigner.shapeId = new Array("shpVP1", "shpVP2", "shpVP3", "shpHorizon", "shpDocument", "shpTraceLine1", "shpTraceLine2","shpTouchAnim");
+GSDesigner.shapeIdEnum = {
         VP1        : 0,
         VP2        : 1,
         VP3        : 2,
@@ -98,7 +98,7 @@ PovGridDesigner.shapeIdEnum = {
  *  This is the document that will get exported as an image after
  *  the grid and vanishing points are in place.
  */
-Object.defineProperties(PovGridDesigner.exportGridDocument, {
+Object.defineProperties(GSDesigner.exportGridDocument, {
     width:   {
         value:        1024
         , writable:     true
@@ -124,7 +124,7 @@ Object.defineProperties(PovGridDesigner.exportGridDocument, {
 /**
  * Tracking record count to manage memory quota
  */
-Object.defineProperties(PovGridDesigner.DBRecordCount, {
+Object.defineProperties(GSDesigner.DBRecordCount, {
     value:   {
         value:        0
         , writable:     true
@@ -136,7 +136,7 @@ Object.defineProperties(PovGridDesigner.DBRecordCount, {
 /**
  *  Parameter to keep track of the grid color index. This marks the first color in the sequence
  */
-Object.defineProperties(PovGridDesigner.GridColorIndex, {
+Object.defineProperties(GSDesigner.GridColorIndex, {
     value:   {
         value:        0
         , writable:     true
@@ -148,7 +148,7 @@ Object.defineProperties(PovGridDesigner.GridColorIndex, {
 /**
  * Line density for perspective grid
  */
-Object.defineProperties(PovGridDesigner.CurrentLineDensity, {
+Object.defineProperties(GSDesigner.CurrentLineDensity, {
     value:   {
         value:        5
         , writable:     true
@@ -160,7 +160,7 @@ Object.defineProperties(PovGridDesigner.CurrentLineDensity, {
 /**
  * Line density for perspective grid
  */
-Object.defineProperties(PovGridDesigner.CurrentLineOpacity, {
+Object.defineProperties(GSDesigner.CurrentLineOpacity, {
     value:   {
         value:        0.6
         , writable:     true
@@ -176,7 +176,7 @@ Object.defineProperties(PovGridDesigner.CurrentLineOpacity, {
 *  Point1 is top anchor point on verticle line.
 *  Point2 is bottom anchor point on verticle line.
 */
-Object.defineProperties(PovGridDesigner.segmentParams, {
+Object.defineProperties(GSDesigner.segmentParams, {
     staticPos:   { 
         value:        0
       , writable:     true
@@ -220,7 +220,7 @@ Object.defineProperties(PovGridDesigner.segmentParams, {
 *	isAutomatic: place and draw guides with assistance/assumptions based on perspective principles.
 *	hLineMidPoint: half-way point on horizon line.
 */
-Object.defineProperties(PovGridDesigner.WorkspaceSettings, {
+Object.defineProperties(GSDesigner.WorkspaceSettings, {
     isLandscape:   { 
         value:        1
       , writable:     true
@@ -278,7 +278,7 @@ Object.defineProperties(PovGridDesigner.WorkspaceSettings, {
     }            
 });
 
-Object.defineProperties(PovGridDesigner.GeneralShapeAttributes,
+Object.defineProperties(GSDesigner.GeneralShapeAttributes,
 {
     strokeWidth:
     {
@@ -308,7 +308,7 @@ Object.defineProperties(PovGridDesigner.GeneralShapeAttributes,
 /**
  * Default shape attributes for a vanishing point
  */
-Object.defineProperties(PovGridDesigner.VPAttributes,
+Object.defineProperties(GSDesigner.VPAttributes,
 {
     fillColor:
     {
@@ -369,7 +369,7 @@ Object.defineProperties(PovGridDesigner.VPAttributes,
  * @returns {{x: (*|number), y: (*|number)}}
  * @constructor
  */
-PovGridDesigner.Coordinate = function (xPos, yPos)
+GSDesigner.Coordinate = function (xPos, yPos)
 {
     return  {x: xPos || 0, y: yPos || 0};
 }
@@ -383,7 +383,7 @@ PovGridDesigner.Coordinate = function (xPos, yPos)
  * @returns {{x1: (*|number), y1: (*|number), x2: (*|number), y2: (*|number)}}
  * @constructor
  */
-PovGridDesigner.LineCoordinate = function (x1Pos, y1Pos, x2Pos, y2Pos)
+GSDesigner.LineCoordinate = function (x1Pos, y1Pos, x2Pos, y2Pos)
 {
     return {x1: x1Pos || 0, y1: y1Pos || 0, x2: x2Pos || 0, y2: y2Pos || 0};
 }
@@ -397,7 +397,7 @@ PovGridDesigner.LineCoordinate = function (x1Pos, y1Pos, x2Pos, y2Pos)
  * @returns {{width: *, height: *, backgroundColor: *, strokeColor: *, strokeWidth: *, shadowColor: *, shadowBlur: *, shadowOffset: *, shadowOpacity: *, shadowEnabled: *, name: *}}
  * @constructor
  */
-PovGridDesigner.DocumentObject = function (dWidth, dHeight, hexFillColor, docName)
+GSDesigner.DocumentObject = function (dWidth, dHeight, hexFillColor, docName)
 {
     documentName = docName || 'document';
     fillColorHex = hexFillColor || '#ffffff';
@@ -432,7 +432,7 @@ PovGridDesigner.DocumentObject = function (dWidth, dHeight, hexFillColor, docNam
  * @param shapeId
  * @returns {kinetic node}
  */
-PovGridDesigner.GetNode = function (shapeId)
+GSDesigner.GetNode = function (shapeId)
 {
     var node = Object.create(null);
 
@@ -460,13 +460,13 @@ PovGridDesigner.GetNode = function (shapeId)
  * @param objectID
  * @returns {boolean}
  */
-PovGridDesigner.NodeExists = function (objectID)
+GSDesigner.NodeExists = function (objectID)
 {
     var results = true;
 
     try
     {
-        var node = PovGridDesigner.GetNode(objectID);
+        var node = GSDesigner.GetNode(objectID);
 
         if(typeof node === 'undefined'){
             results = false;

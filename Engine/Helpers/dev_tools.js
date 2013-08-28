@@ -49,7 +49,7 @@ function CreateDebugWindow()
 
     label.add(new Kinetic.Text({
         y: -250,
-        text: 'App Version: ' + PovGridDesigner.version(),
+        text: 'App Version: ' + GSDesigner.version(),
         fontFamily: 'Courier',
         fontSize: 15,
         lineHeight: 1.2,
@@ -194,23 +194,23 @@ function CreateDebugWindow()
         id: 'lyrDev'
     });
 
-    PovGridDesigner.MainStage.on('mousemove', function(evt) {
-        var node = PovGridDesigner.GetNode("txtCoords");
+    GSDesigner.MainStage.on('mousemove', function(evt) {
+        var node = GSDesigner.GetNode("txtCoords");
 
         node.setText('x = ' + evt.x + ' | y = ' + evt.y);
-        PovGridDesigner.MainStage.draw();
+        GSDesigner.MainStage.draw();
     });
 
     devLayer.add(label);
-    PovGridDesigner.MainStage.add(devLayer);
+    GSDesigner.MainStage.add(devLayer);
 
-    PovGridDesigner.MainStage.draw();
+    GSDesigner.MainStage.draw();
 }
 
 
 function SetFieldData(fieldLableId, txtData)
 {
-    var node = PovGridDesigner.GetNode(fieldLableId);
+    var node = GSDesigner.GetNode(fieldLableId);
 
     node.setText(txtData);
 }
