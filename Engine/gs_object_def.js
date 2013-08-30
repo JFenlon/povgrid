@@ -54,10 +54,10 @@ var GSDesigner = {
  * @type {*}
  */
 GSDesigner.MainStage = Object.create(null);
-GSDesigner.MainLayer = Object.create(null);
 GSDesigner.BaseLayer = Object.create(null);
 GSDesigner.TouchLayer = Object.create(null);
 GSDesigner.HorizonLayer = Object.create(null);
+GSDesigner.VPLayer = Object.create(null);
 
 GSDesigner.DBRecordCount = Object.create(null);
 GSDesigner.GridColorIndex = Object.create(null);
@@ -481,5 +481,58 @@ GSDesigner.NodeExists = function (objectID)
     finally
     {
         return results;
+    }
+}
+
+/**
+ *
+ * @param vpGroup
+ * @returns {number}
+ * @constructor
+ */
+GSDesigner.GetLineDensity = function (vpGroup)
+{
+    var lineDensity = 0;
+
+    try
+    {
+        var lineNode = layer.get('Line');
+
+        if(lineDensity != null)
+            lineDensity = lineNode.toArray().length;
+    }
+    catch (ex)
+    {
+        lineDensity = 0;
+
+        //LOG ERROR
+        LogError(ex.ex.message + ' [' + arguments.arguments.callee.arguments.callee.name + ']');
+    }
+    finally
+    {
+        return lineDensity;
+    }
+}
+
+GSDesigner.GetPerspectiveCount = function ()
+{
+    var pCount = 0;
+
+    try
+    {
+        var nodes = GSDesigner.VPLayer.get('Group');
+
+        if(typeof nodes != 'undefined');
+            pCount = nodes.toArray().length;
+    }
+    catch (ex)
+    {
+        pCount = 0;
+        //LOG ERROR
+        LogError(ex.ex.message + ' [' + arguments.arguments.callee.arguments.callee.name + ']');
+    }
+    finally
+    {
+        return pCount;
     }
 }

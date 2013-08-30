@@ -39,6 +39,12 @@ function EventBinding()
         UpdateGridLineColors();
     });
 
+    /*
+        Todo - Clean up theme switching logic (sliders not updating correctly)
+        @author: John.Fenlon
+        @date: 8/30/13
+     */
+
     $("[name='link']").bind('click', function (event) {
         event.preventDefault();
         var theme = $(this).text();
@@ -61,7 +67,11 @@ function EventBinding()
 
 }
 
-function disableSelection(target){
+/**
+ * Prevents the user from selecting objects with mouse/touch
+ * @param target
+ */
+function disableSelection(target) {
     if (typeof target.onselectstart!="undefined") //IE route
         target.onselectstart=function(){return false;}
     else if (typeof target.style.MozUserSelect!="undefined") //Firefox route
@@ -96,9 +106,8 @@ function ToggleVanishPoint(shapeEnumId)
             var group = GSDesigner.GetNode(GSDesigner.groupId[shapeEnumId]);
 
             group.setVisible(!group.getVisible());
-            GSDesigner.MainLayer.draw();
+            GSDesigner.VPLayer.draw();
         }
-
     }
     catch (ex)
     {
@@ -153,6 +162,11 @@ function AddNewDocument()
     }
 }
 
+/**
+ * Determines new document parameters
+ * @returns {*}
+ * @constructor
+ */
 function GetNewDocSettings()
 {
     var docSettings = Object.create(null);
@@ -411,22 +425,37 @@ function SetupStage()
 
         GSDesigner.MainStage = new Kinetic.Stage({
             container: "canvasContainer",
-            id: 'stgMain',
+            id: 'stage',
             width: stageWidth,
             height: stageHeight - 30,
             draggable: true
         });
 
-        GSDesigner.MainLayer = new Kinetic.Layer({
-            id: 'lyrMain'
-        });
-
+        // Reserved for document shape only
         GSDesigner.BaseLayer = new Kinetic.Layer({
             id: 'lyrBase'
         });
 
+        // Reserved for horizon line only
+        GSDesigner.HorizonLayer = new Kinetic.Layer({
+            id: 'lyrHorizon'
+        });
+
+        // This layer is reserved for vanishing points
+        GSDesigner.VPLayer = new Kinetic.Layer({
+            id: 'lyrVP'
+        });
+
         GSDesigner.TouchLayer = new Kinetic.Layer({
             id: 'lyrTouch'
+        });
+
+        // keep v points 1 and/or 2 in sync with the horizon
+        GSDesigner.VPLayer.on('beforeDraw', function(evt) {
+            var isTwoPP = (GSDesigner.NodeExists());
+
+            if(evt.targetNode.attr.id == GSDesigner.groupIdEnum[GSDesigner.groupId.VanishPoint1] || evt.targetNode.attr.id == GSDesigner.groupIdEnum[GSDesigner.groupId.VanishPoint2])
+                UpdateHorizon();
         });
 
         /*
@@ -434,11 +463,10 @@ function SetupStage()
             @author: John.Fenlon
             @date: 8/14/13
          */
-        GSDesigner.MainLayer.on('click', function(evt){
+        GSDesigner.VPLayer.on('click', function(evt){
             var shape = evt.targetNode;
             var node = GSDesigner.GetNode('txtSelected');
             node.setText(shape.getName());
-
         });
 
         /*
@@ -446,7 +474,7 @@ function SetupStage()
             @author: John.Fenlon
             @date: 8/14/13
          */
-        var zoom = function(e) {
+/*        var zoom = function(e) {
             var zoomAmount = e.wheelDeltaY*0.0005;
             var newCoords = new GSDesigner.Coordinate();
             newCoords.x = GSDesigner.BaseLayer.getPosition().x - zoomAmount;
@@ -457,18 +485,19 @@ function SetupStage()
             GSDesigner.MainStage.draw();
         }
 
-        GSDesigner.BaseLayer.setOffset(GSDesigner.BaseLayer.getWidth()/2,GSDesigner.BaseLayer.getHeight()/2);
+        GSDesigner.BaseLayer.setOffset(GSDesigner.BaseLayer.getWidth()/2,GSDesigner.BaseLayer.getHeight()/2);*/
 
+        GSDesigner.MainStage.add(GSDesigner.AnchorLayer);
+        GSDesigner.MainStage.add(GSDesigner.HorizonLayer);
+        GSDesigner.MainStage.add(GSDesigner.VPLayer);
         GSDesigner.MainStage.add(GSDesigner.BaseLayer);
-        GSDesigner.MainStage.add(GSDesigner.MainLayer);
-        GSDesigner.MainStage.add(GSDesigner.TouchLayer);
 
         /*
             Todo - Add touch-zoom functionality
             @author: John.Fenlon
             @date: 8/14/13
          */
-        GSDesigner.MainStage.getContent().addEventListener('touchmove', function(evt) {
+/*        GSDesigner.MainStage.getContent().addEventListener('touchmove', function(evt) {
             var touch1 = evt.touches[0];
             var touch2 = evt.touches[1];
 
@@ -491,13 +520,13 @@ function SetupStage()
                 layer.draw();
                 lastDist = dist;
             }
-        }, false);
+        }, false);*/
 
-        document.addEventListener("mousewheel", zoom, false);
+        //document.addEventListener("mousewheel", zoom, false);
 
-        GSDesigner.MainStage.getContent().addEventListener('touchend', function() {
+/*        GSDesigner.MainStage.getContent().addEventListener('touchend', function() {
             lastDist = 0;
-        }, false);
+        }, false);*/
 
         results = 1;
     }
@@ -512,6 +541,24 @@ function SetupStage()
     {
         return results;
     }
+}
+
+
+function UpdateHorizon() {
+    var q = quad; // equivalent to vp1 & vp2 coordinates
+    var horizonLine = GSDesigner.HorizonLayer.get('#' + GSDesigner.shapeIdEnum[GSDesigner.shapeId.Horizon])[0];
+
+    if(GSDesigner.GetPerspectiveCount > 1)
+    {
+        horizonLine.setPoints([q.start.attrs.x, q.start.attrs.y, q.end.attrs.x, q.end.attrs.y]);
+    }
+    else
+    {
+        // single point perspective, we only move the line on the x axis
+        //horizonLine.setPoints([vp1 points]);
+    }
+
+    GSDesigner.HorizonLayer.draw();
 }
 
 /**
@@ -559,7 +606,6 @@ function CreateDocument(docInit)
 
         // add the shape to the group
         kjsMainGroup.add(kjsDocument);
-
 
         // add the group to the layer
         GSDesigner.BaseLayer.add(kjsMainGroup);
