@@ -13,8 +13,9 @@ var GSDesigner = {
     version_major             : 1,
     version_minor             : 0,
     version_revision          : 0,
-    GridColors          : ["#CC0000", "#00CCFF", "#6600CC", "#00CC00", "#FF00FF", "#663300", "#CC0066", "#0066FF", "#4A6E6E"],
+    GridColors                : ["#CC0000", "#00CCFF", "#6600CC", "#00CC00", "#FF00FF", "#663300", "#CC0066", "#0066FF", "#4A6E6E"],
     UI_theme_literal          : "data-theme",
+    Max_VP                    : 12,
 
     // public methods
     getNextGridLineColor: function(colorIncrement)
