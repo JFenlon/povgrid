@@ -294,7 +294,7 @@ function GenerateVanishingPoints()
  * @param enumId
  * @returns {boolean}
  */
-function CreateVanishingPoint(shapeCoords, enumId)
+function CreateSourceVanishPoint()
 {
     var isSuccess = false;
 
@@ -304,8 +304,8 @@ function CreateVanishingPoint(shapeCoords, enumId)
         {
             var vpGroup = GSDesigner.GetNode(GSDesigner.groupId[enumId]);
             var vPoint = new Kinetic.Circle({
-                x: shapeCoords.x,
-                y: shapeCoords.y,
+                x: 0,
+                y: 0,
                 radius: GSDesigner.VPAttributes.radius,
                 fill: GSDesigner.VPAttributes.fillColor,
                 stroke: GSDesigner.VPAttributes.strokeColor,
