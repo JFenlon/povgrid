@@ -70,27 +70,21 @@ GSDesigner.VPAttributes = Object.create(null);
 GSDesigner.GeneralShapeAttributes = Object.create(null);
 GSDesigner.WorkspaceSettings = Object.create(null);
 GSDesigner.exportGridDocument = Object.create(null);
-GSDesigner.groupId = new Array("gpVanishPoint1", "gpVanishPoint2", "gpVanishPoint3", "gpTraceLines", "gpPerspLines1", "gpPerspLines2", "gpPerspLines3", "gpMain");
+
+GSDesigner.groupId = new Array("gpVPSource","gpPerspectiveLines", "gpTraceLines", "gpMain");
 GSDesigner.groupIdEnum = {
-        VanishPoint1 : 0,
-        VanishPoint2 : 1,
-        VanishPoint3 : 2,
-        TraceLines   : 3,
-        PerspLines1  : 4,
-        PerspLines2  : 5,
-        PerspLines3  : 6,
-        Main         : 7
+        VanishPoint      : 0,
+        PerspectiveLines : 1,
+        TraceLines       : 2,
+        Main             : 3
     };
-GSDesigner.shapeId = new Array("shpVP1", "shpVP2", "shpVP3", "shpHorizon", "shpDocument", "shpTraceLine1", "shpTraceLine2","shpTouchAnim");
+GSDesigner.shapeId = new Array("shpHorizon", "shpDocument", "shpTraceLine1", "shpTraceLine2","shpTouchAnim");
 GSDesigner.shapeIdEnum = {
-        VP1        : 0,
-        VP2        : 1,
-        VP3        : 2,
-        Horizon    : 3,
-        Document   : 4,
-        TraceLine1 : 5,
-        TraceLine2 : 6,
-        TouchAnim  : 7
+        Horizon    : 0,
+        Document   : 1,
+        TraceLine1 : 2,
+        TraceLine2 : 3,
+        TouchAnim  : 4
 };
 
 // Object properties
@@ -521,6 +515,9 @@ GSDesigner.GetPerspectiveCount = function ()
 
     try
     {
+        // TODO - Update function call and 'get' calls so that we're only getting the perspective group for the selected VP group
+        // John 9/8/13
+
         var nodes = GSDesigner.VPLayer.get('Group');
 
         if(typeof nodes != 'undefined');
@@ -535,5 +532,50 @@ GSDesigner.GetPerspectiveCount = function ()
     finally
     {
         return pCount;
+    }
+}
+
+/**
+ * Find the next available sequential vp id
+ * @returns {number}
+ * @constructor
+ */
+GSDesigner.GetNextAvailableVP = function ()
+{
+    var vpNodeNumber = 1;
+
+    try
+    {
+        var groupNode = GSDesigner.VPLayer.get('.vanishingPoint');
+        var activeID = new Array();
+
+        for(var i = 0; i < groupNode.length; i++)
+        {
+            if(groupNode[i].attrs.id != GSDesigner.groupId[GSDesigner.groupIdEnum.VanishPoint])
+            {
+                activeID.push(groupNode[i].attrs.id.substring(3));
+            }
+        }
+
+        activeID.sort(function(a,b){return a-b});
+
+        for(var i = 0; i < activeID.length; i++)
+        {
+            if(i != parseInt(activeID[i]))
+            {
+                vpNodeNumber = parseInt(activeID[i]);
+                break;
+            }
+        }
+    }
+    catch (ex)
+    {
+        vpNodeNumber = -1;
+        //LOG ERROR
+        LogError(ex.ex.message + ' [' + arguments.arguments.callee.arguments.callee.name + ']');
+    }
+    finally
+    {
+        return vpNodeNumber;
     }
 }

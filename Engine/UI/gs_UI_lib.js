@@ -101,13 +101,14 @@ function ToggleVanishPoint(shapeEnumId)
 {
     try
     {
-        if(GSDesigner.NodeExists(GSDesigner.groupId[shapeEnumId]))
+/*        if(GSDesigner.NodeExists(GSDesigner.groupId[shapeEnumId]))
         {
             var group = GSDesigner.GetNode(GSDesigner.groupId[shapeEnumId]);
 
             group.setVisible(!group.getVisible());
             GSDesigner.VPLayer.draw();
-        }
+        }*/
+        AddNewVanishingPoint();
     }
     catch (ex)
     {
@@ -136,8 +137,8 @@ function AddNewDocument()
         if(CreateDocument(docSettings) < 0)
             throw new EvalError("create-main_layer-failed");
 
-        if(GenerateVanishingPoints() < 0)
-            throw new EvalError("generate-vpoints-failed");
+        if(!CreateSourceVanishPoint())
+            throw new EvalError("generate-vpsource-failed");
 
     }
     catch(ex)
@@ -202,7 +203,7 @@ function GetNewDocSettings()
  *
  * @returns {number}
  */
-function GenerateVanishingPoints()
+function AddNewVanishingPoint()
 {
     var results = 0;
 
@@ -243,6 +244,8 @@ function GenerateVanishingPoints()
         });
         kjsMainGroup.add(kjsHorizon);*/
 
+        var nextAvailable = GSDesigner.GetNextAvailableVP(); // call next available function
+
 
         // we need to create it
         var shapeCoords = new GSDesigner.Coordinate(0,0);
@@ -271,9 +274,9 @@ function GenerateVanishingPoints()
                     break;
             }
 
-            CreateVanishingPointGrid(shapeCoords, i);
-            CreateVanishingPoint(shapeCoords, i);
         }
+
+        CloneSourceVanishingPoint(nextAvailable, new GSDesigner.Coordinate(25,25));
     }
     catch(ex)
     {
@@ -289,10 +292,9 @@ function GenerateVanishingPoints()
 }
 
 /**
- *
- * @param initialCoords
- * @param enumId
+ * Creates the source vanishing point, grid lines and group to be cloned.
  * @returns {boolean}
+ * @constructor
  */
 function CreateSourceVanishPoint()
 {
@@ -302,7 +304,15 @@ function CreateSourceVanishPoint()
     {
         if(GSDesigner.MainStage != undefined)
         {
-            var vpGroup = GSDesigner.GetNode(GSDesigner.groupId[enumId]);
+            var vpGroup = new Kinetic.Group({
+                x: 0,
+                y: 0,
+                id: GSDesigner.groupId[GSDesigner.groupIdEnum.VanishPoint],
+                name: 'source',
+                draggable: true,
+                visible: true
+            });
+
             var vPoint = new Kinetic.Circle({
                 x: 0,
                 y: 0,
@@ -311,8 +321,8 @@ function CreateSourceVanishPoint()
                 stroke: GSDesigner.VPAttributes.strokeColor,
                 strokeWidth: GSDesigner.VPAttributes.strokeWidth,
                 opacity: GSDesigner.VPAttributes.opacity,
-                id: GSDesigner.shapeId[enumId],
-                name: 'Vanishing Point',
+                id: 'vpCircle',
+                name: 'vpCircle',
                 visible: true,
                 draggable: false,
                 shadowColor: '#00E600',
@@ -323,11 +333,11 @@ function CreateSourceVanishPoint()
                 shadowEnabled: false
             });
 
-            var numberLabel = enumId + 1;
             var simpleText = new Kinetic.Text({
-                x: shapeCoords.x - (GSDesigner.VPAttributes.radius/2),
-                y: shapeCoords.y - (GSDesigner.VPAttributes.radius/2),
-                text: numberLabel.toString(),
+                x: -1 * (GSDesigner.VPAttributes.radius / 2),
+                y: -1 * (GSDesigner.VPAttributes.radius / 2),
+                id: 'vpText',
+                text: '0',
                 fontSize: 14,
                 fontFamily: 'Courier',
                 fontStyle: 'bold',
@@ -336,6 +346,9 @@ function CreateSourceVanishPoint()
                 fill: 'black'
             });
 
+            var perpectiveGrid = CreatePerspectiveGrid(new GSDesigner.Coordinate(0,0));
+
+            vpGroup.add(perpectiveGrid);
             vpGroup.add(vPoint);
             vpGroup.add(simpleText);
 
@@ -364,26 +377,26 @@ function CreateSourceVanishPoint()
                 this.setFill(GSDesigner.VPAttributes.hoverFillColor);
                 this.setShadowEnabled(true);
                 vpGroup.setZIndex(3);
-                GSDesigner.MainLayer.draw();
+                GSDesigner.VPLayer.draw();
             });
 
             simpleText.on('mouseover touchstart', function(){
                 vPoint.setFill(GSDesigner.VPAttributes.hoverFillColor);
                 vPoint.setShadowEnabled(true);
                 vpGroup.setZIndex(3);
-                GSDesigner.MainLayer.draw();
+                GSDesigner.VPLayer.draw();
             });
 
             vPoint.on('mouseout', function(){
                 this.setFill(GSDesigner.VPAttributes.fillColor);
                 this.setShadowEnabled(false);
-                GSDesigner.MainLayer.draw();
+                GSDesigner.VPLayer.draw();
             });
 
             simpleText.on('mouseout', function(){
                 vPoint.setFill(GSDesigner.VPAttributes.fillColor);
                 vPoint.setShadowEnabled(false);
-                GSDesigner.MainLayer.draw();
+                GSDesigner.VPLayer.draw();
             });
             
             /*
@@ -391,6 +404,9 @@ function CreateSourceVanishPoint()
                 @author: John.Fenlon
                 @date: 8/14/13
              */
+
+            GSDesigner.VPLayer.add(vpGroup);
+            GSDesigner.VPLayer.draw();
 
             isSuccess = true;
         }
@@ -400,7 +416,6 @@ function CreateSourceVanishPoint()
         //LOG ERROR
         LogError(ex.message + ' [' + arguments.callee.name + ']');
         //Set results to negative
-        results = -1;
     }
     finally
     {
@@ -408,7 +423,51 @@ function CreateSourceVanishPoint()
     }
 }
 
+/**
+ * Clone the source vanishing point
+ * @param nodeId
+ * @param startingCoords
+ * @returns {number}
+ * @constructor
+ */
+function CloneSourceVanishingPoint(nodeId, startingCoords)
+{
+    var result = 0;
 
+    try
+    {
+        // TODO - Correct issue with not finding node after first clone
+        // John 9/8/13
+        
+        var sourceVP = GSDesigner.GetNode(GSDesigner.groupId[GSDesigner.groupIdEnum.VanishPoint]);
+        var newVP = sourceVP.clone({
+            id: 'grp' + nodeId,
+            name: 'vanishingPoint',
+            x: startingCoords.x,
+            y: startingCoords.y
+        });
+
+        // TODO - Fix the set text mothods here
+        // John 9/8/13
+        
+        var vpText = newVP.get("#vpText");
+
+        //vpText.setText(nodeId);
+
+        GSDesigner.VPLayer.add(newVP);
+        GSDesigner.VPLayer.draw();
+    }
+    catch (ex)
+    {
+        result = 0;
+        //LOG ERROR
+        LogError(ex.message + ' [' + arguments.callee.name + ']');
+    }
+    finally
+    {
+        return result;
+    }
+}
 
 /**
  * @return {number}
@@ -451,12 +510,12 @@ function SetupStage()
         });
 
         // keep v points 1 and/or 2 in sync with the horizon
-        GSDesigner.VPLayer.on('beforeDraw', function(evt) {
+/*        GSDesigner.VPLayer.on('beforeDraw', function(evt) {
             var isTwoPP = (GSDesigner.NodeExists());
 
-            if(evt.targetNode.attr.id == GSDesigner.groupIdEnum[GSDesigner.groupId.VanishPoint1] || evt.targetNode.attr.id == GSDesigner.groupIdEnum[GSDesigner.groupId.VanishPoint2])
+            if(evt.targetNode.attr.id == GSDesigner.groupIdEnum[GSDesigner.groupId.VanishPoint] || evt.targetNode.attr.id == GSDesigner.groupIdEnum[GSDesigner.groupId.VanishPoint2])
                 UpdateHorizon();
-        });
+        });*/
 
         /*
             Todo - DEBUG - REMOVE
@@ -487,10 +546,9 @@ function SetupStage()
 
         GSDesigner.BaseLayer.setOffset(GSDesigner.BaseLayer.getWidth()/2,GSDesigner.BaseLayer.getHeight()/2);*/
 
-        GSDesigner.MainStage.add(GSDesigner.AnchorLayer);
+        GSDesigner.MainStage.add(GSDesigner.BaseLayer);
         GSDesigner.MainStage.add(GSDesigner.HorizonLayer);
         GSDesigner.MainStage.add(GSDesigner.VPLayer);
-        GSDesigner.MainStage.add(GSDesigner.BaseLayer);
 
         /*
             Todo - Add touch-zoom functionality
@@ -736,66 +794,28 @@ function UpdateLineDensity()
 
 /**
  *
- * @param vpEnumId
+ * @returns {null}
+ * @constructor
  */
-function CreateVanishingPointGrid(groupCoords, vpEnumId)
+function CreatePerspectiveGrid(groupCoords)
 {
-    var results = 0;
+    var results = null;
 
     try
     {
         var lineCount = parseInt(GSDesigner.getLineDensity());
         var angleIncrement = 360 / (lineCount * 2);
-        var vpGroup = Object.create(null);
-        var perspGroup = Object.create(null);
+        var perspGroup;
 
-        switch(vpEnumId)
-        {
-            case GSDesigner.shapeIdEnum.VP1:
-                vpGroup = new Kinetic.Group({
-                    id: GSDesigner.groupId[GSDesigner.groupIdEnum.VanishPoint1],
-                    draggable: true,
-                    visible: false
-                });
-
-                perspGroup =  new Kinetic.Group({
-                    id: GSDesigner.groupId[GSDesigner.groupIdEnum.PerspLines1],
-                    draggable: true
-                });
-
-                break;
-            case GSDesigner.shapeIdEnum.VP2:
-                vpGroup = new Kinetic.Group({
-                    id: GSDesigner.groupId[GSDesigner.groupIdEnum.VanishPoint2],
-                    draggable: true,
-                    visible: false
-                });
-
-                perspGroup =  new Kinetic.Group({
-                    id: GSDesigner.groupId[GSDesigner.groupIdEnum.PerspLines2],
-                    draggable: true
-                });
-
-                break;
-            case GSDesigner.shapeIdEnum.VP3:
-                vpGroup = new Kinetic.Group({
-                    id: GSDesigner.groupId[GSDesigner.groupIdEnum.VanishPoint3],
-                    draggable: true,
-                    visible: false
-                });
-
-                perspGroup =  new Kinetic.Group({
-                    id: GSDesigner.groupId[GSDesigner.groupIdEnum.PerspLines3],
-                    draggable: true
-                });
-
-                break;
-        }
+        perspGroup =  new Kinetic.Group({
+            id: GSDesigner.groupId[GSDesigner.groupIdEnum.PerspectiveLines],
+            draggable: true
+        });
 
         var stageDiag = getDistanceBetweenPoints(new GSDesigner.Coordinate(0,GSDesigner.MainStage.getHeight()), new GSDesigner.Coordinate(GSDesigner.MainStage.getWidth(),0));
         var perspectiveLine = [];
         var angle = 0;
-        var gridLineColor = GSDesigner.getNextGridLineColor(vpEnumId);
+        var gridLineColor = GSDesigner.getNextGridLineColor(0);
 
         for(var n = 0; n < lineCount; n++)
         {
@@ -820,15 +840,12 @@ function CreateVanishingPointGrid(groupCoords, vpEnumId)
             perspGroup.add(perspectiveLine[n]);
         }
 
-        vpGroup.add(perspGroup);
-
-        GSDesigner.MainLayer.add(vpGroup);
+        results = perspGroup;
     }
     catch (ex)
     {
         //LOG ERROR
         LogError(ex.message + ' [' + arguments.callee.name + ']');
-        results = -1;
     }
     finally
     {
