@@ -14,11 +14,11 @@ function CreateDebugWindow()
 {
     /** TEST CODE */
     var label = new Kinetic.Label({
-        x: 15,
-        y: 320,
+        x: 0,
+        y: 380,
         height: 400,
-        opacity: 0.8,
-        draggable: true
+        opacity: 0.5,
+        draggable: false
     });
 
     // add a tag to the label
@@ -39,11 +39,11 @@ function CreateDebugWindow()
         text: 'Development Details',
         fontFamily: 'Courier',
         fontStyle: 'bold',
-        fontSize: 20,
+        fontSize: 16,
         lineHeight: 1.2,
         padding: 10,
         fill: 'green',
-        width: 350,
+        width: 275,
         height: 600
     }));
 
@@ -51,7 +51,7 @@ function CreateDebugWindow()
         y: -250,
         text: 'App Version: ' + GSDesigner.version(),
         fontFamily: 'Courier',
-        fontSize: 15,
+        fontSize: 12,
         lineHeight: 1.2,
         padding: 10,
         fill: 'blue'
@@ -61,7 +61,7 @@ function CreateDebugWindow()
         y: -220,
         text: 'Mouse Coords:',
         fontFamily: 'Courier',
-        fontSize: 15,
+        fontSize: 12,
         lineHeight: 1.2,
         padding: 10,
         fill: 'blue'
@@ -71,7 +71,7 @@ function CreateDebugWindow()
         y: -190,
         text: 'Document Size:',
         fontFamily: 'Courier',
-        fontSize: 15,
+        fontSize: 12,
         lineHeight: 1.2,
         padding: 10,
         fill: 'blue'
@@ -81,7 +81,7 @@ function CreateDebugWindow()
         y: -160,
         text: 'Current VP:',
         fontFamily: 'Courier',
-        fontSize: 15,
+        fontSize: 12,
         lineHeight: 1.2,
         padding: 10,
         fill: 'blue'
@@ -91,7 +91,7 @@ function CreateDebugWindow()
         y: -130,
         text: 'VP Position:',
         fontFamily: 'Courier',
-        fontSize: 15,
+        fontSize: 12,
         lineHeight: 1.2,
         padding: 10,
         fill: 'blue'
@@ -101,7 +101,7 @@ function CreateDebugWindow()
         y: -100,
         text: 'Horizon:',
         fontFamily: 'Courier',
-        fontSize: 15,
+        fontSize: 12,
         lineHeight: 1.2,
         padding: 10,
         fill: 'blue'
@@ -111,7 +111,7 @@ function CreateDebugWindow()
         y: -70,
         text: 'Selected Obj:',
         fontFamily: 'Courier',
-        fontSize: 15,
+        fontSize: 12,
         lineHeight: 1.2,
         padding: 10,
         fill: 'blue'
@@ -124,7 +124,7 @@ function CreateDebugWindow()
         text: 'x = 0000 | y = 0000',
         id: 'txtCoords',
         fontFamily: 'Courier',
-        fontSize: 15,
+        fontSize: 12,
         lineHeight: 1.2,
         padding: 10,
         fill: 'red'
@@ -136,7 +136,7 @@ function CreateDebugWindow()
         text: '...',
         id: 'txtDocSize',
         fontFamily: 'Courier',
-        fontSize: 15,
+        fontSize: 12,
         lineHeight: 1.2,
         padding: 10,
         fill: 'red'
@@ -148,7 +148,7 @@ function CreateDebugWindow()
         text: '...',
         id: 'txtCurrentVP',
         fontFamily: 'Courier',
-        fontSize: 15,
+        fontSize: 12,
         lineHeight: 1.2,
         padding: 10,
         fill: 'red'
@@ -160,7 +160,7 @@ function CreateDebugWindow()
         text: '...',
         id: 'txtVPPos',
         fontFamily: 'Courier',
-        fontSize: 15,
+        fontSize: 12,
         lineHeight: 1.2,
         padding: 10,
         fill: 'red'
@@ -172,7 +172,7 @@ function CreateDebugWindow()
         text: '...',
         id: 'txtMidPoint',
         fontFamily: 'Courier',
-        fontSize: 15,
+        fontSize: 12,
         lineHeight: 1.2,
         padding: 10,
         fill: 'red'
@@ -184,7 +184,7 @@ function CreateDebugWindow()
         text: '...',
         id: 'txtSelected',
         fontFamily: 'Courier',
-        fontSize: 15,
+        fontSize: 12,
         lineHeight: 1.2,
         padding: 10,
         fill: 'red'

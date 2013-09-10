@@ -352,61 +352,10 @@ function CreateSourceVanishPoint()
             vpGroup.add(vPoint);
             vpGroup.add(simpleText);
 
-            /** Event binding for vanishing point group (where needed) */
-            simpleText.on('click', function(){
-                GSDesigner.setSelectedVP(vpGroup);
-                vpGroup.setZIndex(3);
-            });
-
-            vpGroup.on('click touchstart', function(){
-                  GSDesigner.setSelectedVP(this);
-            });
-
-            /*
-                Todo - DEBUG - REMOVE
-                @author: John.Fenlon
-                @date: 8/14/13
-             */
-            vpGroup.on('mouseup touchend', function(){
-                var node = GSDesigner.GetNode('txtVPPos');
-
-                node.setText('x = ' + this.getAbsolutePosition().x + ' | y = ' + this.getAbsolutePosition().y);
-            });
-
-            vPoint.on('mouseover touchstart', function(){
-                this.setFill(GSDesigner.VPAttributes.hoverFillColor);
-                this.setShadowEnabled(true);
-                vpGroup.setZIndex(3);
-                GSDesigner.VPLayer.draw();
-            });
-
-            simpleText.on('mouseover touchstart', function(){
-                vPoint.setFill(GSDesigner.VPAttributes.hoverFillColor);
-                vPoint.setShadowEnabled(true);
-                vpGroup.setZIndex(3);
-                GSDesigner.VPLayer.draw();
-            });
-
-            vPoint.on('mouseout', function(){
-                this.setFill(GSDesigner.VPAttributes.fillColor);
-                this.setShadowEnabled(false);
-                GSDesigner.VPLayer.draw();
-            });
-
-            simpleText.on('mouseout', function(){
-                vPoint.setFill(GSDesigner.VPAttributes.fillColor);
-                vPoint.setShadowEnabled(false);
-                GSDesigner.VPLayer.draw();
-            });
-            
-            /*
-                Todo - Add binding to handle horizon line updates upon VP1,VP2 drag & drop
-                @author: John.Fenlon
-                @date: 8/14/13
-             */
-
             GSDesigner.VPLayer.add(vpGroup);
             GSDesigner.VPLayer.draw();
+
+            GSDesigner.VPGrpSource = vpGroup;
 
             isSuccess = true;
         }
@@ -436,25 +385,77 @@ function CloneSourceVanishingPoint(nodeId, startingCoords)
 
     try
     {
-        // TODO - Correct issue with not finding node after first clone
-        // John 9/8/13
-        
-        var sourceVP = GSDesigner.GetNode(GSDesigner.groupId[GSDesigner.groupIdEnum.VanishPoint]);
-        var newVP = sourceVP.clone({
+        var newVP = GSDesigner.VPGrpSource.clone({
             id: 'grp' + nodeId,
             name: 'vanishingPoint',
             x: startingCoords.x,
             y: startingCoords.y
         });
 
-        // TODO - Fix the set text mothods here
-        // John 9/8/13
-        
-        var vpText = newVP.get("#vpText");
-
-        //vpText.setText(nodeId);
-
         GSDesigner.VPLayer.add(newVP);
+
+        var vpText = undefined;
+        var vpCircle = undefined;
+
+        for(var i = 0; i < newVP.children.length; i++)
+        {
+            if(newVP.children[i].attrs.id == 'vpText')
+            {
+                vpText = newVP.children[i];
+                vpText.setText(nodeId);
+            }
+            if(newVP.children[i].attrs.id == 'vpCircle')
+            {
+                vpCircle = newVP.children[i];
+            }
+        }
+
+        // TODO - Replace these events when touch layer objects are implemented. Touch layer will handle all touch/drag events
+        // John 9/9/13
+        
+        /** Event binding for vanishing point group (where needed) */
+        vpText.on('click', function(){
+            GSDesigner.setSelectedVP(newVP);
+            newVP.setZIndex(3);
+        });
+
+        newVP.on('click touchstart', function(){
+            GSDesigner.setSelectedVP(this);
+        });
+
+        /*
+         Todo - DEBUG - REMOVE
+         @author: John.Fenlon
+         @date: 8/14/13
+         */
+        newVP.on('mouseup touchend', function(){
+            var node = GSDesigner.GetNode('txtVPPos');
+
+            node.setText('x = ' + this.getAbsolutePosition().x + ' | y = ' + this.getAbsolutePosition().y);
+        });
+
+        vpCircle.on('mouseover touchstart', function(){
+            this.setFill(GSDesigner.VPAttributes.hoverFillColor);
+            this.setShadowEnabled(true);
+            newVP.setZIndex(3);
+            GSDesigner.VPLayer.draw();
+        });
+
+        vpText.on('mouseover touchstart', function(){
+            vpCircle.setFill(GSDesigner.VPAttributes.hoverFillColor);
+            vpCircle.setShadowEnabled(true);
+            newVP.setZIndex(3);
+            GSDesigner.VPLayer.draw();
+        });
+
+        vpCircle.on('mouseout', function(){
+            this.setFill(GSDesigner.VPAttributes.fillColor);
+            this.setShadowEnabled(false);
+            GSDesigner.VPLayer.draw();
+        });
+
+
+
         GSDesigner.VPLayer.draw();
     }
     catch (ex)

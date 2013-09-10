@@ -59,6 +59,7 @@ GSDesigner.BaseLayer = Object.create(null);
 GSDesigner.TouchLayer = Object.create(null);
 GSDesigner.HorizonLayer = Object.create(null);
 GSDesigner.VPLayer = Object.create(null);
+GSDesigner.VPGrpSource = Object.create(null);
 
 GSDesigner.DBRecordCount = Object.create(null);
 GSDesigner.GridColorIndex = Object.create(null);
@@ -501,7 +502,7 @@ GSDesigner.GetLineDensity = function (vpGroup)
         lineDensity = 0;
 
         //LOG ERROR
-        LogError(ex.ex.message + ' [' + arguments.arguments.callee.arguments.callee.name + ']');
+        LogError(ex.message + ' [' + arguments.callee.name + ']');
     }
     finally
     {
@@ -527,7 +528,7 @@ GSDesigner.GetPerspectiveCount = function ()
     {
         pCount = 0;
         //LOG ERROR
-        LogError(ex.ex.message + ' [' + arguments.arguments.callee.arguments.callee.name + ']');
+        LogError(ex.message + ' [' + arguments.callee.name + ']');
     }
     finally
     {
@@ -559,9 +560,15 @@ GSDesigner.GetNextAvailableVP = function ()
 
         activeID.sort(function(a,b){return a-b});
 
+        // set the next node number to the next highest node first
+        if(activeID.length > 0)
+            vpNodeNumber += parseInt(activeID[activeID.length - 1]);
+
+        // if a node has been deleted out of sequence then we will
+        // set the next node to this number.
         for(var i = 0; i < activeID.length; i++)
         {
-            if(i != parseInt(activeID[i]))
+            if(i+1 != parseInt(activeID[i]))
             {
                 vpNodeNumber = parseInt(activeID[i]);
                 break;
@@ -572,7 +579,7 @@ GSDesigner.GetNextAvailableVP = function ()
     {
         vpNodeNumber = -1;
         //LOG ERROR
-        LogError(ex.ex.message + ' [' + arguments.arguments.callee.arguments.callee.name + ']');
+        LogError(ex.message + ' [' + arguments.callee.name + ']');
     }
     finally
     {
