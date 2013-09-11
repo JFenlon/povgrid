@@ -4,13 +4,9 @@
     <list id="dffa65c6-1358-439d-b91d-5ef99f148acb" name="Default" comment="" />
     <list id="bc166a81-2bc8-4f38-bd62-74850f0eaf91" name="BugOut" comment="On Hold" />
     <list default="true" id="1ea9c6ec-aa69-4242-92d2-c9368ee30397" name="POvGrid Master" comment="Initial file listInitial file list">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/kineticJS/kinetic-v4.6.0.min.js" />
-      <change type="DELETED" beforePath="C:\Users\John\Documents\Apps\HTML5\povgrid\ThirdPartyJS\kineticJS\kinetic-v4.4.0.js" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Engine/Helpers/dev_tools.js" afterPath="$PROJECT_DIR$/Engine/Helpers/dev_tools.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Engine/UI/gs_UI_lib.js" afterPath="$PROJECT_DIR$/Engine/UI/gs_UI_lib.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gs_main.html" afterPath="$PROJECT_DIR$/gs_main.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Engine/gs_object_def.js" afterPath="$PROJECT_DIR$/Engine/gs_object_def.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Examples_Helpers/kineticJS_Demo.html" afterPath="$PROJECT_DIR$/Examples_Helpers/kineticJS_Demo.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="PovGrid.iws" />
@@ -21,7 +17,7 @@
     <file path="/povgrid_canvas.html" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1365024540613" ignored="false" />
     <file path="/Dummy.regexp" changelist="dffa65c6-1358-439d-b91d-5ef99f148acb" time="1365018760315" ignored="false" />
     <file path="/Dummy.xpath" changelist="dffa65c6-1358-439d-b91d-5ef99f148acb" time="1365018760315" ignored="false" />
-    <file path="/Dummy.txt" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1378771648409" ignored="false" />
+    <file path="/Dummy.txt" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1378867123263" ignored="false" />
     <file path="/povgrid_object_def.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1376336525193" ignored="false" />
     <file path="/povgrid_UI_lib.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1376344409635" ignored="false" />
     <file path="/povgrid_main.html" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1376342611401" ignored="false" />
@@ -29,9 +25,9 @@
     <file path="/povgrid_main.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1375196923064" ignored="false" />
     <file path="/povgrid_generic_lib.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1376337327606" ignored="false" />
     <file path="/povgrid_geometry_lib.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1375455678975" ignored="false" />
-    <file path="/gs_main.html" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1377741579832" ignored="false" />
-    <file path="/gs_object_def.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1378779994257" ignored="false" />
-    <file path="/gs_UI_lib.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1378784563766" ignored="false" />
+    <file path="/gs_main.html" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1378867863082" ignored="false" />
+    <file path="/gs_object_def.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1378874170007" ignored="false" />
+    <file path="/gs_UI_lib.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1378873281608" ignored="false" />
     <file path="/dev_tools.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1378779189903" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,25 +51,28 @@
       <file leaf-file-name="gs_main.html" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/gs_main.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="10" column="52" selection-start="653" selection-end="653" vertical-scroll-proportion="-6.5384617">
-              <folding />
+            <state line="57" column="58" selection-start="3375" selection-end="3375" vertical-scroll-proportion="-9.384615">
+              <folding>
+                <element signature="n#style#0;n#div#0;n#div#0;n#form#0;n#div#3;n#div#0;n#body#0;n#!!top" expanded="true" />
+                <element signature="n#style#0;n#div#0;n#div#1;n#form#0;n#div#3;n#div#0;n#body#0;n#!!top" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gs_object_def.js" pinned="false" current="false" current-in-tab="false">
+      <file leaf-file-name="gs_object_def.js" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/Engine/gs_object_def.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="564" column="65" selection-start="13335" selection-end="13335" vertical-scroll-proportion="0.0">
+            <state line="570" column="21" selection-start="13565" selection-end="13565" vertical-scroll-proportion="0.55131966">
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="gs_UI_lib.js" pinned="false" current="true" current-in-tab="true">
+      <file leaf-file-name="gs_UI_lib.js" pinned="false" current="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Engine/UI/gs_UI_lib.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state line="354" column="0" selection-start="10627" selection-end="10627" vertical-scroll-proportion="0.56304985">
+            <state line="397" column="20" selection-start="11564" selection-end="11564" vertical-scroll-proportion="-2.64">
               <folding />
             </state>
           </provider>
@@ -83,9 +82,7 @@
         <entry file="file://$PROJECT_DIR$/Engine/Helpers/dev_tools.js">
           <provider selected="true" editor-type-id="text-editor">
             <state line="16" column="12" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0">
-              <folding>
-                <element signature="n#!!doc" expanded="true" />
-              </folding>
+              <folding />
             </state>
           </provider>
         </entry>
@@ -130,11 +127,11 @@
         <option value="$PROJECT_DIR$/CustomJS/Helpers/povgrid_generic_lib.js" />
         <option value="$PROJECT_DIR$/povgrid_main.html" />
         <option value="$PROJECT_DIR$/CustomJS/UI/povgrid_UI_lib.js" />
-        <option value="$PROJECT_DIR$/gs_main.html" />
         <option value="$PROJECT_DIR$/Examples_Helpers/kineticJS_Demo.html" />
         <option value="$PROJECT_DIR$/Engine/Helpers/dev_tools.js" />
-        <option value="$PROJECT_DIR$/Engine/gs_object_def.js" />
+        <option value="$PROJECT_DIR$/gs_main.html" />
         <option value="$PROJECT_DIR$/Engine/UI/gs_UI_lib.js" />
+        <option value="$PROJECT_DIR$/Engine/gs_object_def.js" />
       </list>
     </option>
   </component>
@@ -174,7 +171,7 @@
     <option name="STATE" value="0" />
   </component>
   <component name="ProjectView">
-    <navigator currentView="ProjectPane" proportions="" version="1" splitterProportion="0.5">
+    <navigator proportions="" version="1" splitterProportion="0.5">
       <flattenPackages />
       <showMembers />
       <showModules />
@@ -185,136 +182,18 @@
       <autoscrollFromSource />
       <sortByType />
     </navigator>
-    <panes>
-      <pane id="ProjectPane">
-        <subPane>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PovGrid" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PovGrid" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="povgrid" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PovGrid" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="povgrid" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ThirdPartyJS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PovGrid" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="povgrid" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ThirdPartyJS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="kineticJS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PovGrid" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="povgrid" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Engine" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PovGrid" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="povgrid" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Engine" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="UI" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PovGrid" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="povgrid" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Engine" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="Helpers" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PovGrid" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="povgrid" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="CustomJS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-        </subPane>
-      </pane>
-      <pane id="Scope" />
-    </panes>
+    <panes />
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="editing.templates" />
     <property name="recentsLimit" value="5" />
-    <property name="restartRequiresConfirmation" value="true" />
+    <property name="options.lastSelected" value="editing.templates" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="restartRequiresConfirmation" value="true" />
     <property name="FullScreen" value="false" />
-    <property name="options.searchVisible" value="true" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="PublishConfig" serverName="Digitalife" serverId="e6cb882d-10de-4c4c-b453-5c5f280863ec">
     <servers>
@@ -462,7 +341,11 @@
       <created>1378700265011</created>
       <updated>1378700265011</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Initial file listInitial file list">
+      <created>1378784680285</created>
+      <updated>1378784680285</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -491,7 +374,6 @@
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12482663" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32871014" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32871014" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19213697" sideWeight="0.6704289" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.13696893" sideWeight="0.67128986" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39839265" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
@@ -503,6 +385,7 @@
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32871014" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32844242" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
@@ -591,7 +474,10 @@
     <entry file="file://$PROJECT_DIR$/gs_main.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="27" column="107" selection-start="1480" selection-end="1480" vertical-scroll-proportion="0.0">
-          <folding />
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#form#0;n#div#3;n#div#0;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#form#0;n#div#3;n#div#0;n#body#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
@@ -638,9 +524,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Engine/gs_main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Examples_Helpers/kineticJS_Demo.html">
@@ -650,32 +534,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gs_main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="10" column="52" selection-start="653" selection-end="653" vertical-scroll-proportion="-6.5384617">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Engine/Helpers/dev_tools.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="16" column="12" selection-start="289" selection-end="289" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
+          <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Engine/gs_object_def.js">
+    <entry file="file://$PROJECT_DIR$/gs_main.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="564" column="65" selection-start="13335" selection-end="13335" vertical-scroll-proportion="0.0">
-          <folding />
+        <state line="57" column="58" selection-start="3375" selection-end="3375" vertical-scroll-proportion="-9.384615">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#form#0;n#div#3;n#div#0;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#form#0;n#div#3;n#div#0;n#body#0;n#!!top" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Engine/UI/gs_UI_lib.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="354" column="0" selection-start="10627" selection-end="10627" vertical-scroll-proportion="0.56304985">
+        <state line="397" column="20" selection-start="11564" selection-end="11564" vertical-scroll-proportion="-2.64">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Engine/gs_object_def.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="570" column="21" selection-start="13565" selection-end="13565" vertical-scroll-proportion="0.55131966">
           <folding />
         </state>
       </provider>

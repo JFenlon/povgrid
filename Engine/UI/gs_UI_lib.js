@@ -346,14 +346,16 @@ function CreateSourceVanishPoint()
                 fill: 'black'
             });
 
-            var perpectiveGrid = CreatePerspectiveGrid(new GSDesigner.Coordinate(0,0));
+            GSDesigner.PGGroupSource = CreatePerspectiveGrid(new GSDesigner.Coordinate(0,0));
 
-            vpGroup.add(perpectiveGrid);
             vpGroup.add(vPoint);
             vpGroup.add(simpleText);
 
             GSDesigner.VPLayer.add(vpGroup);
             GSDesigner.VPLayer.draw();
+
+            GSDesigner.GridLayer.add(GSDesigner.PGGroupSource);
+            GSDesigner.GridLayer.draw();
 
             GSDesigner.VPGrpSource = vpGroup;
 
@@ -386,16 +388,24 @@ function CloneSourceVanishingPoint(nodeId, startingCoords)
     try
     {
         var newVP = GSDesigner.VPGrpSource.clone({
-            id: 'grp' + nodeId,
+            id: 'vp' + nodeId,
             name: 'vanishingPoint',
             x: startingCoords.x,
             y: startingCoords.y
         });
 
-        GSDesigner.VPLayer.add(newVP);
+        var newPG = GSDesigner.PGGroupSource.clone({
+            id:  'pg' + nodeId,
+            name: 'perspectiveGrid',
+            x: startingCoords.x,
+            y: startingCoords.y
+        })
 
         var vpText = undefined;
         var vpCircle = undefined;
+
+        GSDesigner.VPLayer.add(newVP);
+        GSDesigner.GridLayer.add(newPG);
 
         for(var i = 0; i < newVP.children.length; i++)
         {
@@ -422,6 +432,16 @@ function CloneSourceVanishingPoint(nodeId, startingCoords)
         newVP.on('click touchstart', function(){
             GSDesigner.setSelectedVP(this);
         });
+
+        newVP.on('dragend', function() {
+            newPG.setPosition(this.getPosition().x, this.getPosition().y);
+            GSDesigner.GridLayer.draw();
+        })
+
+        GSDesigner.VPLayer.on('beforeDraw', function(){
+            newPG.setPosition(newVP.getPosition().x, newVP.getPosition().y);
+            GSDesigner.GridLayer.draw();
+        })
 
         /*
          Todo - DEBUG - REMOVE
@@ -454,9 +474,8 @@ function CloneSourceVanishingPoint(nodeId, startingCoords)
             GSDesigner.VPLayer.draw();
         });
 
-
-
         GSDesigner.VPLayer.draw();
+        GSDesigner.GridLayer.draw();
     }
     catch (ex)
     {
@@ -506,6 +525,11 @@ function SetupStage()
             id: 'lyrVP'
         });
 
+        // This layer is reserved for perspective grid lines
+        GSDesigner.GridLayer = new Kinetic.Layer({
+            id: 'lyrGrid'
+        });
+
         GSDesigner.TouchLayer = new Kinetic.Layer({
             id: 'lyrTouch'
         });
@@ -549,6 +573,7 @@ function SetupStage()
 
         GSDesigner.MainStage.add(GSDesigner.BaseLayer);
         GSDesigner.MainStage.add(GSDesigner.HorizonLayer);
+        GSDesigner.MainStage.add(GSDesigner.GridLayer);
         GSDesigner.MainStage.add(GSDesigner.VPLayer);
 
         /*
@@ -690,6 +715,9 @@ function UpdateLineOpacity()
 {
     var results = 0;
 
+    // TODO - Adjust to update grid lines only on the selected VP
+    // John 9/10/13
+
     try
     {
         for(var g = 1; g < 4; g++)
@@ -731,6 +759,9 @@ function UpdateLineDensity()
 
     try
     {
+        // TODO - Adjust to update grid lines only on the selected VP
+        // John 9/10/13
+
         var perspGroup = Object.create(null);
         var vpGroup = Object.create(null);
         var lineCount = GSDesigner.getLineDensity();
@@ -828,6 +859,7 @@ function CreatePerspectiveGrid(groupCoords)
                 strokeWidth: GSDesigner.GeneralShapeAttributes.strokeWidth,
                 opacity: 0.6,
                 id: 'perpectiveLines' + n,
+                name: 'grid',
                 draggable: false
             });
 
@@ -861,6 +893,9 @@ function CreatePerspectiveGrid(groupCoords)
 function UpdateGridLineColors()
 {
     var results = 0;
+
+    // TODO - Adjust to update grid lines only on the selected VP
+    // John 9/10/13
 
     try
     {

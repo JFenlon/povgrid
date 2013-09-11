@@ -59,7 +59,9 @@ GSDesigner.BaseLayer = Object.create(null);
 GSDesigner.TouchLayer = Object.create(null);
 GSDesigner.HorizonLayer = Object.create(null);
 GSDesigner.VPLayer = Object.create(null);
+GSDesigner.GridLayer = Object.create(null);
 GSDesigner.VPGrpSource = Object.create(null);
+GSDesigner.PGGroupSource = Object.create(null);
 
 GSDesigner.DBRecordCount = Object.create(null);
 GSDesigner.GridColorIndex = Object.create(null);
@@ -554,7 +556,7 @@ GSDesigner.GetNextAvailableVP = function ()
         {
             if(groupNode[i].attrs.id != GSDesigner.groupId[GSDesigner.groupIdEnum.VanishPoint])
             {
-                activeID.push(groupNode[i].attrs.id.substring(3));
+                activeID.push(groupNode[i].attrs.id.substring(2));
             }
         }
 
@@ -566,11 +568,11 @@ GSDesigner.GetNextAvailableVP = function ()
 
         // if a node has been deleted out of sequence then we will
         // set the next node to this number.
-        for(var i = 0; i < activeID.length; i++)
+        for(var i = 1; i < activeID.length; i++)
         {
-            if(i+1 != parseInt(activeID[i]))
+            if(activeID[i] - activeID[i-1] != 1)
             {
-                vpNodeNumber = parseInt(activeID[i]);
+                vpNodeNumber = parseInt(activeID[i]) - 1;
                 break;
             }
         }
