@@ -60,6 +60,7 @@ GSDesigner.TouchLayer = Object.create(null);
 GSDesigner.HorizonLayer = Object.create(null);
 GSDesigner.VPLayer = Object.create(null);
 GSDesigner.GridLayer = Object.create(null);
+
 GSDesigner.VPGrpSource = Object.create(null);
 GSDesigner.PGGroupSource = Object.create(null);
 
@@ -148,7 +149,7 @@ Object.defineProperties(GSDesigner.GridColorIndex, {
  */
 Object.defineProperties(GSDesigner.CurrentLineDensity, {
     value:   {
-        value:        5
+        value:          5
         , writable:     true
         , configurable: false
         , enumerable:   false
@@ -160,7 +161,7 @@ Object.defineProperties(GSDesigner.CurrentLineDensity, {
  */
 Object.defineProperties(GSDesigner.CurrentLineOpacity, {
     value:   {
-        value:        0.6
+        value:          0.6
         , writable:     true
         , configurable: false
         , enumerable:   false
@@ -255,18 +256,25 @@ Object.defineProperties(GSDesigner.WorkspaceSettings, {
     }   
 
     , touchPadding: { 
-        value:        5
+        value:        1
       , writable:     true
       , configurable: true
       , enumerable:   true 
     } 
 
     , touchOpacity: { 
-        value:        .6
+        value:        0.0
       , writable:     true
       , configurable: true
       , enumerable:   true 
-    }  
+    }
+
+    , touchFillColor: {
+        value:        'red'
+      , writable:     true
+      , configurable: true
+      , enumerable:   true
+    }
 
     , configLoaded: { 
         value:        false
@@ -338,7 +346,7 @@ Object.defineProperties(GSDesigner.VPAttributes,
         , writable:     true
         , configurable: true
         , enumerable:   true 
-    }   
+    }
 
     ,strokeWidth:
     {

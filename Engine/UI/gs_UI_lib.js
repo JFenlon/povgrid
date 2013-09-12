@@ -310,7 +310,7 @@ function CreateSourceVanishPoint()
                 id: GSDesigner.groupId[GSDesigner.groupIdEnum.VanishPoint],
                 name: 'source',
                 draggable: true,
-                visible: true
+                visible: false
             });
 
             var vPoint = new Kinetic.Circle({
@@ -391,19 +391,44 @@ function CloneSourceVanishingPoint(nodeId, startingCoords)
             id: 'vp' + nodeId,
             name: 'vanishingPoint',
             x: startingCoords.x,
-            y: startingCoords.y
+            y: startingCoords.y ,
+            visible: true
         });
 
         var newPG = GSDesigner.PGGroupSource.clone({
             id:  'pg' + nodeId,
             name: 'perspectiveGrid',
             x: startingCoords.x,
-            y: startingCoords.y
-        })
+            y: startingCoords.y,
+            visible: true
+        });
+
+        var newTC = new Kinetic.Circle({
+            x: 0,
+            y: 0,
+            id: 'tc' + nodeId,
+            name: 'touchCircle',
+            radius: GSDesigner.VPAttributes.radius,
+            fill: GSDesigner.WorkspaceSettings.touchFillColor,
+            opacity: GSDesigner.WorkspaceSettings.touchOpacity,
+            visible: true
+        });
+
+        var newTG = new Kinetic.Group({
+            x: startingCoords.x,
+            y: startingCoords.y,
+            id: 'tg' + nodeId,
+            name: 'touchGroup',
+            draggable: true,
+            visible: true
+        });
+
+        newTG.add(newTC);
 
         var vpText = undefined;
         var vpCircle = undefined;
 
+        GSDesigner.TouchLayer.add(newTG);
         GSDesigner.VPLayer.add(newVP);
         GSDesigner.GridLayer.add(newPG);
 
@@ -424,23 +449,22 @@ function CloneSourceVanishingPoint(nodeId, startingCoords)
         // John 9/9/13
         
         /** Event binding for vanishing point group (where needed) */
-        vpText.on('click', function(){
+        newTG.on('click', function(){
             GSDesigner.setSelectedVP(newVP);
-            newVP.setZIndex(3);
         });
 
-        newVP.on('click touchstart', function(){
-            GSDesigner.setSelectedVP(this);
-        });
-
-        newVP.on('dragend', function() {
+        newTG.on('dragend', function() {
+            newVP.setPosition(this.getPosition().x, this.getPosition().y);
             newPG.setPosition(this.getPosition().x, this.getPosition().y);
             GSDesigner.GridLayer.draw();
+            GSDesigner.VPLayer.draw();
         })
 
-        GSDesigner.VPLayer.on('beforeDraw', function(){
-            newPG.setPosition(newVP.getPosition().x, newVP.getPosition().y);
+        GSDesigner.TouchLayer.on('beforeDraw', function(){
+            newVP.setPosition(newTG.getPosition().x, newTG.getPosition().y);
+            newPG.setPosition(newTG.getPosition().x, newTG.getPosition().y);
             GSDesigner.GridLayer.draw();
+            GSDesigner.VPLayer.draw();
         })
 
         /*
@@ -448,32 +472,25 @@ function CloneSourceVanishingPoint(nodeId, startingCoords)
          @author: John.Fenlon
          @date: 8/14/13
          */
-        newVP.on('mouseup touchend', function(){
+        newTG.on('mouseup touchend', function(){
             var node = GSDesigner.GetNode('txtVPPos');
 
             node.setText('x = ' + this.getAbsolutePosition().x + ' | y = ' + this.getAbsolutePosition().y);
         });
 
-        vpCircle.on('mouseover touchstart', function(){
-            this.setFill(GSDesigner.VPAttributes.hoverFillColor);
-            this.setShadowEnabled(true);
-            newVP.setZIndex(3);
-            GSDesigner.VPLayer.draw();
-        });
-
-        vpText.on('mouseover touchstart', function(){
+        newTC.on('mouseover touchstart', function(){
             vpCircle.setFill(GSDesigner.VPAttributes.hoverFillColor);
             vpCircle.setShadowEnabled(true);
-            newVP.setZIndex(3);
             GSDesigner.VPLayer.draw();
         });
 
-        vpCircle.on('mouseout', function(){
-            this.setFill(GSDesigner.VPAttributes.fillColor);
-            this.setShadowEnabled(false);
+        newTC.on('mouseout', function(){
+            vpCircle.setFill(GSDesigner.VPAttributes.fillColor);
+            vpCircle.setShadowEnabled(false);
             GSDesigner.VPLayer.draw();
         });
 
+        GSDesigner.TouchLayer.draw();
         GSDesigner.VPLayer.draw();
         GSDesigner.GridLayer.draw();
     }
@@ -575,6 +592,7 @@ function SetupStage()
         GSDesigner.MainStage.add(GSDesigner.HorizonLayer);
         GSDesigner.MainStage.add(GSDesigner.GridLayer);
         GSDesigner.MainStage.add(GSDesigner.VPLayer);
+        GSDesigner.MainStage.add(GSDesigner.TouchLayer);
 
         /*
             Todo - Add touch-zoom functionality
@@ -841,7 +859,8 @@ function CreatePerspectiveGrid(groupCoords)
 
         perspGroup =  new Kinetic.Group({
             id: GSDesigner.groupId[GSDesigner.groupIdEnum.PerspectiveLines],
-            draggable: true
+            draggable: true,
+            visible: false
         });
 
         var stageDiag = getDistanceBetweenPoints(new GSDesigner.Coordinate(0,GSDesigner.MainStage.getHeight()), new GSDesigner.Coordinate(GSDesigner.MainStage.getWidth(),0));
@@ -916,56 +935,6 @@ function UpdateGridLineColors()
         }
     }
     catch (ex)
-    {
-        //LOG ERROR
-        LogError(ex.message + ' [' + arguments.callee.name + ']');
-        results = -1;
-    }
-    finally
-    {
-        return results;
-    }
-}
-
-
-function CreateTouchLayer()
-{
-    var results = 0;
-
-    try
-    {
-        var kjsTouchCircle = new Kinetic.Circle({
-            x: 665,
-            y: 255,
-            radius: 30,
-            fill: 'red',
-            stroke: 'gray',
-            opacity: 0.4,
-            strokeWidth: 2,
-            visible: false
-        });
-
-        // add the shape to the layer
-        GSDesigner.TouchLayer.add(kjsTouchCircle);
-
-        // use event delegation
-        GSDesigner.MainStage.on('mousedown touchstart', function(evt) {
-            GSDesigner.TouchLayer.clear();
-            kjsTouchCircle.setVisible(true);
-            kjsTouchCircle.setPosition(evt.layerX, evt.layerY);
-            kjsTouchCircle.draw();
-            //anim.start();
-        });
-
-        kjsTouchCircle.on('mousedown mouseout', function(evt) {
-            GSDesigner.TouchLayer.clear();
-        });
-
-        GSDesigner.MainStage.on('mouseup touchend', function(evt) {
-            GSDesigner.TouchLayer.clear();
-        });
-    }
-    catch(ex)
     {
         //LOG ERROR
         LogError(ex.message + ' [' + arguments.callee.name + ']');

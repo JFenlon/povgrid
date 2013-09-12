@@ -20,12 +20,6 @@ $(document).ready(function () {
         if(SetupStage() < 0)
             throw new EvalError("setup-stage-failed");
 
-        /*
-        if(CreateTouchLayer() < 0)
-            throw new EvalError("create-touchlayer-failed");
-        */
-
-
         disableSelection(document.body);
     }
     catch(ex)
