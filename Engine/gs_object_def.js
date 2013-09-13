@@ -1,10 +1,3 @@
-/**
- *************************************************************
- * POVGRID global object/property definition file
- * Created 04/03/2013
- *************************************************************
- */
-
 /* Declaration */
 // Object literal declaration {namespace}
 var GSDesigner = {
@@ -64,6 +57,9 @@ GSDesigner.GridLayer = Object.create(null);
 GSDesigner.VPGrpSource = Object.create(null);
 GSDesigner.PGGroupSource = Object.create(null);
 
+GSDesigner.SelectedVPGroupID = Object.create(null);
+GSDesigner.SelectedPGGroupID = Object.create(null);
+
 GSDesigner.DBRecordCount = Object.create(null);
 GSDesigner.GridColorIndex = Object.create(null);
 GSDesigner.CurrentLineDensity = Object.create(null);
@@ -89,6 +85,12 @@ GSDesigner.shapeIdEnum = {
         TraceLine1 : 2,
         TraceLine2 : 3,
         TouchAnim  : 4
+};
+
+GSDesigner.ResponseEnum = {
+    SUCCESS         : 1,
+    SILENT_FAILURE  : 0,
+    LOGGED_FAILURE  : -1
 };
 
 // Object properties
@@ -281,7 +283,28 @@ Object.defineProperties(GSDesigner.WorkspaceSettings, {
       , writable:     true
       , configurable: false
       , enumerable:   true 
-    }            
+    }
+
+    , lineDensity:  {
+        value:        4
+      , writable:     true
+      , configurable: true
+      , enumerable:   true
+    }
+
+    , lineOpacity:  {
+        value:        0.6
+        , writable:     true
+        , configurable: true
+        , enumerable:   true
+    }
+
+    , lineColor:  {
+          value:        'red'
+        , writable:     true
+        , configurable: true
+        , enumerable:   true
+    }
 });
 
 Object.defineProperties(GSDesigner.GeneralShapeAttributes,
@@ -394,6 +417,15 @@ GSDesigner.LineCoordinate = function (x1Pos, y1Pos, x2Pos, y2Pos)
     return {x1: x1Pos || 0, y1: y1Pos || 0, x2: x2Pos || 0, y2: y2Pos || 0};
 }
 
+GSDesigner.SelectedLineProperties = function (lineDensity, lineOpacity, lineColor)
+{
+    return {
+                density: lineDensity || GSDesigner.WorkspaceSettings.lineDensity,
+                opacity: lineOpacity || GSDesigner.WorkspaceSettings.lineOpacity,
+                color:   lineColor   || GSDesigner.WorkspaceSettings.lineColor
+            };
+}
+
 /**
  *
  * @param dWidth
@@ -434,17 +466,17 @@ GSDesigner.DocumentObject = function (dWidth, dHeight, hexFillColor, docName)
 
 
 /**
- *
- * @param shapeId
+ * Find a node, by ID, in the stage
+ * @param nodeId
  * @returns {kinetic node}
  */
-GSDesigner.GetNode = function (shapeId)
+GSDesigner.GetNode = function (nodeId)
 {
     var node = Object.create(null);
 
     try
     {
-        var objectId = '#' + shapeId;
+        var objectId = '#' + nodeId;
         var nodes = this.MainStage.get(objectId);
         node = nodes[0];
     }
@@ -462,17 +494,17 @@ GSDesigner.GetNode = function (shapeId)
 }
 
 /**
- *
- * @param objectID
+ * Check if a node exists on the stage
+ * @param nodeId
  * @returns {boolean}
  */
-GSDesigner.NodeExists = function (objectID)
+GSDesigner.NodeExists = function (nodeId)
 {
     var results = true;
 
     try
     {
-        var node = GSDesigner.GetNode(objectID);
+        var node = GSDesigner.GetNode(nodeId);
 
         if(typeof node === 'undefined'){
             results = false;
@@ -491,47 +523,55 @@ GSDesigner.NodeExists = function (objectID)
 }
 
 /**
- *
- * @param vpGroup
- * @returns {number}
+ * Sets and returns the line properties for the selected VP
+ * @param pgGroup
+ * @returns {GSDesigner.SelectedLineProperties}
  * @constructor
  */
-GSDesigner.GetLineDensity = function (vpGroup)
+GSDesigner.GetLineProperties = function (pgGroup)
 {
-    var lineDensity = 0;
+    var lineProperties = new GSDesigner.SelectedLineProperties();
 
     try
     {
-        var lineNode = layer.get('Line');
+        var lineNode = pgGroup.getChildren();
 
-        if(lineDensity != null)
-            lineDensity = lineNode.toArray().length;
+        if(lineNode)
+        {
+            lineProperties.density = lineNode.toArray().length;
+
+            lineProperties.color = lineNode.toArray()[0].getStroke();
+
+            lineProperties.opacity = lineNode[0].getOpacity();
+        }
     }
     catch (ex)
     {
-        lineDensity = 0;
+        lineProperties = null;
 
         //LOG ERROR
         LogError(ex.message + ' [' + arguments.callee.name + ']');
     }
     finally
     {
-        return lineDensity;
+        return lineProperties;
     }
 }
 
+/**
+ * Finds the number of vanishing points on the stage
+ * @returns {number}
+ * @constructor
+ */
 GSDesigner.GetPerspectiveCount = function ()
 {
     var pCount = 0;
 
     try
     {
-        // TODO - Update function call and 'get' calls so that we're only getting the perspective group for the selected VP group
-        // John 9/8/13
-
         var nodes = GSDesigner.VPLayer.get('Group');
 
-        if(typeof nodes != 'undefined');
+        if(nodes);
             pCount = nodes.toArray().length;
     }
     catch (ex)

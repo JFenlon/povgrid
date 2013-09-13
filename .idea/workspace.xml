@@ -4,8 +4,10 @@
     <list id="dffa65c6-1358-439d-b91d-5ef99f148acb" name="Default" comment="" />
     <list id="bc166a81-2bc8-4f38-bd62-74850f0eaf91" name="BugOut" comment="On Hold" />
     <list default="true" id="1ea9c6ec-aa69-4242-92d2-c9368ee30397" name="POvGrid Master" comment="Initial file listInitial file list">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/greyback.jpg" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CSS/Global.css" afterPath="$PROJECT_DIR$/CSS/Global.css" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Engine/UI/gs_UI_lib.js" afterPath="$PROJECT_DIR$/Engine/UI/gs_UI_lib.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Engine/gs_main.js" afterPath="$PROJECT_DIR$/Engine/gs_main.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Engine/gs_object_def.js" afterPath="$PROJECT_DIR$/Engine/gs_object_def.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
@@ -17,17 +19,17 @@
     <file path="/povgrid_canvas.html" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1365024540613" ignored="false" />
     <file path="/Dummy.regexp" changelist="dffa65c6-1358-439d-b91d-5ef99f148acb" time="1365018760315" ignored="false" />
     <file path="/Dummy.xpath" changelist="dffa65c6-1358-439d-b91d-5ef99f148acb" time="1365018760315" ignored="false" />
-    <file path="/Dummy.txt" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1378952892639" ignored="false" />
+    <file path="/Dummy.txt" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1379037531367" ignored="false" />
     <file path="/povgrid_object_def.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1376336525193" ignored="false" />
     <file path="/povgrid_UI_lib.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1376344409635" ignored="false" />
     <file path="/povgrid_main.html" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1376342611401" ignored="false" />
-    <file path="/Global.css" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1375382930027" ignored="false" />
+    <file path="/Global.css" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1379049194611" ignored="false" />
     <file path="/povgrid_main.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1375196923064" ignored="false" />
     <file path="/povgrid_generic_lib.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1376337327606" ignored="false" />
     <file path="/povgrid_geometry_lib.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1375455678975" ignored="false" />
     <file path="/gs_main.html" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1378867863082" ignored="false" />
-    <file path="/gs_object_def.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1378953688187" ignored="false" />
-    <file path="/gs_UI_lib.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1378963168886" ignored="false" />
+    <file path="/gs_object_def.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1379046446236" ignored="false" />
+    <file path="/gs_UI_lib.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1379047663530" ignored="false" />
     <file path="/dev_tools.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1378779189903" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -77,11 +79,9 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/povgrid_kjs_lib.js" />
         <option value="$PROJECT_DIR$/povgrid_canvas.html" />
         <option value="$PROJECT_DIR$/CustomJS/povgrid_main.js" />
         <option value="$PROJECT_DIR$/CustomJS/Helpers/povgrid_geometry_lib.js" />
-        <option value="$PROJECT_DIR$/CSS/Global.css" />
         <option value="$PROJECT_DIR$/CustomJS/Helpers/dev_tools.js" />
         <option value="$PROJECT_DIR$/CustomJS/povgrid_object_def.js" />
         <option value="$PROJECT_DIR$/CustomJS/Helpers/povgrid_generic_lib.js" />
@@ -91,8 +91,10 @@
         <option value="$PROJECT_DIR$/Engine/Helpers/dev_tools.js" />
         <option value="$PROJECT_DIR$/gs_main.html" />
         <option value="$PROJECT_DIR$/Engine/gs_main.js" />
+        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/Engine/gs_object_def.js" />
         <option value="$PROJECT_DIR$/Engine/UI/gs_UI_lib.js" />
+        <option value="$PROJECT_DIR$/CSS/Global.css" />
       </list>
     </option>
   </component>
@@ -220,13 +222,14 @@
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="options.lastSelected" value="editing.templates" />
     <property name="recentsLimit" value="5" />
-    <property name="restartRequiresConfirmation" value="true" />
+    <property name="options.lastSelected" value="editing.templates" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="restartRequiresConfirmation" value="true" />
     <property name="FullScreen" value="false" />
-    <property name="options.searchVisible" value="true" />
+    <property name="DefaultHtmlFileTemplate" value="Html5" />
     <property name="options.splitter.details.proportions" value="0.2" />
+    <property name="options.searchVisible" value="true" />
   </component>
   <component name="PublishConfig" serverName="Digitalife" serverId="e6cb882d-10de-4c4c-b453-5c5f280863ec">
     <servers>
@@ -238,6 +241,9 @@
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
       <recent name="C:\Users\john.fenlon\Documents\GitHub\povgrid\CSS" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\John\Documents\Apps\HTML5\povgrid\CSS\images" />
     </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.povgrid_canvas.html">
@@ -383,7 +389,11 @@
       <created>1378874645596</created>
       <updated>1378874645596</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="Initial file listInitial file list">
+      <created>1378963348393</created>
+      <updated>1378963348393</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -407,7 +417,7 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="0" />
     <editor active="false" />
     <layout>
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12482663" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -495,39 +505,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/Engine/UI/gs_UI_lib.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="307" column="20" selection-start="8943" selection-end="8943" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/gs_main.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="27" column="107" selection-start="1480" selection-end="1480" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Engine/gs_object_def.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="30" selection-start="445" selection-end="445" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Engine/UI/gs_UI_lib.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="221" column="70" selection-start="5988" selection-end="5988" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Examples_Helpers/ImageSize.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="7" selection-start="477" selection-end="477" vertical-scroll-proportion="0.63909775" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/ThirdPartyJS/kineticJS/kinetic-v4.5.4.min.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
@@ -536,11 +513,6 @@
     <entry file="file://$PROJECT_DIR$/Examples_Helpers/BasicLayout.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CSS/Global.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="86" column="28" selection-start="1138" selection-end="1138" vertical-scroll-proportion="0.7232558" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Engine/Helpers/gs_generic_lib.js">
@@ -553,13 +525,6 @@
     <entry file="file://$PROJECT_DIR$/Examples_Helpers/kineticJS_Demo.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="4" column="55" selection-start="245" selection-end="245" vertical-scroll-proportion="0.16229117">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Engine/gs_main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="0" selection-start="506" selection-end="506" vertical-scroll-proportion="0.42014387">
           <folding />
         </state>
       </provider>
@@ -578,23 +543,78 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gs_main.html">
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="57" column="58" selection-start="3375" selection-end="3375" vertical-scroll-proportion="-0.65384614">
-          <folding />
+        <state line="99" column="7" selection-start="5333" selection-end="5333" vertical-scroll-proportion="0.94917786">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#0;n#div#1;n#div#0;n#body#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#div#1;n#div#0;n#body#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#2;n#div#1;n#div#0;n#body#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#3;n#div#1;n#div#0;n#body#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#4;n#div#1;n#div#0;n#body#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#form#0;n#div#3;n#div#0;n#body#0;n#!!top" expanded="false" />
+            <element signature="n#style#0;n#div#0;n#div#1;n#form#0;n#div#3;n#div#0;n#body#0;n#!!top" expanded="false" />
+          </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Engine/UI/gs_UI_lib.js">
+    <entry file="file://$PROJECT_DIR$/Engine/gs_main.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="402" column="25" selection-start="11733" selection-end="11733" vertical-scroll-proportion="0.60597014">
+        <state line="20" column="25" selection-start="476" selection-end="476" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Engine/gs_object_def.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="265" column="24" selection-start="7232" selection-end="7233" vertical-scroll-proportion="0.67769784">
+        <state line="542" column="53" selection-start="13072" selection-end="13072" vertical-scroll-proportion="0.45970148">
+          <folding>
+            <element signature="n#!!doc" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Engine/UI/gs_UI_lib.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="756" column="61" selection-start="22333" selection-end="22333" vertical-scroll-proportion="0.6460432">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gs_main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="75" column="56" selection-start="4034" selection-end="4034" vertical-scroll-proportion="-12.423077">
+          <folding>
+            <element signature="n#style#0;n#div#0;n#div#4;n#div#1;n#div#0;n#body#0;n#!!top" expanded="true" />
+            <element signature="n#style#0;n#div#0;n#div#0;n#form#0;n#div#3;n#div#0;n#body#0;n#!!top" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CSS/spectrum.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CSS/jquery.mobile-1.3.0.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CSS/jquery.mobile.custom.theme.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="18" column="12" selection-start="440" selection-end="440" vertical-scroll-proportion="-8.3020525">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CSS/Global.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="44" selection-start="483" selection-end="483" vertical-scroll-proportion="0.7338129">
           <folding />
         </state>
       </provider>

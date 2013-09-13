@@ -445,12 +445,13 @@ function CloneSourceVanishingPoint(nodeId, startingCoords)
             }
         }
 
-        // TODO - Replace these events when touch layer objects are implemented. Touch layer will handle all touch/drag events
-        // John 9/9/13
+        // TODO - Bind mobile 'touch' events for selection and menu (touchhold)
+        // John 9/12/13
         
         /** Event binding for vanishing point group (where needed) */
-        newTG.on('click', function(){
+        newTG.on('click mousedown', function(){
             GSDesigner.setSelectedVP(newVP);
+            PointSelected(newVP);
         });
 
         newTG.on('dragend', function() {
@@ -472,13 +473,13 @@ function CloneSourceVanishingPoint(nodeId, startingCoords)
          @author: John.Fenlon
          @date: 8/14/13
          */
-        newTG.on('mouseup touchend', function(){
+        newTG.on('mouseup', function(){
             var node = GSDesigner.GetNode('txtVPPos');
 
             node.setText('x = ' + this.getAbsolutePosition().x + ' | y = ' + this.getAbsolutePosition().y);
         });
 
-        newTC.on('mouseover touchstart', function(){
+        newTC.on('mouseover', function(){
             vpCircle.setFill(GSDesigner.VPAttributes.hoverFillColor);
             vpCircle.setShadowEnabled(true);
             GSDesigner.VPLayer.draw();
@@ -672,7 +673,7 @@ function CreateDocument(docInit)
 
     try
     {
-        var documentObj = (typeof docInit === "undefined") ? new GSDesigner.DocumentObject(docInit) : docInit;
+        var documentObj = (!docInit) ? new GSDesigner.DocumentObject(docInit) : docInit;
 
         /** document size input */
         var fldWidth = getDomElement('tbWidth');
@@ -729,29 +730,37 @@ function CreateDocument(docInit)
     }
 }
 
+/**
+ * Updates line opacity of given perspective grid group lines.
+ * @param pgGroup
+ * @returns {number}
+ * @constructor
+ */
 function UpdateLineOpacity()
 {
-    var results = 0;
+    // TODO - Can probably speed this up by grabbing the opacity value in the binding and passing it to this function
+    // John 9/12/13
 
-    // TODO - Adjust to update grid lines only on the selected VP
-    // John 9/10/13
+    var results = GSDesigner.ResponseEnum.SILENT_FAILURE;
 
     try
     {
-        for(var g = 1; g < 4; g++)
-        {
-            var group = GSDesigner.GetNode("gpPerspLines" + g);
+        var pgGroup = Object.create(null);
+        var opacity = GSDesigner.getLineOpacity();
+        pgGroup = GSDesigner.GetNode(GSDesigner.SelectedPGGroupID);
 
-            var children = group.getChildren();
+        if(pgGroup)
+        {
+            var children = pgGroup.getChildren().toArray();
 
             for(var l = 0; l < children.length; l++)
             {
-                children[l].setOpacity(GSDesigner.getLineOpacity());
+                children[l].setOpacity(opacity);
             }
 
-            group.draw();
-            group.getParent().draw();
-            GSDesigner.MainLayer.draw();
+            GSDesigner.GridLayer.draw();
+
+            results = 1;
         }
     }
     catch (ex)
@@ -780,54 +789,43 @@ function UpdateLineDensity()
         // TODO - Adjust to update grid lines only on the selected VP
         // John 9/10/13
 
-        var perspGroup = Object.create(null);
-        var vpGroup = Object.create(null);
+        var pgGroup = Object.create(null);
         var lineCount = GSDesigner.getLineDensity();
         var angleIncrement = 360 / (lineCount * 2);
         var stageDiag = getDistanceBetweenPoints(new GSDesigner.Coordinate(0,GSDesigner.MainStage.getHeight()), new GSDesigner.Coordinate(GSDesigner.MainStage.getWidth(),0));
 
-        for(var g = 1; g < 4; g++)
+        pgGroup = GSDesigner.GetNode(GSDesigner.SelectedPGGroupID);
+        var angle = 0;
+        var groupCoords = new GSDesigner.Coordinate(0,0);
+        var lineProperties = GSDesigner.GetLineProperties(pgGroup);
+
+        if(pgGroup.hasChildren())
+            pgGroup.destroyChildren();
+
+        GSDesigner.GridLayer.draw();
+
+        for(var n = 0; n < lineCount; n++)
         {
-            perspGroup = GSDesigner.GetNode("gpPerspLines" + g);
-            vpGroup = GSDesigner.GetNode("gpVanishPoint" + g);
+            var endPoint = getSpokeLineCoords(stageDiag, groupCoords, Math.abs(angle));
 
-            if(perspGroup.hasChildren())
-                perspGroup.destroyChildren();
+            var line = new Kinetic.Line({
+                points: [endPoint.x1,endPoint.y1,endPoint.x2,endPoint.y2],
+                stroke: lineProperties.color,
+                strokeWidth: GSDesigner.GeneralShapeAttributes.strokeWidth,
+                opacity: lineProperties.opacity,
+                id: GSDesigner.groupId[GSDesigner.groupIdEnum.PerspectiveLines],
+                draggable: false
+            });
 
-            GSDesigner.MainLayer.draw();
+            //perspectiveLine.push(line);
+            pgGroup.add(line);
+            angle += angleIncrement;
 
-            var vanishingPoint = GSDesigner.GetNode("shpVP" + g);
-            var perspectiveLine = [];
-            var angle = 0;
-            var gridLineColor = GSDesigner.getNextGridLineColor(g-1); // grid color is a zero-based array
-
-            for(var n = 0; n < lineCount; n++)
-            {
-                var endPoint = getSpokeLineCoords(stageDiag, new GSDesigner.Coordinate(vanishingPoint.getPosition().x, vanishingPoint.getPosition().y), Math.abs(angle));
-
-                var line = new Kinetic.Line({
-                    points: [endPoint.x1,endPoint.y1,endPoint.x2,endPoint.y2],
-                    stroke: gridLineColor,
-                    strokeWidth: GSDesigner.GeneralShapeAttributes.strokeWidth,
-                    opacity: 0.6,
-                    id: 'perpectiveLines_' + g + '_' + n,
-                    draggable: false
-                });
-
-                perspectiveLine.push(line);
-                angle += angleIncrement;
-            }
-
-            // add the lines to the group
-            for(n = 0; n < lineCount; n++)
-            {
-                perspGroup.add(perspectiveLine[n]);
-            }
-
-            perspGroup.setVisible(true);
         }
 
-        GSDesigner.MainLayer.draw();
+        GSDesigner.GridLayer.draw();
+
+
     }
     catch (ex)
     {
@@ -853,7 +851,7 @@ function CreatePerspectiveGrid(groupCoords)
 
     try
     {
-        var lineCount = parseInt(GSDesigner.getLineDensity());
+        var lineCount = parseInt(GSDesigner.WorkspaceSettings.lineDensity);
         var angleIncrement = 360 / (lineCount * 2);
         var perspGroup;
 
@@ -905,34 +903,31 @@ function CreatePerspectiveGrid(groupCoords)
     }
 }
 
+
 /**
- *
+ * Updates the grid line colors of the given perspective grid group
+ * @param pgGroup
  * @returns {number}
+ * @constructor
  */
-function UpdateGridLineColors()
+function UpdateGridLineColors(pgGroupId)
 {
     var results = 0;
-
-    // TODO - Adjust to update grid lines only on the selected VP
-    // John 9/10/13
 
     try
     {
         for(var g = 1; g < 4; g++)
         {
-            var group = GSDesigner.GetNode("gpPerspLines" + g);
-
-            var children = group.getChildren();
+            var children = pgGroup.getChildren();
 
             for(var l = 0; l < children.length; l++)
             {
                children[l].setStroke(GSDesigner.getNextGridLineColor(g-1));
             }
-
-            group.draw();
-            group.getParent().draw();
-            GSDesigner.MainLayer.draw();
         }
+
+        results = 1;
+        GSDesigner.GridLayer.draw();
     }
     catch (ex)
     {
@@ -943,6 +938,30 @@ function UpdateGridLineColors()
     finally
     {
         return results;
+    }
+}
+
+function PointSelected(selectedVPGroup)
+{
+    var result = GSDesigner.ResponseEnum.SILENT_FAILURE;
+
+    try
+    {
+        if(selectedVPGroup)
+        {
+            GSDesigner.SelectedVPGroupID = selectedVPGroup.getId();
+            GSDesigner.SelectedPGGroupID = 'pg' + GSDesigner.SelectedVPGroupID.substring(2);
+        }
+    }
+    catch (ex)
+    {
+        result = GSDesigner.ResponseEnum.LOGGED_FAILURE;
+        //LOG ERROR
+        LogError(ex.message + ' [' + arguments.callee.name + ']');
+    }
+    finally
+    {
+        return result;
     }
 }
 
