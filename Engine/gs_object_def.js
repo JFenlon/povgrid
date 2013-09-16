@@ -78,13 +78,12 @@ GSDesigner.groupIdEnum = {
         TraceLines       : 2,
         Main             : 3
     };
-GSDesigner.shapeId = new Array("shpHorizon", "shpDocument", "shpTraceLine1", "shpTraceLine2","shpTouchAnim");
+GSDesigner.shapeId = new Array("shpHorizon", "shpDocument", "shpTraceLine1", "shpTraceLine2");
 GSDesigner.shapeIdEnum = {
         Horizon    : 0,
         Document   : 1,
         TraceLine1 : 2,
-        TraceLine2 : 3,
-        TouchAnim  : 4
+        TraceLine2 : 3
 };
 
 GSDesigner.ResponseEnum = {
@@ -569,7 +568,7 @@ GSDesigner.GetPerspectiveCount = function ()
 
     try
     {
-        var nodes = GSDesigner.VPLayer.get('Group');
+        var nodes = GSDesigner.VPLayer.get('.vanishingPoint');
 
         if(nodes);
             pCount = nodes.toArray().length;

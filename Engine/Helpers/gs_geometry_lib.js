@@ -40,17 +40,18 @@ function getDistanceBetweenPoints(coordinate1, coordinate2)
 function getAngleFromCoords(lineCoords)
 {
     var angle = 0.0;
+
     try
     {
-        var xDiff = lineCoords.x2 - lineCoords.x1;
-        var yDiff = lineCoords.y2 - lineCoords.y1;
+        var deltaX = lineCoords.x2 - lineCoords.x1;
+        var deltaY = lineCoords.y2 - lineCoords.y1;
 
-        angle =  Math.Atan2(yDiff, xDiff) * (180 / Math.PI);
+        angle =  Math.atan2(deltaY, deltaX) * 180 / Math.PI;
     }
     catch (ex)
     {
         //LOG ERROR
-        LogError(ex.ex.message + ' [' + arguments.arguments.callee.arguments.callee.name + ']');
+        LogError(ex.message + ' [' + arguments.callee.name + ']');
         angle = 0;
     }
     finally
@@ -91,7 +92,7 @@ function getBounds(domObject)
 
 /**
  * Returns the points to which all grid lines should run
- *rom a given vanishing point (Polygon point array).
+ * from a given vanishing point (Polygon point array).
  * -----------------------------------------------------------------
  * x1 = position of x1 point on line.
  * segmentPoints = array of points to which grid lines will run.
@@ -145,7 +146,7 @@ function getVPPolyGrid(segmentPoints, vpX, vpY)
  * @param lAngle
  * @returns {GSDesigner.LineCoordinate}
  */
-function getSpokeLineCoords(cRadius, ccCoords, lAngle)
+function getAngledLineCoords(cRadius, ccCoords, lAngle)
 {
     var lineCoords = new GSDesigner.LineCoordinate();
 
@@ -180,13 +181,14 @@ function getSpokeLineCoords(cRadius, ccCoords, lAngle)
 
 /**
  * Calculates the endpoint of a line given the
- * radius of the outer circle, center points of
+ * radius of the outer circle, center point of
  * the circle and desired angle.
  * ---------------------------------------------------
  * cRadius = circle radius
  * cXpos = circle center X point
  * cYpos = circle center Y point
  * lAngle = line angle in degrees
+ * spokeAdjustment = bool, subtract 90 degrees for spoke angles
  * @param cRadius
  * @param ccCoords
  * @param lAngle
@@ -198,7 +200,7 @@ function getPointsFromAngle(cRadius, ccCoords, lAngle)
 
     try
     {
-        var actualAngle = lAngle - 90;
+        var actualAngle = lAngle;
 
         resultCoords.x = ccCoords.x + cRadius * Math.cos(actualAngle * (Math.PI / 180));
         resultCoords.y = ccCoords.y + cRadius * Math.sin(actualAngle * (Math.PI / 180));

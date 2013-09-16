@@ -93,21 +93,12 @@ function SetCanvasElementHeight()
     divContent.style.maxHeight = divContent.style.height;
 }
 
-/**
- *
- * @vanishing point enumID
- */
+// TODO - Remove once the touch methods and popup menus are functional
+// John 9/15/13
 function ToggleVanishPoint(shapeEnumId)
 {
     try
     {
-/*        if(GSDesigner.NodeExists(GSDesigner.groupId[shapeEnumId]))
-        {
-            var group = GSDesigner.GetNode(GSDesigner.groupId[shapeEnumId]);
-
-            group.setVisible(!group.getVisible());
-            GSDesigner.VPLayer.draw();
-        }*/
         AddNewVanishingPoint();
     }
     catch (ex)
@@ -200,7 +191,7 @@ function GetNewDocSettings()
 }
 
 /**
- *
+ * Add the next sequential vaishing point to the grid
  * @returns {number}
  */
 function AddNewVanishingPoint()
@@ -209,41 +200,6 @@ function AddNewVanishingPoint()
 
     try
     {
-        /*
-            Todo - Add the creation of a horizon line on the first VP added to DOC
-            @author: John.Fenlon
-            @date: 8/23/13
-         */
-
-
-         // Draw the horizon line
-/*         var hlineY = (GSDesigner.MainStage.getHeight() - 2) /2;
-         var hlineX1 = 0;
-         var hlineX2 = GSDesigner.MainStage.getWidth();
-         GSDesigner.WorkspaceSettings.hLineMidPoint = (hlineX2 - hlineX1) / 2;
-
-         *//*
-         Todo - DEBUG - REMOVE
-         @author: John.Fenlon
-         @date: 8/14/13
-         *//*
-        var node = GSDesigner.GetNode('txtMidPoint');
-        node.setText(hlineY);
-
-        var kjsHorizon = new Kinetic.Line({
-            points: [hlineX1, hlineY, hlineX2, hlineY],
-            stroke: 'black',
-            strokeWidth: GSDesigner.GeneralShapeAttributes.strokeWidth + 0.2,
-            id: GSDesigner.shapeId[GSDesigner.shapeIdEnum.Horizon],
-            name: 'horizon',
-            draggable: false
-        });
-
-        GSDesigner.HorizonLayer = new Kinetic.Layer({
-            id: 'lyrHorizon'
-        });
-        kjsMainGroup.add(kjsHorizon);*/
-
         var nextAvailable = GSDesigner.GetNextAvailableVP(); // call next available function
 
 
@@ -432,6 +388,8 @@ function CloneSourceVanishingPoint(nodeId, startingCoords)
         GSDesigner.VPLayer.add(newVP);
         GSDesigner.GridLayer.add(newPG);
 
+        UpdateGridLineColors(nodeId);
+
         for(var i = 0; i < newVP.children.length; i++)
         {
             if(newVP.children[i].attrs.id == 'vpText')
@@ -444,6 +402,16 @@ function CloneSourceVanishingPoint(nodeId, startingCoords)
                 vpCircle = newVP.children[i];
             }
         }
+
+        // If this is vp1 then draw the horizon
+        if(newVP.getId() == 'vp1')
+        {
+            var hlineY = (GSDesigner.MainStage.getHeight() - 2) /2;
+            var hlineX1 = 0;
+            var hlineX2 = GSDesigner.MainStage.getWidth();
+            DrawHorizon(new GSDesigner.LineCoordinate(hlineX1, newVP.attrs.y, hlineX2, newVP.attrs.y));
+        }
+
 
         // TODO - Bind mobile 'touch' events for selection and menu (touchhold)
         // John 9/12/13
@@ -467,6 +435,10 @@ function CloneSourceVanishingPoint(nodeId, startingCoords)
             GSDesigner.GridLayer.draw();
             GSDesigner.VPLayer.draw();
         })
+
+        GSDesigner.VPLayer.on('beforeDraw', function(){
+            UpdateHorizon();
+        });
 
         /*
          Todo - DEBUG - REMOVE
@@ -552,13 +524,6 @@ function SetupStage()
             id: 'lyrTouch'
         });
 
-        // keep v points 1 and/or 2 in sync with the horizon
-/*        GSDesigner.VPLayer.on('beforeDraw', function(evt) {
-            var isTwoPP = (GSDesigner.NodeExists());
-
-            if(evt.targetNode.attr.id == GSDesigner.groupIdEnum[GSDesigner.groupId.VanishPoint] || evt.targetNode.attr.id == GSDesigner.groupIdEnum[GSDesigner.groupId.VanishPoint2])
-                UpdateHorizon();
-        });*/
 
         /*
             Todo - DEBUG - REMOVE
@@ -646,22 +611,96 @@ function SetupStage()
     }
 }
 
+/**
+ * Draw the horizon line with vp1
+ * @param lineCoords
+ * @returns {*}
+ * @constructor
+ */
+function  DrawHorizon(lineCoords)
+{
+    var result = GSDesigner.ResponseEnum.SILENT_FAILURE;
 
-function UpdateHorizon() {
-    var q = quad; // equivalent to vp1 & vp2 coordinates
-    var horizonLine = GSDesigner.HorizonLayer.get('#' + GSDesigner.shapeIdEnum[GSDesigner.shapeId.Horizon])[0];
-
-    if(GSDesigner.GetPerspectiveCount > 1)
+    try
     {
-        horizonLine.setPoints([q.start.attrs.x, q.start.attrs.y, q.end.attrs.x, q.end.attrs.y]);
-    }
-    else
-    {
-        // single point perspective, we only move the line on the x axis
-        //horizonLine.setPoints([vp1 points]);
-    }
+        // TODO - Parameterize the horizon settings
+        // John 9/15/13
 
-    GSDesigner.HorizonLayer.draw();
+        var horizonLine = new Kinetic.Line({
+            dashArray: [33, 10],
+            strokeWidth: 1,
+            stroke: 'green',
+            lineCap: 'round',
+            id: 'horizon',
+            opacity: 0.6,
+            points: [lineCoords.x1, lineCoords.y1, lineCoords.x2, lineCoords.y2]
+        });
+
+        GSDesigner.HorizonLayer.add(horizonLine);
+
+        result = GSDesigner.ResponseEnum.SUCCESS;
+    }
+    catch (ex)
+    {
+        result = GSDesigner.ResponseEnum.LOGGED_FAILURE;
+        //LOG ERROR
+        LogError(ex.message + ' [' + arguments.callee.name + ']');
+    }
+    finally
+    {
+        return result;
+    }
+}
+
+/**
+ * Updates the horizon line according to the position of vp1 and/or vp2
+ * @returns {*}
+ * @constructor
+ */
+function UpdateHorizon()
+{
+    var result = GSDesigner.ResponseEnum.SILENT_FAILURE;
+
+    try
+    {
+        var horizonLine = GSDesigner.HorizonLayer.get('Line')[0];
+        var tg1 = GSDesigner.TouchLayer.get('#tg1')[0];
+        var tg2 = GSDesigner.TouchLayer.get('#tg2')[0];
+        var pCount = GSDesigner.GetPerspectiveCount();
+
+        if(tg2 && pCount > 1)
+        {
+            // Angle adjustment added
+            var lineAngle = getAngleFromCoords(new GSDesigner.LineCoordinate(tg1.attrs.x, tg1.attrs.y, tg2.attrs.x, tg2.attrs.y));
+            var newHorizonLineCoords = getAngledLineCoords(GSDesigner.MainStage.getWidth(), new GSDesigner.Coordinate(tg1.attrs.x, tg1.attrs.y), lineAngle);
+
+            horizonLine.setAttr('points',[newHorizonLineCoords.x1, newHorizonLineCoords.y1, newHorizonLineCoords.x2, newHorizonLineCoords.y2]);
+        }
+        else
+        {
+            var hlineY = tg1.attrs.y;
+            var hlineX1 = 0;
+            var hlineX2 = GSDesigner.MainStage.getWidth();
+
+            // single point perspective, we only move the line on the x axis
+            var lineCoords = new GSDesigner.LineCoordinate(hlineX1, hlineY, hlineX2, hlineY);
+            horizonLine.setAttr('points',[lineCoords.x1, lineCoords.y1, lineCoords.x2, lineCoords.y2]);
+        }
+
+        GSDesigner.HorizonLayer.draw();
+
+        result = GSDesigner.ResponseEnum.SUCCESS;
+    }
+    catch (ex)
+    {
+        result = GSDesigner.ResponseEnum.LOGGED_FAILURE;
+        //LOG ERROR
+        LogError(ex.message + ' [' + arguments.callee.name + ']');
+    }
+    finally
+    {
+        return result;
+    }
 }
 
 /**
@@ -806,7 +845,7 @@ function UpdateLineDensity()
 
         for(var n = 0; n < lineCount; n++)
         {
-            var endPoint = getSpokeLineCoords(stageDiag, groupCoords, Math.abs(angle));
+            var endPoint = getAngledLineCoords(stageDiag, groupCoords, Math.abs(angle));
 
             var line = new Kinetic.Line({
                 points: [endPoint.x1,endPoint.y1,endPoint.x2,endPoint.y2],
@@ -868,7 +907,7 @@ function CreatePerspectiveGrid(groupCoords)
 
         for(var n = 0; n < lineCount; n++)
         {
-            var endPoint = getSpokeLineCoords(stageDiag, groupCoords, Math.abs(angle));
+            var endPoint = getAngledLineCoords(stageDiag, groupCoords, Math.abs(angle));
 
             var line = new Kinetic.Line({
                 points: [endPoint.x1,endPoint.y1,endPoint.x2,endPoint.y2],
@@ -916,15 +955,15 @@ function UpdateGridLineColors(pgGroupId)
 
     try
     {
-        for(var g = 1; g < 4; g++)
-        {
+        var pgGroup = GSDesigner.GridLayer.get('#pg' + pgGroupId)[0];
+
+
             var children = pgGroup.getChildren();
 
             for(var l = 0; l < children.length; l++)
             {
-               children[l].setStroke(GSDesigner.getNextGridLineColor(g-1));
+               children[l].setStroke(GSDesigner.getNextGridLineColor(pgGroupId));
             }
-        }
 
         results = 1;
         GSDesigner.GridLayer.draw();
