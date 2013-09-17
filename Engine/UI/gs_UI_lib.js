@@ -118,12 +118,7 @@ function AddNewDocument()
         // Clear existing document
         GSDesigner.MainStage.clear();
 
-        /** DEV ONLY */
-        CreateDebugWindow();
-
-        var docSettings = GetNewDocSettings() || new GSDesigner.DocumentObject(1024, 400);
-
-        SetFieldData('txtDocSize', docSettings.width +  ' X ' + docSettings.height);
+        var docSettings = GetNewDocSettings() || new GSDesigner.DocumentObject(800, 400);
 
         if(CreateDocument(docSettings) < 0)
             throw new EvalError("create-main_layer-failed");
@@ -443,15 +438,10 @@ function CloneSourceVanishingPoint(nodeId, startingCoords)
         });
 
         /*
-         Todo - DEBUG - REMOVE
-         @author: John.Fenlon
-         @date: 8/14/13
+            Todo - When touch events are added, remove hover effects and add effect to selected VPs only, then set all other VPs to 'normal'
+            @author: John.Fenlon
+            @date: 9/17/13
          */
-        newTG.on('mouseup', function(){
-            var node = GSDesigner.GetNode('txtVPPos');
-
-            node.setText('x = ' + this.getAbsolutePosition().x + ' | y = ' + this.getAbsolutePosition().y);
-        });
 
         newTC.on('mouseover', function(){
             vpCircle.setFill(GSDesigner.VPAttributes.hoverFillColor);
@@ -494,6 +484,12 @@ function SetupStage()
         var stageWidth = stageParent.clientWidth;
         var stageHeight = stageParent.clientHeight;
 
+        /*
+            Todo - Create drag bounds for stage dragging to prevent users from seeing end-points of lines
+            @author: John.Fenlon
+            @date: 9/17/13
+         */
+
         GSDesigner.MainStage = new Kinetic.Stage({
             container: "canvasContainer",
             id: 'stage',
@@ -524,18 +520,6 @@ function SetupStage()
 
         GSDesigner.TouchLayer = new Kinetic.Layer({
             id: 'lyrTouch'
-        });
-
-
-        /*
-            Todo - DEBUG - REMOVE
-            @author: John.Fenlon
-            @date: 8/14/13
-         */
-        GSDesigner.VPLayer.on('click', function(evt){
-            var shape = evt.targetNode;
-            var node = GSDesigner.GetNode('txtSelected');
-            node.setText(shape.getName());
         });
 
         /*
@@ -634,7 +618,7 @@ function  DrawHorizon(lineCoords)
             stroke: 'green',
             lineCap: 'round',
             id: 'horizon',
-            opacity: 0.6,
+            opacity: 0.8,
             points: [lineCoords.x1, lineCoords.y1, lineCoords.x2, lineCoords.y2]
         });
 
@@ -672,9 +656,9 @@ function UpdateHorizon()
 
         if(tg2 && pCount > 1)
         {
-            // Angle adjustment added
+            var pivotPoint = new GSDesigner.Coordinate(tg1.attrs.x, tg1.attrs.y);
             var lineAngle = getAngleFromCoords(new GSDesigner.LineCoordinate(tg1.attrs.x, tg1.attrs.y, tg2.attrs.x, tg2.attrs.y));
-            var newHorizonLineCoords = getAngledLineCoords(GSDesigner.MainStage.getWidth(), new GSDesigner.Coordinate(tg1.attrs.x, tg1.attrs.y), lineAngle);
+            var newHorizonLineCoords = getAngledLineCoords(GSDesigner.MainStage.getWidth() * 2, pivotPoint, lineAngle);
 
             horizonLine.setAttr('points',[newHorizonLineCoords.x1, newHorizonLineCoords.y1, newHorizonLineCoords.x2, newHorizonLineCoords.y2]);
         }
@@ -902,7 +886,7 @@ function CreatePerspectiveGrid(groupCoords)
             visible: false
         });
 
-        var stageDiag = getDistanceBetweenPoints(new GSDesigner.Coordinate(0,GSDesigner.MainStage.getHeight()), new GSDesigner.Coordinate(GSDesigner.MainStage.getWidth(),0));
+        var stageDiag = getDistanceBetweenPoints(new GSDesigner.Coordinate(0,GSDesigner.MainStage.getHeight()), new GSDesigner.Coordinate(GSDesigner.MainStage.getWidth(),0)) * 2;
         var perspectiveLine = [];
         var angle = 0;
         var gridLineColor = GSDesigner.getNextGridLineColor(0);
@@ -990,7 +974,7 @@ function PointSelected(selectedVPGroup)
     {
         if(selectedVPGroup)
         {
-            GSDesigner.SelectedVPGroupID = selectedVPGroup.getId();
+            GSDesigner.SelectedVPGroupID = 'vp' + selectedVPGroup.getId().substring(2);
             GSDesigner.SelectedPGGroupID = 'pg' + GSDesigner.SelectedVPGroupID.substring(2);
         }
     }

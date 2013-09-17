@@ -9,6 +9,8 @@ var GSDesigner = {
     GridColors                : ["#CC0000", "#00CCFF", "#6600CC", "#00CC00", "#FF00FF", "#663300", "#CC0066", "#0066FF", "#4A6E6E"],
     UI_theme_literal          : "data-theme",
     Max_VP                    : 9,
+    Max_Zoom                  : 120,
+    Min_Zoom                  : 30,
 
     // public methods
     getNextGridLineColor: function(colorIncrement)
@@ -28,11 +30,13 @@ var GSDesigner = {
     setSelectedVP: function(vpGroup)
     {
         this.CurrentSelectedVP = vpGroup;
-        var txtVP = GSDesigner.GetNode('txtCurrentVP');
 
-        txtVP.setText(vpGroup.attrs.id);
+        /*
+            Todo - Set other properties when VP1 or VP2 are selected
+            @author: John.Fenlon
+            @date: 9/17/13
+         */
     },
-    getSelectedVP: function(){ return this.CurrentSelectedVP;},
     version: function() { return this.version_major.toString() + '.' + this.version_minor.toString() + '.' + this.version_revision.toString();},
     incrementGridColorIndex: function()
     {

@@ -1,7 +1,6 @@
-﻿/***
-Spectrum: The No Hassle Colorpicker
+/***
+Spectrum Colorpicker v1.1.1
 https://github.com/bgrins/spectrum
-
 Author: Brian Grinstead
 License: MIT
 ***/
@@ -180,6 +179,10 @@ License: MIT
     filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff00ff', endColorstr='#ff0000');
 }
 
+.sp-hidden {
+    display: none !important;
+}
+
 /* Clearfix hack */
 .sp-cf:before, .sp-cf:after { content: ""; display: table; }
 .sp-cf:after { clear: both; }
@@ -218,8 +221,8 @@ License: MIT
 /* Basic display options (colors, fonts, global widths) */
 .sp-container {
     border-radius: 0;
-    background-color: rgb(27,27,27);
-    border: solid 1px rgb(40,40,40);
+    background-color: #ECECEC;
+    border: solid 1px #f0c49B;
     padding: 0;
 }
 .sp-container, .sp-container button, .sp-container input, .sp-color, .sp-hue
@@ -277,7 +280,7 @@ License: MIT
 .sp-picker-container
 {
     width: 172px;
-    /*border-left: solid 1px #fff;*/
+    border-left: solid 1px #fff;
 }
 
 /* Palettes */
@@ -341,6 +344,11 @@ License: MIT
 .sp-replacer:hover, .sp-replacer.sp-active {
     border-color: #F0C49B;
     color: #111;
+}
+.sp-replacer.sp-disabled {
+    cursor:default;
+    border-color: silver;
+    color: silver;
 }
 .sp-dd {
     padding: 2px 0;
@@ -454,6 +462,12 @@ License: MIT
     display:block;
     position:absolute;
     top:0;left:0;bottom:0;right:0;
+}
+
+.sp-palette .sp-thumb-inner
+{
+    background-position: 50% 50%;
+    background-repeat: no-repeat;
 }
 
 .sp-palette .sp-thumb-light.sp-thumb-active .sp-thumb-inner

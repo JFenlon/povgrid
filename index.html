@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="CSS/Global.css"/>
     <link rel="stylesheet" href="http://code.jquery.com/mobile/1.3.0/jquery.mobile-1.3.0.min.css" />
     <link rel="stylesheet" href="CSS/gs_themes.css" />
+    <link rel="stylesheet" href="CSS/Override.css" />
     <script src="jQuery/jquery-1.9.1.js"></script>
     <script src="jQuery/jquery.mobile-1.3.0.js"></script>
     <script src="ThirdPartyJS/kineticJS/kinetic-v4.6.0.min.js"></script>
@@ -19,82 +20,28 @@
 </head>
 
 <body>
-<div data-role="page" class="ui-responsive-panel" id="panel-fixed-page1" data-url="panel-fixed-page1">
-    <div data-role="header" data-theme="d" data-position="fixed">
-        <h1>Gridspective</h1>
-        <a href="#add-form" class="ui-btn-right" data-icon="gear" data-iconpos="left">Menu</a>
-    </div><!-- /header -->
-    <div class="ui-grid-d" id="divTopGrid" data-theme="d">
-        <div class="ui-block-a">
-            <div class="ui-bar ui-bar-d" style="height:125px">
-
-            </div>
-        </div>
-        <div class="ui-block-b" data-theme="d">
-            <div class="ui-bar ui-bar-d" style="height:125px" data-theme="d">
-                <div data-role="controlgroup">
-                    <a href="#" id="btnVanishPoint1" data-role="button" data-icon="plus" data-theme="d" data-iconpos="left">Vanishing Point 1</a>
-                    <a href="#" id="btnVanishPoint2" data-role="button" data-icon="plus" data-theme="d" data-iconpos="left">Vanishing Point 2</a>
-                    <a href="#" id="btnVanishPoint3" data-role="button" data-icon="plus" data-theme="d" data-iconpos="left">Vanishing Point 3</a>
-                </div>
-            </div>
-        </div>
-        <div class="ui-block-b" data-theme="d">
-            <div class="ui-bar ui-bar-d" style="height:125px" data-theme="d">
-                <label data-theme="d" for="sldLineDensity">Line Density:</label>
-                <input data-theme="d" type="range" name="sldLineDensity" id="sldLineDensity" data-highlight="true" min="5" max="60" value="5" data-mini="true">
-                <label data-theme="d" for="sldLineOpacity">Line Opacity:</label>
-                <input data-theme="d" type="range" name="sldLineOpacity" id="sldLineOpacity" data-highlight="true" min="0" max="100" value="60" data-mini="true">
-            </div>
-        </div>
-        <div class="ui-block-b">
-            <div class="ui-bar ui-bar-d" style="height:125px" data-theme="d">
-                <div data-role="controlgroup">
-                    <a href="#" id="btnCycleColors" data-role="button" data-icon="refresh" data-theme="d" data-iconpos="left">Cycle Colors</a>
-                </div>
-            </div>
-        </div>
-        <div class="ui-block-b" data-theme="d">
-            <div class="ui-bar ui-bar-d" style="height:125px" data-theme="d">
-                <div data-role="content">
-
-                </div>
-            </div>
+<div class="rwd-example">
+    <!-- secondary story block #2 -->
+    <div class="ui-block-c">
+        <div class="ui-body ui-body-d">
+            <h4>Header Bar - New doc menu top left. Settings menu top right</h4>
         </div>
     </div>
-    <div class="ui-grid-solo" id="divContent">
-        <div class="ui-block-a">
-            <div id="canvasContainer"></div>
-            <!--        <div data-role="content" id="divContent">
-                        <div id="canvasContainer"></div>
-                    </div>&lt;!&ndash; /content &ndash;&gt;-->
-        </div>
-    </div>
-
-    <div data-role="panel" data-position="right" data-position-fixed="true" data-display="overlay" data-theme="b" id="add-form">
-        <form class="userform">
-            <h2>Controls</h2>
-            <div class="ui-block-a">
-                <div class="ui-bar ui-bar-d" style="height:125px; width:220px">
-                    <input type='text' id='tbWidth' size="4" maxlength="4" data-mini="true" data-theme="d"/>
-                    <input type='text' id='tbHeight' size="4" maxlength="4" data-mini="true" data-theme="d"/>
-                    <input type='button' id='btnCreateDocument' value="Create Document"  data-theme="d"/>
-                </div>
-            </div>
-            <div class="ui-block-a" data-theme="d">
-                <div class="ui-bar ui-bar-d" style="height:200px; width:220px" data-theme="d">
-                    <div data-role="content">
-                        <ul data-role="listview">
-                            <li data-mini="true"><a name="link" href="#">a</a></li>
-                            <li data-mini="true"><a name="link" href="#">b</a></li>
-                            <li data-mini="true"><a name="link" href="#">c</a></li>
-                            <li data-mini="true"><a name="link" href="#">d</a></li>
-                            <li data-mini="true"><a name="link" href="#">e</a></li>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </form>
-    </div><!-- /panel -->
 </div>
+    <div class="rwd-example">
+        <!-- Lead story block -->
+        <div class="ui-block-a">
+            <div class="ui-body ui-body-d">
+                <h2>Apple schedules 'iPad Mini' event for October 23</h2>
+                <p>One of the worst-kept secrets in tech has been confirmed: Apple will hold an event October 23 in San Jose, California, at which the company is widely expected to unveil a smaller, cheaper version of its popular iPad called "Mini".</p>
+            </div>
+        </div>
+        <!-- secondary story block #1 -->
+        <div class="ui-block-b">
+            <div class="ui-body ui-body-d">
+                <h5>Line Density</h5>
+                <h5>Line Opacity</h5>
+            </div>
+        </div>
+    </div><!-- /rwd-example -->
 </body>
