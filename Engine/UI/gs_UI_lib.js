@@ -407,8 +407,10 @@ function CloneSourceVanishingPoint(nodeId, startingCoords)
         if(newVP.getId() == 'vp1')
         {
             var hlineY = (GSDesigner.MainStage.getHeight() - 2) /2;
-            var hlineX1 = 0;
             var hlineX2 = GSDesigner.MainStage.getWidth();
+            var hlineX1 = (hlineX2 / 2) * -1;
+
+            hlineX2 += (hlineX2 / 2);
             DrawHorizon(new GSDesigner.LineCoordinate(hlineX1, newVP.attrs.y, hlineX2, newVP.attrs.y));
         }
 
