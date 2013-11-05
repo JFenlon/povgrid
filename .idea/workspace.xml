@@ -4,64 +4,26 @@
     <list id="dffa65c6-1358-439d-b91d-5ef99f148acb" name="Default" comment="" />
     <list id="bc166a81-2bc8-4f38-bd62-74850f0eaf91" name="BugOut" comment="On Hold" />
     <list default="true" id="1ea9c6ec-aa69-4242-92d2-c9368ee30397" name="POvGrid Master" comment="Initial file listInitial file list">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/apple-touch-icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/css/back-icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/css/back-line.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/css/back-mini.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/css/bright-shiny.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/css/dark_matte.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/css/expando.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/css/full-matte.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/docs/jodog.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/kitchensink/joicon_114.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/css/lite-matte.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/css/shade-top.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/css/shade.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/css/shiny-button.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/css/shiny.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/css/subtle-matte-full.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/css/subtle-shiny-button.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/css/subtle-shiny.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/ABOUT.mdown" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/LICENSE.mdown" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/Override.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/README.mdown" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/kitchensink/js/ajax.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/kitchensink/app.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/kitchensink/js/app.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/kitchensink/js/audio.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/css/browser.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/docs/doc.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/docs/docbody.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/file/file.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/docs/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/file/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/kitchensink/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/yql/index.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/css/jo.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/js/jo.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/js/jo_min.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/kitchensink/js/lists.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/kitchensink/js/menu.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/kitchensink/js/popups.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/css/sample.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/file/sometext.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/kitchensink/js/tables.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/test.html" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/test.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/kitchensink/js/themes.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/css/webos.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/kitchensink/js/widgets.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/yql/yql.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/yql/yql.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CSS/Global.css" afterPath="$PROJECT_DIR$/CSS/Global.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Engine/UI/gs_UI_lib.js" afterPath="$PROJECT_DIR$/Engine/UI/gs_UI_lib.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/back-icon.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/back-line.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/back-mini.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/bright-shiny.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/dark_matte.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/expando.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/full-matte.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/lite-matte.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/shade-top.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/shade.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/shiny-button.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/shiny.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/subtle-matte-full.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/subtle-shiny-button.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/subtle-shiny.png" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/jo.css" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo_UI/jo.js" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo_UI/jo_min.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gs_main.html" afterPath="$PROJECT_DIR$/gs_main.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Engine/gs_object_def.js" afterPath="$PROJECT_DIR$/Engine/gs_object_def.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/CSS/spectrum.css" afterPath="$PROJECT_DIR$/CSS/spectrum.css" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/ThirdPartyJS/spectrum/spectrum.js" afterPath="$PROJECT_DIR$/ThirdPartyJS/spectrum/spectrum.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="PovGrid.iws" />
@@ -72,7 +34,7 @@
     <file path="/povgrid_canvas.html" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1365024540613" ignored="false" />
     <file path="/Dummy.regexp" changelist="dffa65c6-1358-439d-b91d-5ef99f148acb" time="1365018760315" ignored="false" />
     <file path="/Dummy.xpath" changelist="dffa65c6-1358-439d-b91d-5ef99f148acb" time="1365018760315" ignored="false" />
-    <file path="/Dummy.txt" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1379453876821" ignored="false" />
+    <file path="/Dummy.txt" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1383660572029" ignored="false" />
     <file path="/povgrid_object_def.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1376336525193" ignored="false" />
     <file path="/povgrid_UI_lib.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1376344409635" ignored="false" />
     <file path="/povgrid_main.html" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1376342611401" ignored="false" />
@@ -80,7 +42,7 @@
     <file path="/povgrid_main.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1375196923064" ignored="false" />
     <file path="/povgrid_generic_lib.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1376337327606" ignored="false" />
     <file path="/povgrid_geometry_lib.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1375455678975" ignored="false" />
-    <file path="/gs_main.html" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1378867863082" ignored="false" />
+    <file path="/gs_main.html" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1382217436611" ignored="false" />
     <file path="/gs_object_def.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1379453301190" ignored="false" />
     <file path="/gs_UI_lib.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1379453654220" ignored="false" />
     <file path="/dev_tools.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1378779189903" ignored="false" />
@@ -136,7 +98,6 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/CustomJS/Helpers/dev_tools.js" />
         <option value="$PROJECT_DIR$/CustomJS/povgrid_object_def.js" />
         <option value="$PROJECT_DIR$/CustomJS/Helpers/povgrid_generic_lib.js" />
         <option value="$PROJECT_DIR$/povgrid_main.html" />
@@ -148,18 +109,17 @@
         <option value="$PROJECT_DIR$/CSS/Global.css" />
         <option value="$PROJECT_DIR$/CSS/Override.css" />
         <option value="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/kitchensink/js/widgets.js" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/Engine/gs_object_def.js" />
-        <option value="$PROJECT_DIR$/gs_main.html" />
         <option value="$PROJECT_DIR$/Engine/UI/gs_UI_lib.js" />
+        <option value="$PROJECT_DIR$/CSS/jo.css" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/gs_main.html" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="-9" />
-    <option name="y" value="-9" />
-    <option name="width" value="1938" />
-    <option name="height" value="1050" />
+    <option name="width" value="1600" />
+    <option name="height" value="860" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -263,6 +223,24 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
+              <option name="myItemId" value="ThirdPartyJS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jo_UI" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PovGrid" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="povgrid" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
               <option name="myItemId" value="Engine" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
@@ -336,7 +314,7 @@
   </component>
   <component name="PublishConfig" serverName="Digitalife" serverId="e6cb882d-10de-4c4c-b453-5c5f280863ec">
     <servers>
-      <server id="39ed1d0e-1ad9-4204-b011-9e579ae2aace">
+      <server id="e6cb882d-10de-4c4c-b453-5c5f280863ec">
         <serverdata />
       </server>
     </servers>
@@ -347,6 +325,8 @@
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\John\Documents\Apps\HTML5\povgrid\CSS\images" />
+      <recent name="C:\Users\John\Documents\Apps\HTML5\povgrid\CSS" />
+      <recent name="C:\Users\John\Documents\Apps\HTML5\povgrid\ThirdPartyJS\jo_UI" />
     </key>
   </component>
   <component name="RunManager" selected="JavaScript Debug.povgrid_canvas.html">
@@ -528,14 +508,14 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="-9" y="-9" width="1938" height="1050" extended-state="6" />
+    <frame x="0" y="0" width="1600" height="860" extended-state="0" />
     <editor active="false" />
     <layout>
-      <window_info id="Messages" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32844242" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32765958" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12482663" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32844242" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19188192" sideWeight="0.67155755" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13653137" sideWeight="0.67155755" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13773222" sideWeight="0.67234045" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39839265" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294676" sideWeight="0.6704289" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15950069" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -616,6 +596,20 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/gs_main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="60" selection-start="953" selection-end="953" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/CSS/jquery.mobile.custom.theme.css">
       <provider selected="true" editor-type-id="text-editor">
         <state line="18" column="12" selection-start="440" selection-end="440" vertical-scroll-proportion="-8.3020525" />
@@ -635,64 +629,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CSS/Override.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="109" selection-start="758" selection-end="758" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/kitchensink/js/themes.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="53" selection-start="195" selection-end="195" vertical-scroll-proportion="0.1605667">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/kitchensink/js/app.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="21" column="68" selection-start="615" selection-end="615" vertical-scroll-proportion="0.41511628">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/kitchensink/js/menu.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="n#!!doc" expanded="false" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/kitchensink/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="22" column="42" selection-start="932" selection-end="932" vertical-scroll-proportion="0.38848922">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/kitchensink/js/widgets.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="65" column="10" selection-start="1968" selection-end="1968" vertical-scroll-proportion="0.86162794">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="8" column="53" selection-start="541" selection-end="541" vertical-scroll-proportion="0.15103532">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/js/jo.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="125" column="4" selection-start="3121" selection-end="3121" vertical-scroll-proportion="0.3321617">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Engine/gs_main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="20" column="25" selection-start="476" selection-end="476" vertical-scroll-proportion="0.52196836" />
@@ -700,32 +636,43 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/Engine/Helpers/dev_tools.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Engine/gs_object_def.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="41" selection-start="1299" selection-end="1299" vertical-scroll-proportion="0.0">
-          <folding>
-            <element signature="n#!!doc" expanded="true" />
-          </folding>
-        </state>
+        <state line="34" column="41" selection-start="1299" selection-end="1299" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/Engine/UI/gs_UI_lib.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="446" column="60" selection-start="13319" selection-end="13319" vertical-scroll-proportion="0.63093144">
+        <state line="446" column="60" selection-start="13319" selection-end="13319" vertical-scroll-proportion="0.63093144" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CSS/Override.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="37" column="109" selection-start="758" selection-end="758" vertical-scroll-proportion="0.22385861">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CSS/jo.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="973" column="55" selection-start="23598" selection-end="23598" vertical-scroll-proportion="0.9499264">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/gs_main.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="44" column="130" selection-start="2604" selection-end="2604" vertical-scroll-proportion="0.4383057">
+        <state line="101" column="23" selection-start="5409" selection-end="5409" vertical-scroll-proportion="0.6967841">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/index.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="15" column="60" selection-start="953" selection-end="953" vertical-scroll-proportion="0.0265625">
           <folding />
         </state>
       </provider>

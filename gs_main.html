@@ -97,4 +97,13 @@
         </form>
     </div><!-- /panel -->
 </div>
+<script>
+    $(function(){
+        $( "#divContent" ).bind( "taphold", tapholdHandler );
+
+        function tapholdHandler( event ){
+            alert('TAPHOLD');
+        }
+    });
+</script>
 </body>
