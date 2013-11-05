@@ -1,3 +1,4 @@
+/*
 #base
  {
      border: 1px solid #9C9898;
@@ -50,7 +51,9 @@
 ul#display-inline-block,
 ul#display-inline-block li
 {
-    /* Setting a common base */
+    */
+/* Setting a common base *//*
+
     margin: 0;
     padding: 0;
     display: inline-block !important;
@@ -76,7 +79,9 @@ ul#display-inline-block li
     margin-bottom: 5px;
 }
 
-/* Override for padding added by jQuery mobile */
+*/
+/* Override for padding added by jQuery mobile *//*
+
 #divContent
 {
     padding: 0;
@@ -97,4 +102,18 @@ body
     -moz-user-select: moz-none;
     -ms-user-select: none;
     user-select: none;
+}
+*/
+
+body {
+    min-height: 768px;
+    padding-top: 70px;
+    padding-bottom: 70px;
+}
+
+
+
+.custom_container .container
+{
+    width: auto;
 }
