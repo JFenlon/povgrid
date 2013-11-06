@@ -1,8 +1,29 @@
-/*
+
 #base
  {
      border: 1px solid #9C9898;
  }
+
+#canvasContainer
+{
+    border: 0;
+    border-style: solid;
+    border-color: #9C9898;
+    background: #4e624b url('images/greyback.jpg') no-repeat center center fixed;
+    height: 100%;
+    margin-top: 51px;
+}
+
+#home
+{
+    height: 768px;
+}
+
+.control_top
+{
+    padding: 20px 10px 20px 10px;
+    max-width: 50%;
+}
 
 #popupPanel-popup
 {
@@ -23,25 +44,30 @@
     margin: 2em 15px;
 }
 
-#canvasContainer
+/* Override for padding added by jQuery mobile */
+
+/*#divContent
 {
-    border: 0;
-    border-right: 1px;
-    border-style: solid;
-    border-color: #9C9898;
-    background: #4e624b url('images/greyback.jpg') no-repeat center center fixed;
+    padding: 0;
+}*/
+
+body 
+{
+    margin: 0;
+    padding: 0;
+    background: #4e624b;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: moz-none;
+    -ms-user-select: none;
+    user-select: none;
 }
 
-#home 
-{
-    height: 768px;
-}
-
-.control_top 
-{
-    padding: 20px 10px 20px 10px;
-    max-width: 50%;
-}
 
 .inline_display
 {
@@ -51,9 +77,6 @@
 ul#display-inline-block,
 ul#display-inline-block li
 {
-    */
-/* Setting a common base *//*
-
     margin: 0;
     padding: 0;
     display: inline-block !important;
@@ -79,36 +102,9 @@ ul#display-inline-block li
     margin-bottom: 5px;
 }
 
-*/
-/* Override for padding added by jQuery mobile *//*
-
-#divContent
-{
-    padding: 0;
-}
-
-body 
-{
-    margin: 0;
-    padding: 0;
-    background: #4e624b;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
-    background-size: cover;
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
-    -khtml-user-select: none;
-    -moz-user-select: moz-none;
-    -ms-user-select: none;
-    user-select: none;
-}
-*/
-
 body {
     min-height: 768px;
-    padding-top: 70px;
-    padding-bottom: 70px;
+    background: #cccccc;
 }
 
 

@@ -15,7 +15,7 @@ $(document).ready(function () {
         EventBinding();
 
         /** Initialize UI  */
-        SetCanvasElementHeight();
+       // SetCanvasElementHeight();
 
         if(SetupStage() < 0)
             throw new EvalError("setup-stage-failed");

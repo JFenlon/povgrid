@@ -118,7 +118,8 @@ function AddNewDocument()
         // Clear existing document
         GSDesigner.MainStage.clear();
 
-        var docSettings = GetNewDocSettings() || new GSDesigner.DocumentObject(800, 400);
+        //var docSettings = GetNewDocSettings() || new GSDesigner.DocumentObject(800, 400);
+        var docSettings = new GSDesigner.DocumentObject(800, 400);
 
         if(CreateDocument(docSettings) < 0)
             throw new EvalError("create-main_layer-failed");
@@ -178,6 +179,7 @@ function GetNewDocSettings()
     {
         // Generic error
         LogError(ex.message + ' [' + arguments.callee.name + ']');
+        docSettings = new GSDesigner.DocumentObject();
     }
     finally
     {
@@ -698,13 +700,13 @@ function CreateDocument(docInit)
 
     try
     {
-        var documentObj = (!docInit) ? new GSDesigner.DocumentObject(docInit) : docInit;
+        var documentObj = new GSDesigner.DocumentObject(docInit);
 
         /** document size input */
         var fldWidth = getDomElement('tbWidth');
         var fldHeight =  getDomElement('tbHeight');
 
-        if(fldWidth.value.length != 0 && fldHeight.value.length != 0)
+        if(fldHeight && fldWidth && fldWidth.value.length != 0 && fldHeight.value.length != 0)
         {
             documentObj.width = fldWidth.value;
             documentObj.height = fldHeight.value;
