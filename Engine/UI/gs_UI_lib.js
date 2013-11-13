@@ -86,11 +86,12 @@ function disableSelection(target) {
  */
 function SetCanvasElementHeight()
 {
-    var divGrid = getDomElement('divTopGrid');
-    var divContent = getDomElement('divContent');
+    var header = getDomElement('divHeader');
+    var content = getDomElement('divContent');
+    var footer = getDomElement('divFooter');
+    var docHeight = getDocumentHeight();
 
-    divContent.style.height = (getDocumentHeight() - divGrid.clientHeight) - 35;
-    divContent.style.maxHeight = divContent.style.height;
+    GSDesigner.SetContentHeight(docHeight - (header.offsetHeight + footer.offsetHeight));
 }
 
 // TODO - Remove once the touch methods and popup menus are functional
@@ -484,7 +485,7 @@ function SetupStage()
     {
         var stageParent = getDomElement('divContent');
         var stageWidth = stageParent.clientWidth;
-        var stageHeight = stageParent.clientHeight;
+        var stageHeight = GSDesigner.GetContentHeight();
 
         /*
             Todo - Create drag bounds for stage dragging to prevent users from seeing end-points of lines

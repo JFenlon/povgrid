@@ -10,8 +10,8 @@
     border-style: solid;
     border-color: #9C9898;
     background: #4e624b url('images/greyback.jpg') no-repeat center center fixed;
-    height: 100%;
-    margin-top: 51px;
+    min-resolution: 100%;
+    min-height: 100%;
 }
 
 #home
@@ -51,7 +51,7 @@
     padding: 0;
 }*/
 
-body 
+body
 {
     margin: 0;
     padding: 0;

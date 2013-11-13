@@ -6,6 +6,7 @@ var GSDesigner = {
     version_major             : 1,
     version_minor             : 0,
     version_revision          : 0,
+    ContentHeight             : 0,
     GridColors                : ["#CC0000", "#00CCFF", "#6600CC", "#00CC00", "#FF00FF", "#663300", "#CC0066", "#0066FF", "#4A6E6E"],
     UI_theme_literal          : "data-theme",
     Max_VP                    : 9,
@@ -518,6 +519,48 @@ GSDesigner.NodeExists = function (nodeId)
         // Generic error
         LogError(ex.message);
         results = false;
+    }
+    finally
+    {
+        return results;
+    }
+}
+
+/**
+ * Sets the max height of the canvas DOM element
+ * @param contentHeight
+ * @constructor
+ */
+GSDesigner.SetContentHeight = function (contentHeight)
+{
+    try
+    {
+        GSDesigner.ContentHeight = contentHeight;
+    }
+    catch(ex)
+    {
+        // Generic error
+        LogError(ex.message);
+    }
+}
+
+/**
+ * Returns the content height
+ * @returns {number}
+ * @constructor
+ */
+GSDesigner.GetContentHeight = function ()
+{
+    var results = 0;
+
+    try
+    {
+        results = GSDesigner.ContentHeight;
+    }
+    catch(ex)
+    {
+        // Generic error
+        LogError(ex.message);
     }
     finally
     {
