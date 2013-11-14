@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="ThirdPartyJS/slider/css/slider.css" />
     <link rel="stylesheet" href="CSS/Global.css"/>
     <link rel="stylesheet" href="CSS/jquery.mobile-1.3.2.min.css"/>
+    <link rel="stylesheet" href="CSS/spectrum.css"/>
     <script src="jQuery/jquery-1.9.1.js"></script>
     <script src="jQuery/jquery.mobile-1.3.2.min.js"></script>
     <script src="ThirdPartyJS/kineticJS/kinetic-v4.6.0.min.js"></script>
@@ -18,42 +19,54 @@
     <script src="Engine/Helpers/dev_tools.js"></script>
     <script src="Engine/UI/gs_UI_lib.js"></script>
     <script src="Engine/gs_main.js"></script>
+    <script src="ThirdPartyJS/spectrum/spectrum.js"></script>
 </head>
 
 <body>
     <div data-role="page">
-        <div data-role="header" id="divHeader">
+        <!--  Header  -->
+        <div data-role="header" id="divHeader" class="ui-icon-alt">
             <h1>Header</h1>
-            <a href="#" data-icon="bars" class="ui-btn-right">Options</a>
+            <a href="#popupMenu" class="ui-btn-right" data-rel="popup" data-role="button" data-icon="bars" data-position-to="origin" data-iconpos="notext" data-theme="d" data-inline="true">Menu</a>
+            <div data-role="popup" id="popupMenu" data-theme="a">
+                <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="c">
+                    <li data-role="divider" data-theme="a">Choose an action</li>
+                    <li data-icon="gear"><a href="#">Settings</a></li>
+                    <li data-icon="forward"><a href="#">Share</a></li>
+                </ul>
+            </div>
         </div>
+        <!-- Content -->
         <div  id="divContent">
             <div id="canvasContainer"></div>
         </div>
-        <div data-role="footer" id="divFooter"  >
+        <!--  Footer  -->
+        <div data-role="footer" id="divFooter">
             <div class="ui-grid-b">
-                <div class="ui-block-a"><div class="ui-bar ui-bar-e" style="height:35px">
+                <div class="ui-block-a"><div class="ui-bar ui-bar-c" style="height:35px">
                     <form>
                         <div data-role="fieldcontain" style="margin: 0px">
                             <label for="slider-8">Line Density:</label>
-                            <input type="range" name="slider-8" id="slider-8" data-mini="true" min="5" max="62" value="5" step="1">
+                            <input type="range" name="slider-8" id="slider-8" data-track-theme="a" data-theme="d" data-highlight="true" data-mini="true" min="5" max="62" value="5" step="1">
                         </div>
                     </form>
                 </div></div>
-                <div class="ui-block-b"><div class="ui-bar ui-bar-e" style="height:35px">
+                <div class="ui-block-b"><div class="ui-bar ui-bar-c" style="height:35px">
                     <form>
                         <div data-role="fieldcontain" style="margin: 0px">
                             <label for="slider-8">Line Opacity:</label>
-                            <input type="range" name="slider-8" id="slider-8" data-mini="true" min="10" max="100" value="85" step="1">
+                            <input type="range" name="slider-8" id="slider-8" data-track-theme="a" data-theme="d" data-highlight="true" data-mini="true" min="10" max="100" value="85" step="1">
                         </div>
                     </form>
                 </div></div>
-                <div class="ui-block-c"><div class="ui-bar ui-bar-e" style="height:35px">Color picker</div></div>
+                <div class="ui-block-c"><div class="ui-bar ui-bar-c" style="height:35px">
+                    <div data-role="fieldcontain" style="margin: 0px" id="divSpectrum">
+                        <label for="custom">Line Color: </label>
+                        <input type='text' id="custom" />
+                    </div>
+                </div></div>
             </div><!-- /grid-c -->
         </div>
     </div>
-
-
-
-<script src="ThirdPartyJS/bootstrap/bootstrap.min.js"></script>
 </body>
 </html>

@@ -6,7 +6,7 @@
 */
 
 // Main document.ready path
-$(document).ready(function () {
+$(window).load(function () {
     try
     {
         /** Load config data */

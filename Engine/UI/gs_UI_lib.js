@@ -39,6 +39,10 @@ function EventBinding()
         UpdateGridLineColors();
     });
 
+    $("#custom").spectrum({
+        color: "#f00"
+    });
+
     /*
         Todo - Clean up theme switching logic (sliders not updating correctly)
         @author: John.Fenlon
@@ -90,8 +94,9 @@ function SetCanvasElementHeight()
     var content = getDomElement('divContent');
     var footer = getDomElement('divFooter');
     var docHeight = getDocumentHeight();
+    var offsetDifference = (header.offsetHeight - header.clientHeight) + (footer.offsetHeight - footer.clientHeight);
 
-    GSDesigner.SetContentHeight(docHeight - (header.offsetHeight + footer.offsetHeight));
+    GSDesigner.SetContentHeight(docHeight - (header.offsetHeight + footer.offsetHeight) - offsetDifference);
 }
 
 // TODO - Remove once the touch methods and popup menus are functional
@@ -497,7 +502,7 @@ function SetupStage()
             container: "canvasContainer",
             id: 'stage',
             width: stageWidth,
-            height: stageHeight - 30,
+            height: stageHeight,
             draggable: true
         });
 
