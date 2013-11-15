@@ -127,3 +127,10 @@ div#divSpectrum div.ui-body-c
     text-shadow: none;
     background: transparent;
 }
+
+.ui-icon-gridspective-share
+{
+    background-image: url('images/share.png') !important;
+    background-repeat: no-repeat;
+}
+
