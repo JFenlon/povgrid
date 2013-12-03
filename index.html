@@ -26,8 +26,9 @@
     <div data-role="page">
         <!--  Header  -->
         <div data-role="header" id="divHeader" class="ui-icon-alt">
-            <h1>Header</h1>
-            <a href="#popupMenu" class="ui-btn-right" data-rel="popup" data-role="button" data-icon="bars" data-position-to="origin" data-iconpos="notext" data-theme="d" data-inline="true">Menu</a>
+            <h1>Gridspective</h1>
+            <a href="#popupMenu" class="ui-btn-right" data-rel="popup" data-corners="false" data-role="button" data-icon="bars" data-position-to="origin"
+               data-iconpos="notext" data-theme="a" data-inline="true">Menu</a>
             <div data-role="popup" id="popupMenu" data-theme="a">
                 <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="c">
                     <li data-role="divider" data-theme="a">Choose an action</li>
@@ -43,29 +44,58 @@
         <!--  Footer  -->
         <div data-role="footer" id="divFooter">
             <div class="ui-grid-b">
-                <div class="ui-block-a"><div class="ui-bar ui-bar-c" style="height:35px">
-                    <form>
-                        <div data-role="fieldcontain" style="margin: 0px">
-                            <label for="slider-8">Line Density:</label>
-                            <input type="range" name="slider-8" id="slider-8" data-track-theme="a" data-theme="d" data-highlight="true" data-mini="true" min="5" max="62" value="5" step="1">
-                        </div>
-                    </form>
-                </div></div>
-                <div class="ui-block-b"><div class="ui-bar ui-bar-c" style="height:35px">
-                    <form>
-                        <div data-role="fieldcontain" style="margin: 0px">
-                            <label for="slider-8">Line Opacity:</label>
-                            <input type="range" name="slider-8" id="slider-8" data-track-theme="a" data-theme="d" data-highlight="true" data-mini="true" min="10" max="100" value="85" step="1">
-                        </div>
-                    </form>
-                </div></div>
-                <div class="ui-block-c"><div class="ui-bar ui-bar-c" style="height:35px">
-                    <div data-role="fieldcontain" style="margin: 0px" id="divSpectrum">
-                        <label for="custom">Line Color: </label>
-                        <input type='text' id="custom" />
+                <div class="ui-block-a">
+                    <div class="ui-bar ui-bar-c" style="height:30px">
+                        <form>
+                            <div data-role="fieldcontain" style="margin: 0px">
+                                <label for="slider-8">Line Density:</label>
+                                <input type="range" name="slider-8" id="slider-8" data-track-theme="a" data-theme="d" data-highlight="true" data-mini="true" min="5" max="62" value="5" step="1">
+                            </div>
+                        </form>
                     </div>
-                </div></div>
-            </div><!-- /grid-c -->
+                </div>
+                <div class="ui-block-b">
+                    <div class="ui-bar ui-bar-c" style="height:30px">
+                        <form>
+                            <div data-role="fieldcontain" style="margin: 0px">
+                                <label for="slider-8">Line Opacity:</label>
+                                <input type="range" name="slider-8" id="slider-8" data-track-theme="a" data-theme="d" data-highlight="true" data-mini="true" min="10" max="100" value="85" step="1">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="ui-block-c">
+                    <div class="ui-bar ui-bar-c" style="height:30px">
+                        <div data-role="fieldcontain" style="margin: 0px" id="divSpectrum">
+                            <label for="custom">Line Color: </label>
+                            <input type='text' id="custom" />
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /grid-b -->
+
+            <div class="ui-grid-c">
+                <div class="ui-block-a">
+                    <div class="ui-bar ui-bar-c" style="height:15px">
+                        <div class="status_bar_text_reg">Perspective Points: <label id="lblPoints">0</label></div>
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <div class="ui-bar ui-bar-c" style="height:15px">
+                        <div class="status_bar_text_reg">Point Selected: <label id="lblSelected">0</label></div>
+                    </div>
+                </div>
+                <div class="ui-block-c">
+                    <div class="ui-bar ui-bar-c" style="height:15px">
+                        <div class="status_bar_text_reg">Empty Slot</div>
+                    </div>
+                </div>
+                <div class="ui-block-d">
+                    <div class="ui-bar ui-bar-c" style="height:15px">
+                        <div class="status_bar_text_reg">Empty Slot</div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </body>
