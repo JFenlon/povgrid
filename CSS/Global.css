@@ -64,6 +64,8 @@ body
     -moz-user-select: moz-none;
     -ms-user-select: none;
     user-select: none;
+    max-height: 768px;
+    min-resolution: 768;
 }
 
 
@@ -105,6 +107,12 @@ body {
     background: #cccccc;
 }
 
+/* -- Spectrum CSS Override -- */
+div#divSpectrum .sp-replacer
+{
+    margin-top: -4px;
+}
+
 /* -- jQuery Mobile Override -- */
 input.ui-slider-input
 {
@@ -117,15 +125,7 @@ div#divSpectrum div.ui-input-text
     padding: 0px;
 }
 
-div#divSpectrum div.ui-body-e
-{
-    -right: 0px;
-    color: transparent;
-    text-shadow: none;
-    background: transparent;
-}
-
-div#divSpectrum div.ui-body-c
+div#divSpectrum .ui-body-c
 {
     border: 0px;
     color: transparent;
@@ -139,3 +139,23 @@ div#divSpectrum div.ui-body-c
     background-repeat: no-repeat;
 }
 
+input[type="range"]{
+    border-width: 1px;
+    border-style: solid;
+    border-color: #333 #333 #777 #333;
+    border-radius: 25px;
+    width: 100px;
+    position: absolute;
+    height: 13px;
+    background-color: #8e8d8d;
+
+    box-shadow: inset 0 1px 5px 0px rgba(0, 0, 0, .5),
+    0 1px 0 0px rgba(250, 250, 250, .5);
+    left: 20px;
+}
+
+.ui-focus {
+    -moz-box-shadow: none !important;
+    -webkit-box-shadow: none !important;
+    box-shadow: none !important;
+}

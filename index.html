@@ -6,9 +6,9 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <link rel="stylesheet" href="ThirdPartyJS/slider/css/slider.css" />
-    <link rel="stylesheet" href="CSS/Global.css"/>
     <link rel="stylesheet" href="CSS/jquery.mobile-1.3.2.min.css"/>
     <link rel="stylesheet" href="CSS/spectrum.css"/>
+    <link rel="stylesheet" href="CSS/Global.css"/>
     <script src="jQuery/jquery-1.9.1.js"></script>
     <script src="jQuery/jquery.mobile-1.3.2.min.js"></script>
     <script src="ThirdPartyJS/kineticJS/kinetic-v4.6.0.min.js"></script>
@@ -23,49 +23,44 @@
 </head>
 
 <body>
-    <div data-role="page">
+    <div data-role="page" style="max-width: 1024px; max-height: 768px; min-height: 768px">
         <!--  Header  -->
-        <div data-role="header" id="divHeader" class="ui-icon-alt">
+        <div data-role="header" id="divHeader" class="ui-icon-alt" data-theme="a">
             <h1>Gridspective</h1>
-            <a href="#popupMenu" class="ui-btn-right" data-rel="popup" data-corners="false" data-role="button" data-icon="bars" data-position-to="origin"
+            <a href="#popupMenu" class="ui-btn-right" data-rel="popup" data-role="button" data-icon="bars" data-position-to="origin"
                data-iconpos="notext" data-theme="a" data-inline="true">Menu</a>
             <div data-role="popup" id="popupMenu" data-theme="a">
                 <ul data-role="listview" data-inset="true" style="min-width:210px;" data-theme="c">
-                    <li data-role="divider" data-theme="a">Choose an action</li>
+                    <li data-role="divider" data-theme="a">Options</li>
+                    <li data-icon="grid"><a href="#popupNewDoc" data-position-to="window" data-rel="popup" data-transition="pop">New Grid Document</a></li>
+                    <li data-icon="edit"><a href="#">Share</a></li>
+                    <li data-role="divider" data-theme="a"></li>
                     <li data-icon="gear"><a href="#">Settings</a></li>
-                    <li data-icon="gridspective-share"><a href="#">Share</a></li>
                 </ul>
             </div>
-        </div>
-        <!-- Content -->
-        <div  id="divContent">
-            <div id="canvasContainer"></div>
-        </div>
-        <!--  Footer  -->
-        <div data-role="footer" id="divFooter">
             <div class="ui-grid-b">
                 <div class="ui-block-a">
-                    <div class="ui-bar ui-bar-c" style="height:30px">
+                    <div class="ui-bar ui-bar-c" style="height:25px">
                         <form>
                             <div data-role="fieldcontain" style="margin: 0px">
                                 <label for="slider-8">Line Density:</label>
-                                <input type="range" name="slider-8" id="slider-8" data-track-theme="a" data-theme="d" data-highlight="true" data-mini="true" min="5" max="62" value="5" step="1">
+                                <input type="range" name="slider-8" id="slider-8" data-track-theme="d" data-theme="d" data-highlight="true" data-mini="true" min="5" max="62" value="5" step="1">
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="ui-block-b">
-                    <div class="ui-bar ui-bar-c" style="height:30px">
+                    <div class="ui-bar ui-bar-c" style="height:25px">
                         <form>
                             <div data-role="fieldcontain" style="margin: 0px">
                                 <label for="slider-8">Line Opacity:</label>
-                                <input type="range" name="slider-8" id="slider-8" data-track-theme="a" data-theme="d" data-highlight="true" data-mini="true" min="10" max="100" value="85" step="1">
+                                <input type="range" name="slider-8" id="slider-8" data-track-theme="d" data-show-value="false" data-theme="d" data-highlight="true" data-mini="true" min="10" max="100" value="85" step="1">
                             </div>
                         </form>
                     </div>
                 </div>
                 <div class="ui-block-c">
-                    <div class="ui-bar ui-bar-c" style="height:30px">
+                    <div class="ui-bar ui-bar-c" style="height:25px">
                         <div data-role="fieldcontain" style="margin: 0px" id="divSpectrum">
                             <label for="custom">Line Color: </label>
                             <input type='text' id="custom" />
@@ -73,26 +68,48 @@
                     </div>
                 </div>
             </div><!-- /grid-b -->
+        </div>
 
+        <!-- New Doc Content -->
+        <div data-role="popup" id="popupNewDoc" data-dismissible="false" data-close-btn="right" data-overlay-theme="a" data-theme="a" class="ui-corner-all">
+            <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Cancel</a>
+            <div style="padding:10px 20px;">
+                <h3>New Document Dimensions</h3>
+                <label for="txtWidth" class="ui-hidden-accessible">Width:</label>
+                <input type="text" name="width" id="txtWidth" value="" placeholder="800" data-theme="a">
+                <label for="txtHeight" class="ui-hidden-accessible">Height:</label>
+                <input type="text" name="height" id="txtHeight" value="" placeholder="600" data-theme="a">
+                <!--<a href="#" data-role="button" data-inline="false" data-rel="back" data-theme="b" data-mini="true">Cancel</a>-->
+                <a href="#" data-role="button" data-inline="false" data-rel="back" data-transition="flow" data-theme="e" data-mini="true">Create Document</a>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div  id="divContent">
+            <div id="canvasContainer"></div>
+        </div>
+        <!--  Footer  -->
+        <div data-role="footer" id="divFooter">
+            <!--  Status grid  -->
             <div class="ui-grid-c">
                 <div class="ui-block-a">
-                    <div class="ui-bar ui-bar-c" style="height:15px">
+                    <div class="ui-bar ui-bar-c" style="height:13px">
                         <div class="status_bar_text_reg">Perspective Points: <label id="lblPoints">0</label></div>
                     </div>
                 </div>
                 <div class="ui-block-b">
-                    <div class="ui-bar ui-bar-c" style="height:15px">
+                    <div class="ui-bar ui-bar-c" style="height:13px">
                         <div class="status_bar_text_reg">Point Selected: <label id="lblSelected">0</label></div>
                     </div>
                 </div>
                 <div class="ui-block-c">
-                    <div class="ui-bar ui-bar-c" style="height:15px">
-                        <div class="status_bar_text_reg">Empty Slot</div>
+                    <div class="ui-bar ui-bar-c" style="height:13px">
+                        <div class="status_bar_text_reg">Document Size: <label id="lblDocSize">800 x 600</label></div>
                     </div>
                 </div>
                 <div class="ui-block-d">
-                    <div class="ui-bar ui-bar-c" style="height:15px">
-                        <div class="status_bar_text_reg">Empty Slot</div>
+                    <div class="ui-bar ui-bar-c" style="height:13px">
+                        <div class="status_bar_text_reg"></div>
                     </div>
                 </div>
             </div>

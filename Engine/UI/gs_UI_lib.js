@@ -25,6 +25,7 @@ function EventBinding()
 
         UpdateLineDensity();
     });
+
     $( "#sldLineOpacity" ).bind( "change", function(event) {
         // set line opacity property
         GSDesigner.setLineOpacity(event.target.value / 100);
@@ -93,7 +94,7 @@ function SetCanvasElementHeight()
     var header = getDomElement('divHeader');
     var content = getDomElement('divContent');
     var footer = getDomElement('divFooter');
-    var docHeight = getDocumentHeight();
+    var docHeight = 768; //getDocumentHeight();
     var offsetDifference = (header.offsetHeight - header.clientHeight) + (footer.offsetHeight - footer.clientHeight);
 
     GSDesigner.SetContentHeight(docHeight - (header.offsetHeight + footer.offsetHeight) - offsetDifference);
