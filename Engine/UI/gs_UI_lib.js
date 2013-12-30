@@ -8,7 +8,11 @@
 
 function EventBinding()
 {
-    $("#btnCreateDocument").bind("click", AddNewDocument);
+    $("#btnCreateDocument").bind("click", function(){
+        if(AddNewDocument() === 1)
+            ToggleGridPointToolbar(true);
+    });
+
     $("#btnVanishPoint1").bind("click", function(){
         ToggleVanishPoint(GSDesigner.shapeIdEnum.VP1);
     });
@@ -18,6 +22,10 @@ function EventBinding()
     $("#btnVanishPoint3").bind("click", function(){
         ToggleVanishPoint(GSDesigner.shapeIdEnum.VP3);
     });
+
+    // Set defaults for slider UI
+    SetSliderDefaults('sldLineOpacity', 20, 100, 80);
+    SetSliderDefaults('sldLineDensity', 5, 80, 8);
 
     $( "#sldLineDensity" ).bind( "change", function(event) {
         // set line density property
@@ -33,19 +41,12 @@ function EventBinding()
         UpdateLineOpacity();
     });
 
-    $("#btnCycleColors").bind("click", function(){
-        GSDesigner.incrementGridColorIndex();
-
-        //Force grid lines to take on new colors
-        UpdateGridLineColors();
+    $("#colorPicker").spectrum({
+        color: "#006AFF"
     });
 
-    $("#custom").spectrum({
-        color: "#f00"
-    });
-
-    BindSlider('sliderOpacity', 10, 100, 75);
-    BindSlider('sliderCount', 4, 64, 6);
+    // Disable the grid UI controls at startup
+    $('#custom').disabled = true;
 
     /*
         Todo - Clean up theme switching logic (sliders not updating correctly)
@@ -74,6 +75,30 @@ function EventBinding()
     });*/
 
 }
+
+/**
+ * Generate Alert popup message for the user to see
+ * @param alertMessage
+ * @constructor
+ */
+function UserAlert(alertMessage)
+{
+    try
+    {
+        // Set alert message on popup window
+        if(alertMessage)
+            $("#divErrorMessage").text(alertMessage);
+
+        // Display popup window
+        setTimeout(function(){$("#popupError").popup('open');},700);
+    }
+    catch (ex)
+    {
+        // Generic error
+        LogError(ex.message);
+    }
+}
+
 /**
  * Bind Slider
  * @param controlId
@@ -82,7 +107,7 @@ function EventBinding()
  * @param defaultValue
  * @constructor
  */
-function BindSlider(controlId, min, max, defaultValue)
+function SetSliderDefaults(controlId, min, max, defaultValue)
 {
     //Grab the controls
     var slider  = $('#' + controlId).find(".slider");
@@ -108,6 +133,52 @@ function BindSlider(controlId, min, max, defaultValue)
 }
 
 /**
+ * Enables or disables the gridpoint toolbar
+ * @param isEnabled
+ * @returns {number}
+ * @constructor
+ */
+function ToggleGridPointToolbar(isEnabled)
+{
+    var result = 0;
+
+    try
+    {
+
+
+        if(isEnabled)
+        {
+            $("#sldLineOpacity").find(".slider").slider({ enabled: "true" });
+            $("#sldLineDensity").find(".slider").slider({ enabled: "true" });
+
+            $("#colorPicker").spectrum("enable");
+        }
+        else
+        {
+            $("#sldLineOpacity").find(".slider").slider({ disabled: "true" });
+            $("#sldLineDensity").find(".slider").slider({ disabled: "true" });
+
+            $("#colorPicker").spectrum({
+                disabled: true
+            });
+        }
+
+
+        result = 1;
+    }
+    catch (ex)
+    {
+        // Generic error
+        LogError(ex.message);
+        result = -1;
+    }
+    finally
+    {
+        return result;
+    }
+}
+
+/**
  * Prevents the user from selecting objects with mouse/touch
  * @param target
  */
@@ -129,7 +200,7 @@ function SetCanvasElementHeight()
     var header = getDomElement('divHeader');
     var content = getDomElement('divContent');
     var footer = getDomElement('divFooter');
-    var docHeight = 768; //getDocumentHeight();
+    var docHeight = getDocumentHeight();
     var offsetDifference = (header.offsetHeight - header.clientHeight) + (footer.offsetHeight - footer.clientHeight);
 
     GSDesigner.SetContentHeight(docHeight - (header.offsetHeight + footer.offsetHeight) - offsetDifference);
@@ -155,13 +226,15 @@ function ToggleVanishPoint(shapeEnumId)
  */
 function AddNewDocument()
 {
+    var results = 1;
+
     try
     {
         // Clear existing document
         GSDesigner.MainStage.clear();
 
         //var docSettings = GetNewDocSettings() || new GSDesigner.DocumentObject(800, 400);
-        var docSettings = new GSDesigner.DocumentObject(800, 400);
+        var docSettings = new GSDesigner.DocumentObject(800, 400, '#cccccc', 'test');
 
         if(CreateDocument(docSettings) < 0)
             throw new EvalError("create-main_layer-failed");
@@ -188,7 +261,7 @@ function AddNewDocument()
     }
     finally
     {
-
+        return results;
     }
 }
 
@@ -742,7 +815,7 @@ function CreateDocument(docInit)
 
     try
     {
-        var documentObj = new GSDesigner.DocumentObject(docInit);
+        var documentObj = (docInit) ? docInit : new GSDesigner.DocumentObject(null, null, null, null);
 
         /** document size input */
         var fldWidth = getDomElement('tbWidth');

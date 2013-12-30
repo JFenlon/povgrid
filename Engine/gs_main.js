@@ -5,7 +5,7 @@
 *************************************************************
 */
 
-// Main document.ready path
+// Window.load
 $(window).load(function () {
     try
     {
@@ -41,4 +41,15 @@ $(window).load(function () {
 
     }
 });
+
+// Document.Ready
+$(document).ready(function(){
+    // UI control disabling and any post-load functionality
+    if(ToggleGridPointToolbar(false) != 1)
+        UserAlert("Startup Error! Please contact tech support.");
+
+    $("#btnAlertOk").bind("click", function(){
+        $("#popupError").popup('close');;
+    });
+})
 
