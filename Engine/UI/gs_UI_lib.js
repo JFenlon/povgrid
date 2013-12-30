@@ -44,13 +44,16 @@ function EventBinding()
         color: "#f00"
     });
 
+    BindSlider('sliderOpacity', 10, 100, 75);
+    BindSlider('sliderCount', 4, 64, 6);
+
     /*
         Todo - Clean up theme switching logic (sliders not updating correctly)
         @author: John.Fenlon
         @date: 8/30/13
      */
 
-    $("[name='link']").bind('click', function (event) {
+/*    $("[name='link']").bind('click', function (event) {
         event.preventDefault();
         var theme = $(this).text();
         $.mobile.activePage.find('.ui-btn')
@@ -68,8 +71,40 @@ function EventBinding()
         $.mobile.activePage.removeClass('ui-body-a ui-body-b ui-body-c ui-body-d ui-body-e')
             .addClass('ui-body-' + theme)
             .attr('data-theme', theme);
-    });
+    });*/
 
+}
+/**
+ * Bind Slider
+ * @param controlId
+ * @param min
+ * @param max
+ * @param defaultValue
+ * @constructor
+ */
+function BindSlider(controlId, min, max, defaultValue)
+{
+    //Grab the controls
+    var slider  = $('#' + controlId).find(".slider");
+    var tooltip = $('#' + controlId).find('.tooltip');
+
+    //Set the default value of the tooltip
+    tooltip.text(defaultValue);
+
+    //Call the Slider
+    slider.slider({
+        //Config
+        range: "min",
+        min: min,
+        max: max,
+        value: defaultValue,
+
+        // Slider Event
+        slide: function(event, ui) { //When the slider is sliding
+            var value  = slider.slider('value');
+            tooltip.text(ui.value);  //Adjust the tooltip accordingly
+        },
+    });
 }
 
 /**
@@ -997,5 +1032,40 @@ function PointSelected(selectedVPGroup)
     {
         return result;
     }
+}
+
+function SetUPSliderUI()
+{
+    //Store frequently elements in variables
+    var slider  = $('#slider'),
+        tooltip = $('.tooltip');
+
+    //Hide the Tooltip at first
+    tooltip.hide();
+
+    //Call the Slider
+    slider.slider({
+        //Config
+        range: "min",
+        min: 1,
+        value: 35,
+
+        start: function(event,ui) {
+            tooltip.fadeIn('fast');
+        },
+
+        //Slider Event
+        slide: function(event, ui) { //When the slider is sliding
+
+            var value  = slider.slider('value');
+
+            tooltip.css('left', value).text(ui.value);  //Adjust the tooltip accordingly
+        },
+
+        stop: function(event,ui) {
+            tooltip.fadeOut('fast');
+        },
+    });
+
 }
 

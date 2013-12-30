@@ -5,12 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=0">
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <meta name="apple-mobile-web-app-capable" content="yes"/>
-    <link rel="stylesheet" href="ThirdPartyJS/slider/css/slider.css" />
-    <link rel="stylesheet" href="CSS/jquery.mobile-1.3.2.min.css"/>
+    <link rel="stylesheet" href="CSS/jquery.mobile.custom.structure.css"/>
+    <link rel="stylesheet" href="CSS/jquery.mobile.custom.theme.css"/>
     <link rel="stylesheet" href="CSS/spectrum.css"/>
     <link rel="stylesheet" href="CSS/Global.css"/>
-    <script src="jQuery/jquery-1.9.1.js"></script>
-    <script src="jQuery/jquery.mobile-1.3.2.min.js"></script>
+    <script src="jQuery/jquery-1.7.2.min.js"></script>
+    <script src="jQuery/jquery-ui-1.8.21.custom.min.js"></script>
+    <script src="jQuery/jquery.mobile.custom.js"></script>
     <script src="ThirdPartyJS/kineticJS/kinetic-v4.6.0.min.js"></script>
     <script src="ThirdPartyJS/lawnchair/lawnchair-0.6.1.js"></script>
     <script src="Engine/gs_object_def.js"></script>
@@ -41,28 +42,26 @@
             <div class="ui-grid-b">
                 <div class="ui-block-a">
                     <div class="ui-bar ui-bar-c" style="height:25px">
-                        <form>
-                            <div data-role="fieldcontain" style="margin: 0px">
-                                <label for="slider-8">Line Density:</label>
-                                <input type="range" name="slider-8" id="slider-8" data-track-theme="d" data-theme="d" data-highlight="true" data-mini="true" min="5" max="62" value="5" step="1">
-                            </div>
-                        </form>
+                        <section id="sliderCount">
+                            <span class="sliderLabel">Line Count</span> <!-- slider label -->
+                            <div class="slider"></div> <!-- the Slider -->
+                            <span class="tooltip" id="spTTSlider1"></span> <!-- Tooltip -->
+                        </section>
                     </div>
                 </div>
                 <div class="ui-block-b">
                     <div class="ui-bar ui-bar-c" style="height:25px">
-                        <form>
-                            <div data-role="fieldcontain" style="margin: 0px">
-                                <label for="slider-8">Line Opacity:</label>
-                                <input type="range" name="slider-8" id="slider-8" data-track-theme="d" data-show-value="false" data-theme="d" data-highlight="true" data-mini="true" min="10" max="100" value="85" step="1">
-                            </div>
-                        </form>
+                        <section id="sliderOpacity">
+                            <span class="sliderLabel">Line Opacity</span> <!-- slider label -->
+                            <div class="slider"></div> <!-- the Slider -->
+                            <span class="tooltip"></span> <!-- Tooltip -->
+                        </section>
                     </div>
                 </div>
                 <div class="ui-block-c">
                     <div class="ui-bar ui-bar-c" style="height:25px">
                         <div data-role="fieldcontain" style="margin: 0px" id="divSpectrum">
-                            <label for="custom">Line Color: </label>
+                            <span class="sliderLabel" style="top: 4px">Line Color</span>
                             <input type='text' id="custom" />
                         </div>
                     </div>
