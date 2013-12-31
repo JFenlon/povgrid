@@ -7,27 +7,18 @@ var GSDesigner = {
     version_minor             : 0,
     version_revision          : 0,
     ContentHeight             : 0,
-    GridColors                : ["#CC0000", "#00CCFF", "#6600CC", "#00CC00", "#FF00FF", "#663300", "#CC0066", "#0066FF", "#4A6E6E"],
     UI_theme_literal          : "data-theme",
     Max_VP                    : 9,
     Max_Zoom                  : 120,
     Min_Zoom                  : 30,
 
     // public methods
-    getNextGridLineColor: function(colorIncrement)
-    {
-        var requestedColorIndex = this.GridColorIndex.value + colorIncrement;
-
-        if(requestedColorIndex > this.GridColors.length)
-            requestedColorIndex = 0 + colorIncrement;
-
-        return this.GridColors[requestedColorIndex];
-    },
-
     getLineDensity: function(){ return this.CurrentLineDensity.value;},
     setLineDensity: function(newLineDensity){this.CurrentLineDensity.value = newLineDensity;},
     getLineOpacity: function(){ return this.CurrentLineOpacity.value;},
     setLineOpacity: function(newLineOpacity){this.CurrentLineOpacity.value = newLineOpacity;},
+    getLineColor: function(){return 'color';},
+    setLineColor: function(){var test = 'set line color on selected vp';},
     setSelectedVP: function(vpGroup)
     {
         this.CurrentSelectedVP = vpGroup;
@@ -38,14 +29,7 @@ var GSDesigner = {
             @date: 9/17/13
          */
     },
-    version: function() { return this.version_major.toString() + '.' + this.version_minor.toString() + '.' + this.version_revision.toString();},
-    incrementGridColorIndex: function()
-    {
-        this.GridColorIndex.value++;
-
-        if(this.GridColorIndex.value > this.GridColors.length)
-            this.GridColorIndex.value = 0;
-    }
+    version: function() { return this.version_major.toString() + '.' + this.version_minor.toString() + '.' + this.version_revision.toString();}
 };
 
 /**
@@ -96,6 +80,11 @@ GSDesigner.ResponseEnum = {
     SILENT_FAILURE  : 0,
     LOGGED_FAILURE  : -1
 };
+
+GSDesigner.ToolTip_Type = {
+    NUMBER          : 1,
+    PERCENTAGE      : 2
+}
 
 // Object properties
 /**
@@ -441,7 +430,7 @@ GSDesigner.SelectedLineProperties = function (lineDensity, lineOpacity, lineColo
  */
 GSDesigner.DocumentObject = function (dWidth, dHeight, hexFillColor, docName)
 {
-    documentName = docName || 'document';
+    documentName = docName || 'new-document-' + new Date().getUTCMilliseconds().toString();
     fillColorHex = hexFillColor || '#ffffff';
     width = dWidth || 512;
     height = dHeight || 384;
@@ -464,13 +453,13 @@ GSDesigner.DocumentObject = function (dWidth, dHeight, hexFillColor, docName)
                 ,shadowOffset: shadowOffset
                 ,shadowOpacity: shadowOpacity
                 ,shadowEnabled: shadowEnabled
-                ,name: documentName
+                ,documentName: documentName
             };
 }
 
 
 /**
- * Find a node, by ID, in the stage
+ * Find a kinetic node, by ID, in the stage
  * @param nodeId
  * @returns {kinetic node}
  */
@@ -498,7 +487,7 @@ GSDesigner.GetNode = function (nodeId)
 }
 
 /**
- * Check if a node exists on the stage
+ * Check if a kinetic node exists on the stage
  * @param nodeId
  * @returns {boolean}
  */

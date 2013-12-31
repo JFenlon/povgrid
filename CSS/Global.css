@@ -21,7 +21,7 @@
 
 .status_bar_text_reg
 {
-    font-size: 11px !important;
+    font: 8pt Tahoma, Arial, sans-serif !important;
 }
 
 .control_top
@@ -74,6 +74,11 @@ body
     display: inline-block;
 }
 
+.ui-bar
+{
+    padding: 0.2em 8px;
+}
+
 ul#display-inline-block,
 ul#display-inline-block li
 {
@@ -102,12 +107,21 @@ ul#display-inline-block li
     margin-bottom: 5px;
 }
 
-
-
 /* -- Spectrum CSS Override -- */
 div#divSpectrum .sp-replacer
 {
-    margin-top: -4px;
+    margin-top: -1px;
+    height: 16px;
+}
+
+div#divSpectrum .sp-preview
+{
+    height: 14px;
+}
+
+div#divSpectrum .sp-dd
+{
+    padding: 0;
 }
 
 /* -- jQuery Mobile Override -- */
@@ -174,6 +188,7 @@ section {
 
 .tooltip {
     position: absolute;
+    margin-right: 2px;
     display: block;
     top: -2px;
     left: 195px;
@@ -194,6 +209,10 @@ section {
     background: -ms-linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* IE10+ */
     background: linear-gradient(top,  rgba(69,72,77,0.5) 0%,rgba(0,0,0,0.5) 100%); /* W3C */
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#8045484d', endColorstr='#80000000',GradientType=0 ); /* IE6-9 */
+}
+
+.tooltipPercentage{
+    width: 42px;
 }
 
 .ui-slider-handle {
@@ -233,4 +252,19 @@ section {
 #sldLineOpacity span.tooltip
 {
     left: 205px;
+}
+
+#divToolbar div.ui-block-a
+{
+    width: 34%;
+}
+
+#divToolbar div.ui-block-b
+{
+    width: 35%;
+}
+
+#divToolbar div.ui-block-c
+{
+    width: 31%;
 }

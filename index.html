@@ -24,7 +24,7 @@
 </head>
 
 <body>
-    <div data-role="page" >
+    <div data-role="page" style="width:1024px; height: 768px">
         <!--  Header  -->
         <div data-role="header" id="divHeader" class="ui-icon-alt" data-theme="a">
             <h1>Gridspective</h1>
@@ -39,7 +39,7 @@
                     <li data-icon="gear"><a href="#">Settings</a></li>
                 </ul>
             </div>
-            <div class="ui-grid-b">
+            <div class="ui-grid-b ui-responsive" id="divToolbar">
                 <div class="ui-block-a">
                     <div class="ui-bar ui-bar-c" style="height:25px">
                         <section id="sldLineDensity">
@@ -53,8 +53,8 @@
                     <div class="ui-bar ui-bar-c" style="height:25px">
                         <section id="sldLineOpacity">
                             <span class="sliderLabel">Line Opacity</span> <!-- slider label -->
-                            <div class="slider" id="sliderOp"></div> <!-- the Slider -->
-                            <span class="tooltip"></span> <!-- Tooltip -->
+                            <div class="slider"></div> <!-- the Slider -->
+                            <span class="tooltip tooltipPercentage"></span> <!-- Tooltip -->
                         </section>
                     </div>
                 </div>
@@ -74,17 +74,15 @@
             <a href="#" data-rel="back" data-role="button" data-theme="a" data-icon="delete" data-iconpos="notext" class="ui-btn-right">Cancel</a>
             <div style="padding:10px 20px;">
                 <h3>New Document Dimensions</h3>
-                <label for="txtWidth" class="ui-hidden-accessible">Width:</label>
-                <input type="text" name="width" id="txtWidth" value="" placeholder="800" data-theme="a">
-                <label for="txtHeight" class="ui-hidden-accessible">Height:</label>
-                <input type="text" name="height" id="txtHeight" value="" placeholder="600" data-theme="a">
-                <!--<a href="#" data-role="button" data-inline="false" data-rel="back" data-theme="b" data-mini="true">Cancel</a>-->
+                <label for="tbWidth" class="ui-hidden-accessible">Width:</label>
+                <input type="text" name="width" id="tbWidth" value="" placeholder="800" data-theme="a">
+                <label for="tbHeight" class="ui-hidden-accessible">Height:</label>
+                <input type="text" name="height" id="tbHeight" value="" placeholder="600" data-theme="a">
                 <a href="#" id="btnCreateDocument" data-role="button" data-inline="false" data-rel="back" data-transition="flow" data-theme="e" data-mini="true">Create Document</a>
             </div>
         </div>
 
         <!-- Error Popup -->
-
         <div data-role="popup" id="popupError" data-overlay-theme="b" data-theme="b" data-dismissible="false" style="max-width:400px;">
             <div data-role="header" data-theme="a">
                 <h1>Application Error</h1>
@@ -102,25 +100,25 @@
         <!--  Footer  -->
         <div data-role="footer" id="divFooter">
             <!--  Status grid  -->
-            <div class="ui-grid-c">
+            <div class="ui-grid-c ui-responsive">
                 <div class="ui-block-a">
                     <div class="ui-bar ui-bar-c" style="height:13px">
-                        <div class="status_bar_text_reg">Perspective Points: <label id="lblPoints">0</label></div>
-                    </div>
-                </div>
-                <div class="ui-block-b">
-                    <div class="ui-bar ui-bar-c" style="height:13px">
-                        <div class="status_bar_text_reg">Point Selected: <label id="lblSelected">0</label></div>
-                    </div>
-                </div>
-                <div class="ui-block-c">
-                    <div class="ui-bar ui-bar-c" style="height:13px">
-                        <div class="status_bar_text_reg">Document Size: <label id="lblDocSize">800 x 600</label></div>
+                        <div class="status_bar_text_reg">Active Perspective Points: <label id="lblActivePoints">0</label></div>
                     </div>
                 </div>
                 <div class="ui-block-d">
                     <div class="ui-bar ui-bar-c" style="height:13px">
-                        <div class="status_bar_text_reg"></div>
+                        <div class="status_bar_text_reg">Available Perspective Points: <label id="lblAvailable">0</label></div>
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <div class="ui-bar ui-bar-c" style="height:13px">
+                        <div class="status_bar_text_reg">Selected Point: <label id="lblSelected">0</label></div>
+                    </div>
+                </div>
+                <div class="ui-block-c">
+                    <div class="ui-bar ui-bar-c" style="height:13px">
+                        <div class="status_bar_text_reg">Document Size: <label id="lblDocSize"></label></div>
                     </div>
                 </div>
             </div>

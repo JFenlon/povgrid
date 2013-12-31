@@ -8,9 +8,9 @@
 
 function EventBinding()
 {
+    // Create new doc
     $("#btnCreateDocument").bind("click", function(){
-        if(AddNewDocument() === 1)
-            ToggleGridPointToolbar(true);
+        AddNewDocument();
     });
 
 /*    $("#btnVanishPoint1").bind("click", function(){
@@ -25,8 +25,8 @@ function EventBinding()
 */
 
     // Set defaults for slider UI
-    SetSliderDefaults('sldLineOpacity', 20, 100, 80);
-    SetSliderDefaults('sldLineDensity', 5, 80, 8);
+    SetSliderDefaults('sldLineOpacity', 20, 100, 80, GSDesigner.ToolTip_Type.PERCENTAGE);
+    SetSliderDefaults('sldLineDensity', 5, 80, 8, GSDesigner.ToolTip_Type.NUMBER);
 
     $( "#sldLineDensity" ).bind( "change", function(event) {
         // set line density property
@@ -46,11 +46,8 @@ function EventBinding()
         color: "#006AFF"
     });
 
-    // Disable the grid UI controls at startup
-    $('#custom').disabled = true;
-
     /*
-        Todo - Clean up theme switching logic (sliders not updating correctly)
+        Todo - Clean up theme switching logic if applicable
         @author: John.Fenlon
         @date: 8/30/13
      */
@@ -75,6 +72,20 @@ function EventBinding()
             .attr('data-theme', theme);
     });*/
 
+}
+
+/**
+ * Sets the document size on the status control
+ * @param docWidth
+ * @param docHeight
+ * @constructor
+ */
+function SetDocumentSizeStatus(docWidth, docHeight)
+{
+    var docSizeStatus = $("#lblDocSize");
+    var statusText = (docWidth && docHeight) ? docWidth.toString() + " x " + docHeight.toString() : String.empty;
+
+    docSizeStatus.text(statusText);
 }
 
 /**
@@ -108,14 +119,15 @@ function UserAlert(alertMessage)
  * @param defaultValue
  * @constructor
  */
-function SetSliderDefaults(controlId, min, max, defaultValue)
+function SetSliderDefaults(controlId, min, max, defaultValue, toolTipType)
 {
     //Grab the controls
     var slider  = $('#' + controlId).find(".slider");
     var tooltip = $('#' + controlId).find('.tooltip');
+    var valueSuffix = (toolTipType == GSDesigner.ToolTip_Type.PERCENTAGE) ? '%' : '';
 
     //Set the default value of the tooltip
-    tooltip.text(defaultValue);
+    tooltip.text(defaultValue + valueSuffix);
 
     //Call the Slider
     slider.slider({
@@ -128,7 +140,7 @@ function SetSliderDefaults(controlId, min, max, defaultValue)
         // Slider Event
         slide: function(event, ui) { //When the slider is sliding
             var value  = slider.slider('value');
-            tooltip.text(ui.value);  //Adjust the tooltip accordingly
+            tooltip.text(ui.value + valueSuffix);  //Adjust the tooltip accordingly
         },
     });
 }
@@ -189,14 +201,16 @@ function AddNewDocument()
         // Clear existing document
         GSDesigner.MainStage.clear();
 
-        //var docSettings = GetNewDocSettings() || new GSDesigner.DocumentObject(800, 400);
-        var docSettings = new GSDesigner.DocumentObject(800, 400, '#cccccc', 'test');
+        var docSettings = GetNewDocSettings() || new GSDesigner.DocumentObject(800, 400, '#ffffff', 'new_default');
+        var docSettings = new GSDesigner.DocumentObject(docSettings.width, docSettings.height, docSettings.backgroundColor, docSettings.documentName);
 
-        if(CreateDocument(docSettings) < 0)
+        if(CreateDocument(docSettings) != GSDesigner.ResponseEnum.SUCCESS)
             throw new EvalError("create-main_layer-failed");
 
-        if(!CreateSourceVanishPoint())
-            throw new EvalError("generate-vpsource-failed");
+        //if(CreateSourceVanishPoint() != GSDesigner.ResponseEnum.SUCCESS)
+            //throw new EvalError("generate-vpsource-failed");
+
+        SetDocumentSizeStatus(docSettings.width, docSettings.height);
 
     }
     catch(ex)
@@ -236,7 +250,7 @@ function GetNewDocSettings()
         var width = getDomElement('tbWidth').value;
         var height = getDomElement('tbHeight').value;
 
-        if((width == null || width.trim() == "") || (height == null || height.trim() == "") )
+        if(!width || !height)
         {
             delete docSettings;
             docSettings =  null;
@@ -322,7 +336,7 @@ function AddNewVanishingPoint()
  */
 function CreateSourceVanishPoint()
 {
-    var isSuccess = false;
+    var results = GSDesigner.ResponseEnum.SUCCESS;
 
     try
     {
@@ -382,19 +396,17 @@ function CreateSourceVanishPoint()
             GSDesigner.GridLayer.draw();
 
             GSDesigner.VPGrpSource = vpGroup;
-
-            isSuccess = true;
         }
     }
     catch(ex)
     {
         //LOG ERROR
         LogError(ex.message + ' [' + arguments.callee.name + ']');
-        //Set results to negative
+        results = GSDesigner.ResponseEnum.SILENT_FAILURE;
     }
     finally
     {
-        return isSuccess;
+        return results;
     }
 }
 
@@ -767,7 +779,7 @@ function UpdateHorizon()
  */
 function CreateDocument(docInit)
 {
-    var results = 0;
+    var results = GSDesigner.ResponseEnum.SUCCESS;
 
     try
     {
@@ -812,15 +824,13 @@ function CreateDocument(docInit)
         GSDesigner.BaseLayer.add(kjsMainGroup);
 
         GSDesigner.MainStage.draw();
-
-        results = 1;
     }
     catch(ex)
     {
         //LOG ERROR
         LogError(ex.message + ' [' + arguments.callee.name + ']');
         //Set results to negative
-        results = -1;
+        results = GSDesigner.ResponseEnum.SILENT_FAILURE;
     }
     finally
     {
