@@ -159,6 +159,7 @@ section {
     left: 75px;
     margin-top: 1px;
 }
+
 .sliderLabel {
     position: absolute;
     display: block;
@@ -224,12 +225,12 @@ section {
     border-radius: 25px;
 }
 
-#sliderOpacity div.slider
+#sldLineOpacity div.slider
 {
     left: 85px;
 }
 
-#sliderOpacity span.tooltip
+#sldLineOpacity span.tooltip
 {
     left: 205px;
 }

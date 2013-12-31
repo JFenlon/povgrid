@@ -13,7 +13,7 @@ function EventBinding()
             ToggleGridPointToolbar(true);
     });
 
-    $("#btnVanishPoint1").bind("click", function(){
+/*    $("#btnVanishPoint1").bind("click", function(){
         ToggleVanishPoint(GSDesigner.shapeIdEnum.VP1);
     });
     $("#btnVanishPoint2").bind("click", function(){
@@ -22,6 +22,7 @@ function EventBinding()
     $("#btnVanishPoint3").bind("click", function(){
         ToggleVanishPoint(GSDesigner.shapeIdEnum.VP3);
     });
+*/
 
     // Set defaults for slider UI
     SetSliderDefaults('sldLineOpacity', 20, 100, 80);
@@ -132,51 +133,6 @@ function SetSliderDefaults(controlId, min, max, defaultValue)
     });
 }
 
-/**
- * Enables or disables the gridpoint toolbar
- * @param isEnabled
- * @returns {number}
- * @constructor
- */
-function ToggleGridPointToolbar(isEnabled)
-{
-    var result = 0;
-
-    try
-    {
-
-
-        if(isEnabled)
-        {
-            $("#sldLineOpacity").find(".slider").slider({ enabled: "true" });
-            $("#sldLineDensity").find(".slider").slider({ enabled: "true" });
-
-            $("#colorPicker").spectrum("enable");
-        }
-        else
-        {
-            $("#sldLineOpacity").find(".slider").slider({ disabled: "true" });
-            $("#sldLineDensity").find(".slider").slider({ disabled: "true" });
-
-            $("#colorPicker").spectrum({
-                disabled: true
-            });
-        }
-
-
-        result = 1;
-    }
-    catch (ex)
-    {
-        // Generic error
-        LogError(ex.message);
-        result = -1;
-    }
-    finally
-    {
-        return result;
-    }
-}
 
 /**
  * Prevents the user from selecting objects with mouse/touch
