@@ -207,10 +207,17 @@ function AddNewDocument()
         if(CreateDocument(docSettings) != GSDesigner.ResponseEnum.SUCCESS)
             throw new EvalError("create-main_layer-failed");
 
-        //if(CreateSourceVanishPoint() != GSDesigner.ResponseEnum.SUCCESS)
-            //throw new EvalError("generate-vpsource-failed");
+        if(CreateSourceVanishPoint() != GSDesigner.ResponseEnum.SUCCESS)
+            throw new EvalError("generate-vpsource-failed");
 
         SetDocumentSizeStatus(docSettings.width, docSettings.height);
+
+        // TODO - Remove after testing floating menu
+        // John 1/1/14
+        var menuCircle = GetSourcePointMenu();
+        GSDesigner.BaseLayer.add(menuCircle);
+        GSDesigner.BaseLayer.draw();
+        GSDesigner.MainStage.draw();
 
     }
     catch(ex)
@@ -810,11 +817,6 @@ function CreateDocument(docInit)
             fill: documentObj.backgroundColor,
             stroke: documentObj.strokeColor,
             strokeWidth: documentObj.strokeWidth,
-            shadowColor: documentObj.strokeColor,
-            shadowBlur: documentObj.shadowBlur,
-            shadowOffset: documentObj.shadowOffset,
-            shadowOpacity: documentObj.shadowOpacity,
-            shadowEnabled: documentObj.shadowEnabled
         });
 
         // add the shape to the group
@@ -972,7 +974,7 @@ function CreatePerspectiveGrid(groupCoords)
         var stageDiag = getDistanceBetweenPoints(new GSDesigner.Coordinate(0,GSDesigner.MainStage.getHeight()), new GSDesigner.Coordinate(GSDesigner.MainStage.getWidth(),0)) * 2;
         var perspectiveLine = [];
         var angle = 0;
-        var gridLineColor = GSDesigner.getNextGridLineColor(0);
+        var gridLineColor = "#ffcd45"; //GSDesigner.getNextGridLineColor(0);
 
         for(var n = 0; n < lineCount; n++)
         {

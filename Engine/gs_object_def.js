@@ -430,17 +430,17 @@ GSDesigner.SelectedLineProperties = function (lineDensity, lineOpacity, lineColo
  */
 GSDesigner.DocumentObject = function (dWidth, dHeight, hexFillColor, docName)
 {
-    documentName = docName || 'new-document-' + new Date().getUTCMilliseconds().toString();
-    fillColorHex = hexFillColor || '#ffffff';
-    width = dWidth || 512;
-    height = dHeight || 384;
-    strokeColorHex = '#000000';
-    strokeWidth = 0.5;
-    shadowColor = '#000000';
-    shadowBlur = 10;
-    shadowOffset = [10, 10];
-    shadowOpacity = 0.5;
-    shadowEnabled = true;
+    var documentName = docName || 'new-document-' + new Date().getUTCMilliseconds().toString();
+    var fillColorHex = hexFillColor || '#ffffff';
+    var width = dWidth || 512;
+    var height = dHeight || 384;
+    var strokeColorHex = '#000000';
+    var strokeWidth = 2;
+    var shadowColor = '#000000';
+    var shadowBlur = 10;
+    var shadowOffset = [10, 10];
+    var shadowOpacity = 0.5;
+    var shadowEnabled = true;
 
     return {
                 width: width

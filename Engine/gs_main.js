@@ -44,7 +44,9 @@ $(window).load(function () {
 
 // Document.Ready
 $(document).ready(function(){
-    // UI control disabling and any post-load functionality
-
-})
+    $(window).resize(function(){
+        SetCanvasElementHeight();
+        GSDesigner.MainStage.setHeight(GSDesigner.GetContentHeight());
+    });
+});
 
