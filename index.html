@@ -7,6 +7,7 @@
     <meta name="apple-mobile-web-app-capable" content="yes"/>
     <link rel="stylesheet" href="CSS/jquery.mobile.custom.structure.css"/>
     <link rel="stylesheet" href="CSS/jquery.mobile.custom.theme.css"/>
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.3/themes/smoothness/jquery-ui.css"/>
     <link rel="stylesheet" href="CSS/spectrum.css"/>
     <link rel="stylesheet" href="CSS/Global.css"/>
     <script src="jQuery/jquery-1.7.2.min.js"></script>
@@ -22,6 +23,18 @@
     <script src="Engine/UI/gs_CustomControls_lib.js"></script>
     <script src="Engine/gs_main.js"></script>
     <script src="ThirdPartyJS/spectrum/spectrum.js"></script>
+
+    <script>
+        $(function() {
+            $( "#slider-vertical" ).slider({
+                orientation: "horizontal",
+                range: "min",
+                min: 0,
+                max: 100,
+                value: 60
+            });
+        });
+    </script>
 </head>
 
 <body>
@@ -40,26 +53,6 @@
                     <li data-icon="gear"><a href="#">Settings</a></li>
                 </ul>
             </div>
-            <div class="ui-grid-b ui-responsive" id="divToolbar">
-                <div class="ui-block-a">
-                    <div class="ui-bar ui-bar-c" style="height:25px">
-                        SLIDER 1 PLACE HOLDER
-                    </div>
-                </div>
-                <div class="ui-block-b">
-                    <div class="ui-bar ui-bar-c" style="height:25px">
-                        SLIDER 2 PLACE HOLDER
-                    </div>
-                </div>
-                <div class="ui-block-c">
-                    <div class="ui-bar ui-bar-c" style="height:25px">
-                        <div data-role="fieldcontain" style="margin: 0px" id="divSpectrum">
-                            <span class="sliderLabel" style="top: 4px">Line Color</span>
-                            <input type='text' id="colorPicker" />
-                        </div>
-                    </div>
-                </div>
-            </div><!-- /grid-b -->
         </div>
 
         <!-- New Doc Content -->
@@ -92,6 +85,26 @@
         </div>
         <!--  Footer  -->
         <div data-role="footer" id="divFooter">
+            <div class="ui-grid-b ui-responsive" id="divToolbar">
+                <div class="ui-block-a">
+                    <div class="ui-bar ui-bar-c" style="height:25px">
+                        <div id="slider-vertical" style="width:130px"></div>
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <div class="ui-bar ui-bar-c" style="height:25px">
+                        SLIDER 2 PLACE HOLDER
+                    </div>
+                </div>
+                <div class="ui-block-c">
+                    <div class="ui-bar ui-bar-c" style="height:25px">
+                        <div data-role="fieldcontain" style="margin: 0px" id="divSpectrum">
+                            <span class="sliderLabel" style="top: 4px">Line Color</span>
+                            <input type='text' id="colorPicker" />
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /grid-b -->
             <!--  Status grid  -->
             <div class="ui-grid-c ui-responsive">
                 <div class="ui-block-a">

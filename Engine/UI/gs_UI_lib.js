@@ -212,11 +212,6 @@ function AddNewDocument()
 
         SetDocumentSizeStatus(docSettings.width, docSettings.height);
 
-        // TODO - Remove after testing floating menu
-        // John 1/1/14
-        var menuCircle = GetSourcePointMenu();
-        GSDesigner.BaseLayer.add(menuCircle);
-        GSDesigner.BaseLayer.draw();
         GSDesigner.MainStage.draw();
 
     }

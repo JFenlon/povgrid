@@ -542,3 +542,89 @@
     <div id="container">
     </div>
 </body>
+        <Script>
+            //Kinetic sci-fi ring
+            // vars that define the arcs for the chart
+            var radius = 75;
+            var outerStrokeWidth = 25;
+            var innerStrokeWidth = 6;
+            var width = height = radius + outerStrokeWidth;
+
+            var PI = Math.PI;
+            var startAngle = -PI / 2;
+            var endAngle = 2 * PI * percent / 100 - PI / 2;
+            var cx = width / 2;
+            var cy = height / 2;
+
+            var menu = new Kinetic.Group({
+                x: x,
+                y: y,
+                width: width,
+                height: height,
+                draggable: false
+            });
+
+            var fullArc = new Kinetic.Shape({
+                drawFunc: function (context) {
+                    context.beginPath();
+                    context.arc(cx, cy, radius, 0, Math.PI * 2, false);
+                    context.closePath();
+                    context.fillStrokeShape(this);
+                },
+                stroke: 'rgb(28,119,255)',
+                strokeWidth: outerStrokeWidth,
+                opacity: 0.05
+            });
+            menu.add(fullArc);
+
+            var outerBorder = new Kinetic.Shape({
+                drawFunc: function (context) {
+                    context.beginPath();
+                    context.arc(cx, cy, radius + 12, 0, Math.PI * 2, false);
+                    context.fillStrokeShape(this);
+                },
+                stroke: 'rgb(28,119,255)',
+                strokeWidth: 0.5,
+                shadowBlur: 15,
+                opacity: 0.4
+            });
+            menu.add(outerBorder);
+
+            var innerBorder = new Kinetic.Shape({
+                drawFunc: function (context) {
+                    context.beginPath();
+                    context.arc(cx, cy, radius - 12, 0, Math.PI * 2, false);
+                    context.fillStrokeShape(this);
+                },
+                stroke: 'rgb(28,119,255)',
+                strokeWidth: 0.5,
+                opacity: 0.4
+            });
+            menu.add(innerBorder);
+
+            // TODO - Pretify this after proof of functionality
+            // John 1/2/14
+            // proof of concept
+
+            var knob = new Kinetic.Circle({
+                radius: 10,
+                fill: 'blue',
+                x: cx,
+                y: cy,
+                draggable: true
+            });
+
+            menu.add(knob);
+            /*        var innerArc = new Kinetic.Shape({
+             drawFunc: function (context) {
+             context.beginPath();
+             context.arc(cx, cy, this.radius+1, startAngle, endAngle, false);
+             context.fillStrokeShape(this);
+             },
+             stroke: 'purple',
+             strokeWidth: innerStrokeWidth
+             });
+             // calc the inner radius
+             innerArc.radius = radius - outerStrokeWidth / 2 + innerStrokeWidth / 2;
+             menu.add(innerArc);*/
+        </Script>
