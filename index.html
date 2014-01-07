@@ -13,6 +13,7 @@
     <script src="jQuery/jquery-1.7.2.min.js"></script>
     <script src="jQuery/jquery-ui-1.8.21.custom.min.js"></script>
     <script src="jQuery/jquery.mobile.custom.js"></script>
+    <script src="jQuery/jquery.ui.touch-punch.min.js"></script>
     <script src="ThirdPartyJS/kineticJS/kinetic-v4.7.4.min.js"></script>
     <script src="ThirdPartyJS/lawnchair/lawnchair-0.6.1.js"></script>
     <script src="Engine/gs_object_def.js"></script>
@@ -53,6 +54,51 @@
                     <li data-icon="gear"><a href="#">Settings</a></li>
                 </ul>
             </div>
+            <!--  Status grid  -->
+            <div class="ui-grid-c ui-responsive">
+                <div class="ui-block-a">
+                    <div class="ui-bar ui-bar-c" style="height:13px">
+                        <div class="status_bar_text_reg">Active Perspective Points: <label id="lblActivePoints">0</label></div>
+                    </div>
+                </div>
+                <div class="ui-block-d">
+                    <div class="ui-bar ui-bar-c" style="height:13px">
+                        <div class="status_bar_text_reg">Available Perspective Points: <label id="lblAvailable">0</label></div>
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <div class="ui-bar ui-bar-c" style="height:13px">
+                        <div class="status_bar_text_reg">Selected Point: <label id="lblSelected">0</label></div>
+                    </div>
+                </div>
+                <div class="ui-block-c">
+                    <div class="ui-bar ui-bar-c" style="height:13px">
+                        <div class="status_bar_text_reg">Document Size: <label id="lblDocSize"></label></div>
+                    </div>
+                </div>
+            </div>
+            <!-- Toolbar -->
+            <div class="ui-grid-b ui-responsive" id="divToolbar">
+                <div class="ui-block-a">
+                    <div class="ui-bar ui-bar-c" style="height:35px">
+                        <div id="slider-vertical" style="width:130px"></div>
+                    </div>
+                </div>
+                <div class="ui-block-b">
+                    <div class="ui-bar ui-bar-c" style="height:35px">
+                        SLIDER 2 PLACE HOLDER
+                    </div>
+                </div>
+                <div class="ui-block-c">
+                    <div class="ui-bar ui-bar-c" style="height:35px">
+                        <div data-role="fieldcontain" style="margin: 0px" id="divSpectrum">
+                            <span class="sliderLabel" style="top: 4px">Line Color</span>
+                            <input type='text' id="colorPicker" />
+                        </div>
+                    </div>
+                </div>
+            </div><!-- /grid-b -->
+
         </div>
 
         <!-- New Doc Content -->
@@ -85,49 +131,7 @@
         </div>
         <!--  Footer  -->
         <div data-role="footer" id="divFooter">
-            <div class="ui-grid-b ui-responsive" id="divToolbar">
-                <div class="ui-block-a">
-                    <div class="ui-bar ui-bar-c" style="height:25px">
-                        <div id="slider-vertical" style="width:130px"></div>
-                    </div>
-                </div>
-                <div class="ui-block-b">
-                    <div class="ui-bar ui-bar-c" style="height:25px">
-                        SLIDER 2 PLACE HOLDER
-                    </div>
-                </div>
-                <div class="ui-block-c">
-                    <div class="ui-bar ui-bar-c" style="height:25px">
-                        <div data-role="fieldcontain" style="margin: 0px" id="divSpectrum">
-                            <span class="sliderLabel" style="top: 4px">Line Color</span>
-                            <input type='text' id="colorPicker" />
-                        </div>
-                    </div>
-                </div>
-            </div><!-- /grid-b -->
-            <!--  Status grid  -->
-            <div class="ui-grid-c ui-responsive">
-                <div class="ui-block-a">
-                    <div class="ui-bar ui-bar-c" style="height:13px">
-                        <div class="status_bar_text_reg">Active Perspective Points: <label id="lblActivePoints">0</label></div>
-                    </div>
-                </div>
-                <div class="ui-block-d">
-                    <div class="ui-bar ui-bar-c" style="height:13px">
-                        <div class="status_bar_text_reg">Available Perspective Points: <label id="lblAvailable">0</label></div>
-                    </div>
-                </div>
-                <div class="ui-block-b">
-                    <div class="ui-bar ui-bar-c" style="height:13px">
-                        <div class="status_bar_text_reg">Selected Point: <label id="lblSelected">0</label></div>
-                    </div>
-                </div>
-                <div class="ui-block-c">
-                    <div class="ui-bar ui-bar-c" style="height:13px">
-                        <div class="status_bar_text_reg">Document Size: <label id="lblDocSize"></label></div>
-                    </div>
-                </div>
-            </div>
+
         </div>
     </div>
 </body>

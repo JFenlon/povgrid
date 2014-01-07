@@ -43,7 +43,8 @@ function EventBinding()
     });
 
     $("#colorPicker").spectrum({
-        color: "#006AFF"
+        color: "#006AFF",
+        clickoutFiresChange: true
     });
 
     /*
