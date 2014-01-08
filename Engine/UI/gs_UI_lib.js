@@ -586,6 +586,35 @@ function SetupStage()
             draggable: true
         });
 
+        GSDesigner.MainStage.getContent().addEventListener('touchmove', function(evt) {
+            var touch1 = evt.touches[0];
+            var touch2 = evt.touches[1];
+
+            if(touch1 && touch2) {
+                var dist = getDistance({
+                    x: touch1.clientX,
+                    y: touch1.clientY
+                }, {
+                    x: touch2.clientX,
+                    y: touch2.clientY
+                });
+
+                if(!lastDist) {
+                    lastDist = dist;
+                }
+
+                var scale = stage.getScale().x * dist / lastDist;
+
+                GSDesigner.MainStage.setScale(scale);
+                GSDesigner.MainStage.draw();
+                lastDist = dist;
+            }
+        }, false);
+
+        stage.getContent().addEventListener('touchend', function() {
+            lastDist = 0;
+        }, false);
+
         // Reserved for document shape only
         GSDesigner.BaseLayer = new Kinetic.Layer({
             id: 'lyrBase'
@@ -1106,3 +1135,16 @@ function SetUPSliderUI()
 
 }
 
+/**
+ * Return X and Y in pos format
+ * @param x
+ * @param y
+ * @returns {{x: *, y: *}}
+ * @constructor
+ */
+function MakePos(x, y) {
+    return {
+        'x': x,
+        'y': y
+    };
+}

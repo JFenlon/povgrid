@@ -4,26 +4,7 @@
     <list id="dffa65c6-1358-439d-b91d-5ef99f148acb" name="Default" comment="" />
     <list id="bc166a81-2bc8-4f38-bd62-74850f0eaf91" name="BugOut" comment="On Hold" />
     <list default="true" id="1ea9c6ec-aa69-4242-92d2-c9368ee30397" name="POvGrid Master" comment="Initial file listInitial file list">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/back-icon.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/back-line.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/back-mini.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/bright-shiny.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/dark_matte.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/expando.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/full-matte.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/lite-matte.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/shade-top.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/shade.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/shiny-button.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/shiny.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/subtle-matte-full.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/subtle-shiny-button.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/images/subtle-shiny.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/CSS/jo.css" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo_UI/jo.js" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/ThirdPartyJS/jo_UI/jo_min.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/gs_main.html" afterPath="$PROJECT_DIR$/gs_main.html" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/index.html" afterPath="$PROJECT_DIR$/index.html" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Engine/UI/gs_UI_lib.js" afterPath="$PROJECT_DIR$/Engine/UI/gs_UI_lib.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="PovGrid.iws" />
@@ -34,22 +15,25 @@
     <file path="/povgrid_canvas.html" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1365024540613" ignored="false" />
     <file path="/Dummy.regexp" changelist="dffa65c6-1358-439d-b91d-5ef99f148acb" time="1365018760315" ignored="false" />
     <file path="/Dummy.xpath" changelist="dffa65c6-1358-439d-b91d-5ef99f148acb" time="1365018760315" ignored="false" />
-    <file path="/Dummy.txt" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1383660572029" ignored="false" />
+    <file path="/Dummy.txt" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1389141508979" ignored="false" />
     <file path="/povgrid_object_def.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1376336525193" ignored="false" />
     <file path="/povgrid_UI_lib.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1376344409635" ignored="false" />
     <file path="/povgrid_main.html" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1376342611401" ignored="false" />
-    <file path="/Global.css" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1379432609182" ignored="false" />
+    <file path="/Global.css" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1388382009387" ignored="false" />
     <file path="/povgrid_main.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1375196923064" ignored="false" />
     <file path="/povgrid_generic_lib.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1376337327606" ignored="false" />
     <file path="/povgrid_geometry_lib.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1375455678975" ignored="false" />
     <file path="/gs_main.html" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1382217436611" ignored="false" />
-    <file path="/gs_object_def.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1379453301190" ignored="false" />
-    <file path="/gs_UI_lib.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1379453654220" ignored="false" />
+    <file path="/gs_object_def.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1388722336890" ignored="false" />
+    <file path="/gs_UI_lib.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1389156664405" ignored="false" />
     <file path="/dev_tools.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1378779189903" ignored="false" />
     <file path="/gs_geometry_lib.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1379306905024" ignored="false" />
-    <file path="/index.html" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1379449864947" ignored="false" />
+    <file path="/index.html" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1388784642006" ignored="false" />
     <file path="/Override.css" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1379435930942" ignored="false" />
     <file path="/widgets.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1379448363356" ignored="false" />
+    <file path="/gs_main.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1388538586958" ignored="false" />
+    <file path="/gs_CustomControls_lib.js" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1388721729280" ignored="false" />
+    <file path="/kineticJS_Demo.html" changelist="1ea9c6ec-aa69-4242-92d2-c9368ee30397" time="1388718817606" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +52,53 @@
     <favorites_list name="PovGrid" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="index.html" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/index.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="78" column="18" selection-start="4042" selection-end="4042" vertical-scroll-proportion="-0.65384614">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gs_UI_lib.js" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/Engine/UI/gs_UI_lib.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="1138" column="31" selection-start="32109" selection-end="32109" vertical-scroll-proportion="0.35443038">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gs_object_def.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Engine/gs_object_def.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="12" column="35" selection-start="396" selection-end="396" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="gs_main.js" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/Engine/gs_main.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="19" column="13" selection-start="418" selection-end="418" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Global.css" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/CSS/Global.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="266" column="15" selection-start="5565" selection-end="5565" vertical-scroll-proportion="0.0">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -98,28 +128,30 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/CustomJS/povgrid_object_def.js" />
-        <option value="$PROJECT_DIR$/CustomJS/Helpers/povgrid_generic_lib.js" />
         <option value="$PROJECT_DIR$/povgrid_main.html" />
         <option value="$PROJECT_DIR$/CustomJS/UI/povgrid_UI_lib.js" />
-        <option value="$PROJECT_DIR$/Examples_Helpers/kineticJS_Demo.html" />
         <option value="$PROJECT_DIR$/Engine/Helpers/dev_tools.js" />
-        <option value="$PROJECT_DIR$/Engine/gs_main.js" />
         <option value="$PROJECT_DIR$/Engine/Helpers/gs_geometry_lib.js" />
-        <option value="$PROJECT_DIR$/CSS/Global.css" />
         <option value="$PROJECT_DIR$/CSS/Override.css" />
         <option value="$PROJECT_DIR$/ThirdPartyJS/jo-0.4.1/samples/kitchensink/js/widgets.js" />
-        <option value="$PROJECT_DIR$/Engine/gs_object_def.js" />
-        <option value="$PROJECT_DIR$/Engine/UI/gs_UI_lib.js" />
         <option value="$PROJECT_DIR$/CSS/jo.css" />
-        <option value="$PROJECT_DIR$/index.html" />
         <option value="$PROJECT_DIR$/gs_main.html" />
+        <option value="$PROJECT_DIR$/CSS/Global.css" />
+        <option value="$PROJECT_DIR$/Engine/gs_main.js" />
+        <option value="$PROJECT_DIR$/Engine/UI/gs_CustomControls.js" />
+        <option value="$PROJECT_DIR$/Examples_Helpers/kineticJS_Demo.html" />
+        <option value="$PROJECT_DIR$/Engine/UI/gs_CustomControls_lib.js" />
+        <option value="$PROJECT_DIR$/Engine/gs_object_def.js" />
+        <option value="$PROJECT_DIR$/index.html" />
+        <option value="$PROJECT_DIR$/Engine/UI/gs_UI_lib.js" />
       </list>
     </option>
   </component>
   <component name="ProjectFrameBounds">
-    <option name="width" value="1600" />
-    <option name="height" value="860" />
+    <option name="x" value="-8" />
+    <option name="y" value="-8" />
+    <option name="width" value="1616" />
+    <option name="height" value="876" />
   </component>
   <component name="ProjectInspectionProfilesVisibleTreeState">
     <entry key="Project Default">
@@ -163,6 +195,7 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -194,24 +227,6 @@
               <option name="myItemId" value="ThirdPartyJS" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="spectrum" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-          </PATH>
-          <PATH>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="PovGrid" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="povgrid" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
-            <PATH_ELEMENT>
-              <option name="myItemId" value="ThirdPartyJS" />
-              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
-            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -227,7 +242,35 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="jo_UI" />
+              <option name="myItemId" value="kineticJS" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PovGrid" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="povgrid" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="jQuery" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="PovGrid" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="povgrid" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="Examples_Helpers" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -297,25 +340,33 @@
           </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
     <property name="options.splitter.main.proportions" value="0.3" />
-    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.permissions" value="false" />
     <property name="recentsLimit" value="5" />
     <property name="options.lastSelected" value="editing.templates" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.size" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="restartRequiresConfirmation" value="true" />
-    <property name="FullScreen" value="false" />
     <property name="DefaultHtmlFileTemplate" value="Html5" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.mappings" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="WebServerToolWindowPanel.toolwindow.show.date" value="false" />
+    <property name="restartRequiresConfirmation" value="true" />
+    <property name="WebServerToolWindowPanel.toolwindow.highlight.symlinks" value="true" />
+    <property name="FullScreen" value="false" />
     <property name="options.splitter.details.proportions" value="0.2" />
     <property name="options.searchVisible" value="true" />
   </component>
-  <component name="PublishConfig" serverName="Digitalife" serverId="e6cb882d-10de-4c4c-b453-5c5f280863ec">
+  <component name="PublishConfig" serverName="Digitalife" serverId="e6cb882d-10de-4c4c-b453-5c5f280863ec" overwriteAll="false" deleteMissingItems="true" autoUpload="true">
     <servers>
       <server id="e6cb882d-10de-4c4c-b453-5c5f280863ec">
-        <serverdata />
+        <serverdata>
+          <mappings>
+            <mapping deploy="/povgrid" local="$PROJECT_DIR$" web="" />
+          </mappings>
+        </serverdata>
       </server>
     </servers>
   </component>
@@ -484,7 +535,27 @@
       <created>1379309370402</created>
       <updated>1379309370402</updated>
     </task>
-    <option name="localTasksCounter" value="20" />
+    <task id="LOCAL-00020" summary="Initial file listInitial file list">
+      <created>1388382076035</created>
+      <updated>1388382076035</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Initial file listInitial file list">
+      <created>1388472884682</created>
+      <updated>1388472884682</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Initial file listInitial file list">
+      <created>1388643916746</created>
+      <updated>1388643916746</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Initial file listInitial file list">
+      <created>1388727498846</created>
+      <updated>1388727498846</updated>
+    </task>
+    <task id="LOCAL-00024" summary="Initial file listInitial file list">
+      <created>1389075450269</created>
+      <updated>1389075450269</updated>
+    </task>
+    <option name="localTasksCounter" value="25" />
     <servers />
   </component>
   <component name="TodoView" selected-index="2">
@@ -508,27 +579,29 @@
     </todo-panel>
   </component>
   <component name="ToolWindowManager">
-    <frame x="0" y="0" width="1600" height="860" extended-state="0" />
-    <editor active="false" />
+    <frame x="-8" y="-8" width="1616" height="876" extended-state="0" />
+    <editor active="true" />
     <layout>
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32765958" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.12482663" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32844242" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
+      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2884882" sideWeight="0.5" order="12" side_tool="false" content_ui="tabs" />
+      <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21636616" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
+      <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32844242" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.19188192" sideWeight="0.67155755" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.13773222" sideWeight="0.67234045" order="0" side_tool="false" content_ui="combo" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39839265" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.2054534" sideWeight="0.7115118" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.39839265" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3294676" sideWeight="0.6704289" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15950069" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
-      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32732317" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="File Transfer" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.32907802" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
-      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32871014" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
-      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
-      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.15950069" sideWeight="0.5" order="9" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14979196" sideWeight="0.5" order="10" side_tool="false" content_ui="tabs" />
+      <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
+      <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32871014" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Remote Host" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32947233" sideWeight="0.7115118" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32732317" sideWeight="0.5" order="11" side_tool="false" content_ui="tabs" />
+      <window_info id="REST Client" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32871014" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
+      <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
+      <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -596,11 +669,16 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/gs_main.html">
+    <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
           <folding />
         </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gs_main.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
@@ -610,69 +688,77 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CSS/jquery.mobile.custom.theme.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="18" column="12" selection-start="440" selection-end="440" vertical-scroll-proportion="-8.3020525" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Engine/Helpers/gs_geometry_lib.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="148" column="9" selection-start="3552" selection-end="3552" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/CSS/Global.css">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Engine/gs_main.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="20" column="25" selection-start="476" selection-end="476" vertical-scroll-proportion="0.52196836" />
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/Engine/Helpers/dev_tools.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Engine/gs_object_def.js">
+    <entry file="file://$PROJECT_DIR$/gs_main.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="34" column="41" selection-start="1299" selection-end="1299" vertical-scroll-proportion="0.0" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/Engine/UI/gs_UI_lib.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="446" column="60" selection-start="13319" selection-end="13319" vertical-scroll-proportion="0.63093144" />
+        <state line="101" column="23" selection-start="5409" selection-end="5409" vertical-scroll-proportion="0.6967841" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/CSS/Override.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="37" column="109" selection-start="758" selection-end="758" vertical-scroll-proportion="0.22385861">
-          <folding />
-        </state>
+        <state line="0" column="109" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/CSS/jo.css">
+    <entry file="file://$PROJECT_DIR$/ThirdPartyJS/spectrum/spectrum.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="973" column="55" selection-start="23598" selection-end="23598" vertical-scroll-proportion="0.9499264">
-          <folding />
-        </state>
+        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/gs_main.html">
+    <entry file="file://$PROJECT_DIR$/CSS/jquery.mobile.custom.theme.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="101" column="23" selection-start="5409" selection-end="5409" vertical-scroll-proportion="0.6967841">
+        <state line="1164" column="16" selection-start="49498" selection-end="49498" vertical-scroll-proportion="0.73318386" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Engine/Helpers/gs_geometry_lib.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="49" column="24" selection-start="1226" selection-end="1226" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Examples_Helpers/kineticJS_Demo.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="587" column="0" selection-start="20329" selection-end="20360" vertical-scroll-proportion="-14.653846" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Engine/UI/gs_CustomControls_lib.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="8" column="32" selection-start="114" selection-end="114" vertical-scroll-proportion="0.0" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/CSS/Global.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="266" column="15" selection-start="5565" selection-end="5565" vertical-scroll-proportion="0.0">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/index.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="15" column="60" selection-start="953" selection-end="953" vertical-scroll-proportion="0.0265625">
+        <state line="78" column="18" selection-start="4042" selection-end="4042" vertical-scroll-proportion="-0.65384614">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Engine/gs_main.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="19" column="13" selection-start="418" selection-end="418" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Engine/gs_object_def.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="12" column="35" selection-start="396" selection-end="396" vertical-scroll-proportion="0.0">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/Engine/UI/gs_UI_lib.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1138" column="31" selection-start="32109" selection-end="32109" vertical-scroll-proportion="0.35443038">
           <folding />
         </state>
       </provider>
