@@ -137,7 +137,6 @@ function SetSliderDefaults(controlId, min, max, defaultValue, toolTipType)
         min: min,
         max: max,
         value: defaultValue,
-
         // Slider Event
         slide: function(event, ui) { //When the slider is sliding
             var value  = slider.slider('value');
@@ -603,7 +602,7 @@ function SetupStage()
                     lastDist = dist;
                 }
 
-                var scale = stage.getScale().x * dist / lastDist;
+                var scale = GSDesigner.MainStage.scaleX() * dist / lastDist;
 
                 GSDesigner.MainStage.setScale(scale);
                 GSDesigner.MainStage.draw();
@@ -611,7 +610,7 @@ function SetupStage()
             }
         }, false);
 
-        stage.getContent().addEventListener('touchend', function() {
+        GSDesigner.MainStage.getContent().addEventListener('touchend', function() {
             lastDist = 0;
         }, false);
 
